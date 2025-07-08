@@ -1,0 +1,165 @@
+﻿Dimension;ADM-Phases;Maturity Level;Description
+Architecture Capability;Preliminary;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Capability;A – Architecture Vision;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;0 – Non-existent;Is not executing any EA function or task at all.
+Transition Planning;E – Opportunities & Solutions;0 – Non-existent;The organization is not executing any EA function or task at all.
+Transition Planning;F – Migration Planning;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Governance;G – Implementation Governance;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Governance;H – Architecture Change Management;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Requirements Management;;0 – Non-existent;The organization is not executing any EA function or task at all.
+Architecture Capability;Preliminary;1 – Initial;The preparation and initiation activities are not performed. There is no definition of principles and no organization-specific architecture framework.
+Architecture Capability;A – Architecture Vision;1 – Initial;The architecture scope is not defined.
+Architecture Capability;A – Architecture Vision;1 – Initial;The stakeholders are not identified.
+Architecture Capability;A – Architecture Vision;1 – Initial;There is no architecture vision.
+Architecture Capability;A – Architecture Vision;1 – Initial;No approvals are obtained.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;1 – Initial;There is no Architecture developed that supports the Architecture Vision.
+Transition Planning;E – Opportunities & Solutions;1 – Initial;The delivery approaches, such as, projects, programs or portfolios are not identified, which results in the organization not being able to deliver the target architecture identified in the previous phases.
+Transition Planning;F – Migration Planning;1 – Initial;The Implementation and Migration Plan is not coordinated with the organizations change management and implementation approach.
+Transition Planning;F – Migration Planning;1 – Initial;The business value and cost of work packages and Transition Architectures is not understood by stakeholders.
+Architecture Governance;G – Implementation Governance;1 – Initial;There is no oversight of the implementation of the target architecture.
+Architecture Governance;G – Implementation Governance;1 – Initial;Deployment resources and priorities are not identified.
+Architecture Governance;G – Implementation Governance;1 – Initial;Compliance reviews are not performed.
+Architecture Governance;H – Architecture Change Management;1 – Initial;The procedures that manage change to the target architecture are not established.
+Architecture Governance;H – Architecture Change Management;1 – Initial;There are no risk management procedures.
+Architecture Governance;H – Architecture Change Management;1 – Initial;No monitoring tools in place.
+Architecture Requirements Management;;1 – Initial;Requirements management is not sustained and does not operate for all ADM phases.
+Architecture Requirements Management;;1 – Initial;The relevant architecture requirements are not available for use at each phase of the ADM.
+Architecture Requirements Management;;1 – Initial; the architecture requirements are not identified and managed during the execution of the ADM. 
+Architecture Capability;Preliminary;2 – Managed;Identifies the core, soft and extended enterprise units, as well as, the communities and governance involved.
+Architecture Capability;Preliminary;2 – Managed;Selects the appropriate architecture tools to support the architecture function.
+Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the key stakeholders and their concerns or objectives
+Architecture Capability;A – Architecture Vision;2 – Managed;describe the key business requirements to be addressed in the architecture project
+Architecture Capability;A – Architecture Vision;2 – Managed;Identifies and evaluates the collection of capabilities within the organization
+Architecture Capability;A – Architecture Vision;2 – Managed;Evaluates and qualifies the organization readiness to undertake change
+Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the risks associated with the architecture vision.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the catalogues that capture inventories of the core assets of the business.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required matrices that show the core relationships between related model entities. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required diagrams that present the , data, application and technology architecture information from deferent viewpoints according to the requirements of stakeholders. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Formalizes the business, data, application and technology requirements for implementing the target architecture. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Develops a Baseline Description of the current business, data, application and technology Architecture to the extent necessary to support the target business architecture. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies and resolves any wide impacts or implications in the Architecture Landscape.
+Transition Planning;E – Opportunities & Solutions;2 – Managed;Identifies any business drivers that would constrain the implementation sequence.
+Transition Planning;E – Opportunities & Solutions;2 – Managed;Consolidates the interoperability requirements identified in previous phases.
+Transition Planning;E – Opportunities & Solutions;2 – Managed;Refines the initial dependencies, ensuring that any constraints on the Implementation and Migration Plans are identified.
+Transition Planning;E – Opportunities & Solutions;2 – Managed;Reviews the findings of the Business Transformation Readiness Assessment previously conducted in Phase A and determine their impact on the Architecture Roadmap and the Implementation and Migration Strategy.
+Transition Planning;E – Opportunities & Solutions;2 – Managed;Creates an overall Implementation and Migration Strategy that will guide the implementation of the Target Architecture, and structure any Transition Architectures.
+Transition Planning;F – Migration Planning;2 – Managed;Establishes and assigns business values to all of the work packages.
+Transition Planning;F – Migration Planning;2 – Managed;Determines the required resources and times for each project and their increments and provides the initial cost estimates.
+Transition Planning;F – Migration Planning;2 – Managed;Transitions governance from the development of the architecture to the realization of the architecture.
+Architecture Governance;G – Implementation Governance;2 – Managed;Identifies system development methods required for solutions development and ensures that the systems development method enables feedback to the architecture team on designs.
+Architecture Governance;G – Implementation Governance;2 – Managed;"Carries out the deployment projects; and publishes new Baseline Architectures to the Architecture Repository and update other impacted repositories, such as operational configuration management stores."
+Architecture Governance;H – Architecture Change Management;2 – Managed;Manages the governance process and framework for the architecture
+Architecture Governance;H – Architecture Change Management;2 – Managed;Activates the architecture process to implement change
+Architecture Requirements Management;;2 – Managed;Identifies the changed requirements and records the priorities.
+Architecture Requirements Management;;2 – Managed;Updates the Requirements Repository with information relating to the changes requested, including stakeholder views affected.
+Architecture Requirements Management;;2 – Managed; Identifies and documents requirements using business scenarios, or an analogous technique.
+Architecture Requirements Management;;2 – Managed;Identifies changed requirements.
+Architecture Requirements Management;;2 – Managed;"Determines whether to implement change, or defer to later ADM cycle; if decision is to implement, assesses timescale for change management implementation."
+Architecture Capability;Preliminary;3 – Defined; Defines a framework for architecture governance.
+Architecture Capability;Preliminary;3 – Defined;Defines and Establishes an Enterprise Architecture Team and Organization.
+Architecture Capability;Preliminary;3 – Defined;Identifies and establishes the Architecture principles, which are the set of principles that relate to architecture work.
+Architecture Capability;Preliminary;3 – Defined;Determines what tailoring of TOGAF and other selected architecture frameworks is required.
+Architecture Capability;A – Architecture Vision;3 – Defined;Conducts the necessary procedures to secure recognition of the architecture project, the endorsement of corporate management, and the support and commitment of the necessary line management
+Architecture Capability;A – Architecture Vision;3 – Defined;Identifies the business goals and business drivers, as well as, the constraints that must be dealt with
+Architecture Capability;A – Architecture Vision;3 – Defined;Defines what is inside the scope of the baseline and target architecture
+Architecture Capability;A – Architecture Vision;3 – Defined;Reviews the principles under which the architecture will be developed
+Architecture Capability;A – Architecture Vision;3 – Defined;Develops an architecture vision that covers the extent of the scope identified for the architecture project, at a high level
+Architecture Capability;A – Architecture Vision;3 – Defined;Defines the value propositions and KPIs for the target architecture to be developed within the project
+Architecture Capability;A – Architecture Vision;3 – Defined;Defines the work products to be produced, as well as, deadlines for each of these work products.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Selects relevant business, data, application and technology architecture resources and viewpoints, as well as, appropriate tools and techniques.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;For each viewpoint, selects the models needed to support the specific view required, using the selected tool or method.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Develops a target description for the business, data, application and technology architecture to be developed, to the extent necessary to support the Architecture vision.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Verifies the business, data, application and technology architecture models for internal consistency and accuracy by identifying gaps between the baseline and target business architecture.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Defines a business, data, application and technology roadmap to prioritize activities over the following phases.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Reviews if the proposed business, data, application and technology architecture is capable of supporting the subsequent work by checking the original motivation for the architecture project and the statement of architecture work against the proposed architecture. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Finalizes the business, data, application and technology architecture after conducting a formal stakeholder review by documenting all the final requirements, mappings and work products.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Documents the architecture definition and also reviews the resulting document with relevant stakeholders and incorporates feedback.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Determines how the enterprise architecture can be best implemented to take advantage of the organization’s business culture. This should include the creation of an Implementation Factor Assessment and Deduction matrix.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Consolidates and integrates the gap analysis results from the Business, Information Systems, and Technology Architectures (created in Phases B to D) and assess their implications with respect to potential solutions and inter-dependencies.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Assesses the requirements, gaps, solutions, and factors to identify a minimal set of requirements whose integration into work packages would lead to a more efficient and effective implementation of the Target Architecture across the business functions that are participating in the architecture.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Assesses the missing business capabilities identified in the Architecture Vision and Target Architecture and logically group the various activities into work packages.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Identifies one or more Transition Architectures where the scope of change to implement the Target Architecture requires an incremental approach.
+Transition Planning;E – Opportunities & Solutions;3 – Defined;Consolidates the work packages and Transition Architectures into the Architecture Roadmap, which describes a timeline of the progression from the Baseline Architecture to the Target Architecture.
+Transition Planning;F – Migration Planning;3 – Defined;Coordinates the Implementation and Migration Plan with the management frameworks within the organization.
+Transition Planning;F – Migration Planning;3 – Defined;Prioritizes the projects by ascertaining their business value against the cost of delivering them.
+Transition Planning;F – Migration Planning;3 – Defined;Updates the Architecture Roadmap including any Transition Architectures and confirms the architecture definition in case the implementation approach shifted.
+Transition Planning;F – Migration Planning;3 – Defined;Generates the completed Implementation and Migration Plan.
+Architecture Governance;G – Implementation Governance;3 – Defined;Confirms the Scope and Priorities for Deployment with Development Management.
+Architecture Governance;G – Implementation Governance;3 – Defined;Guides the Development of Solutions Deployment.
+Architecture Governance;G – Implementation Governance;3 – Defined;"Reviews ongoing implementation governance and architecture compliance for each building block; conducts post-development reviews; and closes the development part of deployment projects."
+Architecture Governance;G – Implementation Governance;3 – Defined;"Conducts post-implementation reviews; and publishes reviews and close projects."
+Architecture Governance;H – Architecture Change Management;3 – Defined;Actively influences business projects to achieve measurable outcomes and business value through Enterprise Architecture
+Architecture Governance;H – Architecture Change Management;3 – Defined;Identifies and mitigates EA-related risks and contributes to the development of IT strategy
+Architecture Requirements Management;;3 – Defined;Ensures that all key participants agree on the detailed description of the requirements, and commit to execute them accordingly.
+Architecture Requirements Management;;3 – Defined;Monitors the baselined requirements.
+Architecture Requirements Management;;3 – Defined;Assesses and revises gap analysis performed during Phases B through D, which identify the gaps between Baseline and Target Architectures.
+Architecture Requirements Management;;3 – Defined;Assesses impact of changed requirements on the current (active) phase.
+Architecture Requirements Management;;3 – Defined;Assesses impact of changed requirements on the previous phases.
+Architecture Requirements Management;;3 – Defined;Issues at every phase of the ADM cycle a requirements impact statement.
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;"Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+
+"
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;"Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+
+
+"
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed;Ensures that monitoring tools are effectively implemented and utilized
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed;Conducts structured analyses to support architecture change management
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed;Provides actionable recommendations on change needs to meet performance targets and establish readiness to act
+Architecture Requirements Management;;4 – Quantitatively Managed;Ensures that new or changing requirements that are derived from Architecture Change Management (Phase H) are managed accordingly.
+Architecture Capability;Preliminary;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Architecture Capability;Preliminary;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Architecture Capability;Preliminary;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Architecture Capability;Preliminary;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Capability;Preliminary;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
+"
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
+"
+Transition Planning;F – Migration Planning;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Transition Planning;F – Migration Planning;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Transition Planning;F – Migration Planning;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Transition Planning;F – Migration Planning;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Transition Planning;F – Migration Planning;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
+
+"
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
