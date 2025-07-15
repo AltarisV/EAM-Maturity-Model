@@ -24,7 +24,7 @@ Architecture Governance;H – Architecture Change Management;1 – Initial;There
 Architecture Governance;H – Architecture Change Management;1 – Initial;No monitoring tools in place.
 Architecture Requirements Management;;1 – Initial;Requirements management is not sustained and does not operate for all ADM phases.
 Architecture Requirements Management;;1 – Initial;The relevant architecture requirements are not available for use at each phase of the ADM.
-Architecture Requirements Management;;1 – Initial; the architecture requirements are not identified and managed during the execution of the ADM. 
+Architecture Requirements Management;;1 – Initial; the architecture requirements are not identified and managed during the execution of the ADM.
 Architecture Capability;Preliminary;2 – Managed;Identifies the core, soft and extended enterprise units, as well as, the communities and governance involved.
 Architecture Capability;Preliminary;2 – Managed;Selects the appropriate architecture tools to support the architecture function.
 Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the key stakeholders and their concerns or objectives
@@ -33,10 +33,10 @@ Architecture Capability;A – Architecture Vision;2 – Managed;Identifies and e
 Architecture Capability;A – Architecture Vision;2 – Managed;Evaluates and qualifies the organization readiness to undertake change
 Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the risks associated with the architecture vision.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the catalogues that capture inventories of the core assets of the business.
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required matrices that show the core relationships between related model entities. 
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required diagrams that present the , data, application and technology architecture information from deferent viewpoints according to the requirements of stakeholders. 
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Formalizes the business, data, application and technology requirements for implementing the target architecture. 
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Develops a Baseline Description of the current business, data, application and technology Architecture to the extent necessary to support the target business architecture. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required matrices that show the core relationships between related model entities.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies the required diagrams that present the , data, application and technology architecture information from deferent viewpoints according to the requirements of stakeholders.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Formalizes the business, data, application and technology requirements for implementing the target architecture.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Develops a Baseline Description of the current business, data, application and technology Architecture to the extent necessary to support the target business architecture.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed;Identifies and resolves any wide impacts or implications in the Architecture Landscape.
 Transition Planning;E – Opportunities & Solutions;2 – Managed;Identifies any business drivers that would constrain the implementation sequence.
 Transition Planning;E – Opportunities & Solutions;2 – Managed;Consolidates the interoperability requirements identified in previous phases.
@@ -47,14 +47,14 @@ Transition Planning;F – Migration Planning;2 – Managed;Establishes and assig
 Transition Planning;F – Migration Planning;2 – Managed;Determines the required resources and times for each project and their increments and provides the initial cost estimates.
 Transition Planning;F – Migration Planning;2 – Managed;Transitions governance from the development of the architecture to the realization of the architecture.
 Architecture Governance;G – Implementation Governance;2 – Managed;Identifies system development methods required for solutions development and ensures that the systems development method enables feedback to the architecture team on designs.
-Architecture Governance;G – Implementation Governance;2 – Managed;"Carries out the deployment projects; and publishes new Baseline Architectures to the Architecture Repository and update other impacted repositories, such as operational configuration management stores."
+Architecture Governance;G – Implementation Governance;2 – Managed;Carries out the deployment projects; and publishes new Baseline Architectures to the Architecture Repository and update other impacted repositories, such as operational configuration management stores.
 Architecture Governance;H – Architecture Change Management;2 – Managed;Manages the governance process and framework for the architecture
 Architecture Governance;H – Architecture Change Management;2 – Managed;Activates the architecture process to implement change
 Architecture Requirements Management;;2 – Managed;Identifies the changed requirements and records the priorities.
 Architecture Requirements Management;;2 – Managed;Updates the Requirements Repository with information relating to the changes requested, including stakeholder views affected.
 Architecture Requirements Management;;2 – Managed; Identifies and documents requirements using business scenarios, or an analogous technique.
 Architecture Requirements Management;;2 – Managed;Identifies changed requirements.
-Architecture Requirements Management;;2 – Managed;"Determines whether to implement change, or defer to later ADM cycle; if decision is to implement, assesses timescale for change management implementation."
+Architecture Requirements Management;;2 – Managed;Determines whether to implement change, or defer to later ADM cycle; if decision is to implement, assesses timescale for change management implementation.
 Architecture Capability;Preliminary;3 – Defined; Defines a framework for architecture governance.
 Architecture Capability;Preliminary;3 – Defined;Defines and Establishes an Enterprise Architecture Team and Organization.
 Architecture Capability;Preliminary;3 – Defined;Identifies and establishes the Architecture principles, which are the set of principles that relate to architecture work.
@@ -71,7 +71,7 @@ Architecture Development;B, C, D – Business, Information Systems and Technolog
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Develops a target description for the business, data, application and technology architecture to be developed, to the extent necessary to support the Architecture vision.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Verifies the business, data, application and technology architecture models for internal consistency and accuracy by identifying gaps between the baseline and target business architecture.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Defines a business, data, application and technology roadmap to prioritize activities over the following phases.
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Reviews if the proposed business, data, application and technology architecture is capable of supporting the subsequent work by checking the original motivation for the architecture project and the statement of architecture work against the proposed architecture. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Reviews if the proposed business, data, application and technology architecture is capable of supporting the subsequent work by checking the original motivation for the architecture project and the statement of architecture work against the proposed architecture.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Finalizes the business, data, application and technology architecture after conducting a formal stakeholder review by documenting all the final requirements, mappings and work products.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined;Documents the architecture definition and also reviews the resulting document with relevant stakeholders and incorporates feedback.
 Transition Planning;E – Opportunities & Solutions;3 – Defined;Determines how the enterprise architecture can be best implemented to take advantage of the organization’s business culture. This should include the creation of an Implementation Factor Assessment and Deduction matrix.
@@ -86,8 +86,8 @@ Transition Planning;F – Migration Planning;3 – Defined;Updates the Architect
 Transition Planning;F – Migration Planning;3 – Defined;Generates the completed Implementation and Migration Plan.
 Architecture Governance;G – Implementation Governance;3 – Defined;Confirms the Scope and Priorities for Deployment with Development Management.
 Architecture Governance;G – Implementation Governance;3 – Defined;Guides the Development of Solutions Deployment.
-Architecture Governance;G – Implementation Governance;3 – Defined;"Reviews ongoing implementation governance and architecture compliance for each building block; conducts post-development reviews; and closes the development part of deployment projects."
-Architecture Governance;G – Implementation Governance;3 – Defined;"Conducts post-implementation reviews; and publishes reviews and close projects."
+Architecture Governance;G – Implementation Governance;3 – Defined;Reviews ongoing implementation governance and architecture compliance for each building block; conducts post-development reviews; and closes the development part of deployment projects.
+Architecture Governance;G – Implementation Governance;3 – Defined;Conducts post-implementation reviews; and publishes reviews and close projects.
 Architecture Governance;H – Architecture Change Management;3 – Defined;Actively influences business projects to achieve measurable outcomes and business value through Enterprise Architecture
 Architecture Governance;H – Architecture Change Management;3 – Defined;Identifies and mitigates EA-related risks and contributes to the development of IT strategy
 Architecture Requirements Management;;3 – Defined;Ensures that all key participants agree on the detailed description of the requirements, and commit to execute them accordingly.
@@ -96,34 +96,29 @@ Architecture Requirements Management;;3 – Defined;Assesses and revises gap ana
 Architecture Requirements Management;;3 – Defined;Assesses impact of changed requirements on the current (active) phase.
 Architecture Requirements Management;;3 – Defined;Assesses impact of changed requirements on the previous phases.
 Architecture Requirements Management;;3 – Defined;Issues at every phase of the ADM cycle a requirements impact statement.
-Architecture Capability;Preliminary;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Architecture Capability;Preliminary;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Architecture Capability;Preliminary;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Architecture Capability;Preliminary;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
 Architecture Capability;Preliminary;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
-Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
 Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
-Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
-Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;"Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
-
-"
-Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
-Transition Planning;F – Migration Planning;4 – Quantitatively Managed;"Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
-
-
-"
-Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level. 
-Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management. 
-Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes. 
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Establishes the objectives for quality and process performance and negotiates at an appropriate level of detail to permit an overall evaluation of the objectives and risks at the process level.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Selects measures and analytic techniques to be used in quantitative management.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Analyses selected measures to characterize the performance of the organizations’ processes.
 Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed;Establishes and compares process performance baselines to the organization’s quality and process performance objectives to determine if the quality and process performance objectives are being achieved.
 Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed;Ensures that monitoring tools are effectively implemented and utilized
 Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed;Conducts structured analyses to support architecture change management
@@ -132,34 +127,30 @@ Architecture Requirements Management;;4 – Quantitatively Managed;Ensures that 
 Architecture Capability;Preliminary;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Architecture Capability;Preliminary;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Architecture Capability;Preliminary;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Architecture Capability;Preliminary;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
-Architecture Capability;Preliminary;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
-"
+Architecture Capability;Preliminary;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
+Architecture Capability;Preliminary;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
 Architecture Capability;A – Architecture Vision;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Architecture Capability;A – Architecture Vision;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Architecture Capability;A – Architecture Vision;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Architecture Capability;A – Architecture Vision;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Capability;A – Architecture Vision;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
 Architecture Capability;A – Architecture Vision;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
 Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
 Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
-Transition Planning;E – Opportunities & Solutions;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
-"
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
 Transition Planning;F – Migration Planning;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Transition Planning;F – Migration Planning;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Transition Planning;F – Migration Planning;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Transition Planning;F – Migration Planning;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
-Transition Planning;F – Migration Planning;5 – Optimizing;"Implements and evaluates selected action proposals developed in causal analysis.
-
-"
+Transition Planning;F – Migration Planning;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
+Transition Planning;F – Migration Planning;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
 Architecture Governance;G – Implementation Governance;5 – Optimizing;Identifies potential areas for improvement that could contribute to meeting business objectives.
 Architecture Governance;G – Implementation Governance;5 – Optimizing;Selects and implements improvements for deployment throughout the organization based on an evaluation of costs, benefits, and other factors.
 Architecture Governance;G – Implementation Governance;5 – Optimizing;Evaluates the effects of deployed improvements on quality and process performance using statistical and other quantitative techniques.
-Architecture Governance;G – Implementation Governance;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes. 
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Systematically determines the root causes of selected and analyzed outcomes.
 Architecture Governance;G – Implementation Governance;5 – Optimizing;Implements and evaluates selected action proposals developed in causal analysis.
