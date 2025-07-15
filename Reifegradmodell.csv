@@ -47,14 +47,14 @@ Transition Planning;F – Migration Planning;2 – Managed;Establishes and assig
 Transition Planning;F – Migration Planning;2 – Managed;Determines the required resources and times for each project and their increments and provides the initial cost estimates.
 Transition Planning;F – Migration Planning;2 – Managed;Transitions governance from the development of the architecture to the realization of the architecture.
 Architecture Governance;G – Implementation Governance;2 – Managed;Identifies system development methods required for solutions development and ensures that the systems development method enables feedback to the architecture team on designs.
-Architecture Governance;G – Implementation Governance;2 – Managed;Carries out the deployment projects; and publishes new Baseline Architectures to the Architecture Repository and update other impacted repositories, such as operational configuration management stores.
+Architecture Governance;G – Implementation Governance;2 – Managed;Carries out the deployment projects and publishes new Baseline Architectures to the Architecture Repository and update other impacted repositories, such as operational configuration management stores.
 Architecture Governance;H – Architecture Change Management;2 – Managed;Manages the governance process and framework for the architecture
 Architecture Governance;H – Architecture Change Management;2 – Managed;Activates the architecture process to implement change
 Architecture Requirements Management;;2 – Managed;Identifies the changed requirements and records the priorities.
 Architecture Requirements Management;;2 – Managed;Updates the Requirements Repository with information relating to the changes requested, including stakeholder views affected.
 Architecture Requirements Management;;2 – Managed; Identifies and documents requirements using business scenarios, or an analogous technique.
 Architecture Requirements Management;;2 – Managed;Identifies changed requirements.
-Architecture Requirements Management;;2 – Managed;Determines whether to implement change, or defer to later ADM cycle; if decision is to implement, assesses timescale for change management implementation.
+Architecture Requirements Management;;2 – Managed;Determines whether to implement change, or defer to later ADM cycle if decision is to implement, assesses timescale for change management implementation.
 Architecture Capability;Preliminary;3 – Defined; Defines a framework for architecture governance.
 Architecture Capability;Preliminary;3 – Defined;Defines and Establishes an Enterprise Architecture Team and Organization.
 Architecture Capability;Preliminary;3 – Defined;Identifies and establishes the Architecture principles, which are the set of principles that relate to architecture work.
@@ -86,8 +86,8 @@ Transition Planning;F – Migration Planning;3 – Defined;Updates the Architect
 Transition Planning;F – Migration Planning;3 – Defined;Generates the completed Implementation and Migration Plan.
 Architecture Governance;G – Implementation Governance;3 – Defined;Confirms the Scope and Priorities for Deployment with Development Management.
 Architecture Governance;G – Implementation Governance;3 – Defined;Guides the Development of Solutions Deployment.
-Architecture Governance;G – Implementation Governance;3 – Defined;Reviews ongoing implementation governance and architecture compliance for each building block; conducts post-development reviews; and closes the development part of deployment projects.
-Architecture Governance;G – Implementation Governance;3 – Defined;Conducts post-implementation reviews; and publishes reviews and close projects.
+Architecture Governance;G – Implementation Governance;3 – Defined;Reviews ongoing implementation governance and architecture compliance for each building block conducts post-development reviews and closes the development part of deployment projects.
+Architecture Governance;G – Implementation Governance;3 – Defined;Conducts post-implementation reviews and publishes reviews and close projects.
 Architecture Governance;H – Architecture Change Management;3 – Defined;Actively influences business projects to achieve measurable outcomes and business value through Enterprise Architecture
 Architecture Governance;H – Architecture Change Management;3 – Defined;Identifies and mitigates EA-related risks and contributes to the development of IT strategy
 Architecture Requirements Management;;3 – Defined;Ensures that all key participants agree on the detailed description of the requirements, and commit to execute them accordingly.
