@@ -7,28 +7,28 @@ Transition Planning;F – Migration Planning;0 – Non-existent;The organization
 Architecture Governance;G – Implementation Governance;0 – Non-existent;The organization is not executing any EA function or task at all.
 Architecture Governance;H – Architecture Change Management;0 – Non-existent;The organization is not executing any EA function or task at all.
 Architecture Requirements Management;;0 – Non-existent;The organization is not executing any EA function or task at all.
-Architecture Capability;Preliminary;1 – Initial;The preparation and initiation activities are not performed. There is no definition of principles and no organization-specific architecture framework.
-Architecture Capability;A – Architecture Vision;1 – Initial;The architecture scope is not defined.
-Architecture Capability;A – Architecture Vision;1 – Initial;The stakeholders are not identified.
-Architecture Capability;A – Architecture Vision;1 – Initial;There is no architecture vision.
-Architecture Capability;A – Architecture Vision;1 – Initial;No approvals are obtained.
-Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;1 – Initial;There is no Architecture developed that supports the Architecture Vision.
-Transition Planning;E – Opportunities & Solutions;1 – Initial;The delivery approaches, such as, projects, programs or portfolios are not identified, which results in the organization not being able to deliver the target architecture identified in the previous phases.
-Transition Planning;F – Migration Planning;1 – Initial;The Implementation and Migration Plan is not coordinated with the organizations change management and implementation approach.
-Transition Planning;F – Migration Planning;1 – Initial;The business value and cost of work packages and Transition Architectures is not understood by stakeholders.
-Architecture Governance;G – Implementation Governance;1 – Initial;There is no oversight of the implementation of the target architecture.
-Architecture Governance;G – Implementation Governance;1 – Initial;Deployment resources and priorities are not identified.
-Architecture Governance;G – Implementation Governance;1 – Initial;Compliance reviews are not performed.
-Architecture Governance;H – Architecture Change Management;1 – Initial;The procedures that manage change to the target architecture are not established.
-Architecture Governance;H – Architecture Change Management;1 – Initial;There are no risk management procedures.
-Architecture Governance;H – Architecture Change Management;1 – Initial;No monitoring tools in place.
-Architecture Requirements Management;;1 – Initial;Requirements management is not sustained and does not operate for all ADM phases.
-Architecture Requirements Management;;1 – Initial;The relevant architecture requirements are not available for use at each phase of the ADM.
-Architecture Requirements Management;;1 – Initial; the architecture requirements are not identified and managed during the execution of the ADM.
+Architecture Capability;Preliminary;1 – Initial;Preparation and initiation activities take place.
+Architecture Capability;A – Architecture Vision;1 – Initial;An initial scope for the architecture is defined.
+Architecture Capability;A – Architecture Vision;1 – Initial;Stakeholders are identified.
+Architecture Capability;A – Architecture Vision;1 – Initial;An initial architecture vision exists.
+Architecture Capability;A – Architecture Vision;1 – Initial;Approvals are obtained.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;1 – Initial;Initial architectural elements are developed.
+Transition Planning;E – Opportunities & Solutions;1 – Initial;Delivery approaches such as projects, programs or portfolios are identified.
+Transition Planning;F – Migration Planning;1 – Initial;An Implementation and Migration Plan exists.
+Transition Planning;F – Migration Planning;1 – Initial;Business value and costs are considered by stakeholders.
+Architecture Governance;G – Implementation Governance;1 – Initial;Oversight of the implementation of the target architecture exists.
+Architecture Governance;G – Implementation Governance;1 – Initial;Deployment resources and priorities are identified.
+Architecture Governance;G – Implementation Governance;1 – Initial;Compliance reviews are performed.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Procedures for change management are established.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Risk management procedures exist.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Monitoring tools are in place.
+Architecture Requirements Management;;1 – Initial;Requirements management is sustained across some ADM phases.
+Architecture Requirements Management;;1 – Initial;Architecture requirements are available at some ADM phases.
+Architecture Requirements Management;;1 – Initial;Architecture requirements are identified and managed during ADM execution.
 Architecture Capability;Preliminary;2 – Managed;Identifies the core, soft and extended enterprise units, as well as, the communities and governance involved.
 Architecture Capability;Preliminary;2 – Managed;Selects the appropriate architecture tools to support the architecture function.
 Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the key stakeholders and their concerns or objectives
-Architecture Capability;A – Architecture Vision;2 – Managed;describe the key business requirements to be addressed in the architecture project
+Architecture Capability;A – Architecture Vision;2 – Managed;Describe the key business requirements to be addressed in the architecture project
 Architecture Capability;A – Architecture Vision;2 – Managed;Identifies and evaluates the collection of capabilities within the organization
 Architecture Capability;A – Architecture Vision;2 – Managed;Evaluates and qualifies the organization readiness to undertake change
 Architecture Capability;A – Architecture Vision;2 – Managed;Identifies the risks associated with the architecture vision.
@@ -52,10 +52,10 @@ Architecture Governance;H – Architecture Change Management;2 – Managed;Manag
 Architecture Governance;H – Architecture Change Management;2 – Managed;Activates the architecture process to implement change
 Architecture Requirements Management;;2 – Managed;Identifies the changed requirements and records the priorities.
 Architecture Requirements Management;;2 – Managed;Updates the Requirements Repository with information relating to the changes requested, including stakeholder views affected.
-Architecture Requirements Management;;2 – Managed; Identifies and documents requirements using business scenarios, or an analogous technique.
+Architecture Requirements Management;;2 – Managed;Identifies and documents requirements using business scenarios, or an analogous technique.
 Architecture Requirements Management;;2 – Managed;Identifies changed requirements.
 Architecture Requirements Management;;2 – Managed;Determines whether to implement change, or defer to later ADM cycle if decision is to implement, assesses timescale for change management implementation.
-Architecture Capability;Preliminary;3 – Defined; Defines a framework for architecture governance.
+Architecture Capability;Preliminary;3 – Defined;Defines a framework for architecture governance.
 Architecture Capability;Preliminary;3 – Defined;Defines and Establishes an Enterprise Architecture Team and Organization.
 Architecture Capability;Preliminary;3 – Defined;Identifies and establishes the Architecture principles, which are the set of principles that relate to architecture work.
 Architecture Capability;Preliminary;3 – Defined;Determines what tailoring of TOGAF and other selected architecture frameworks is required.
