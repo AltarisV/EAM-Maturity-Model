@@ -9,9 +9,9 @@ Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture
 
 Für jede Dimension und Phase des ADM werden Kriterien angezeigt, die einem bestimmten Reifegrad-Level zugeordnet sind:
 
-- Wenn **alle Kriterien** eines Levels erfüllt sind, gilt dieses Level als **Baseline**.
-- Wenn **mindestens ein Kriterium** eines Levels erfüllt ist, gilt es als potenzieller **Deckel (Ceiling)**.
-- Der tatsächliche Reifegrad bewegt sich also zwischen Baseline und Deckel. 
+- Wenn **alle Kriterien** eines Levels und der darunter erfüllt sind, gilt dieses Level als **Baseline**.
+- Das höchste Level, in dem **mindestens ein Kriterium** eines Levels erfüllt ist, gilt es als **Deckel**.
+- Der tatsächliche Reifegrad bewegt sich irgendwo zwischen Baseline und Deckel. 
 - In diesem Bereich sollten (vom untersten Level beginnend) nächste Schritte geplant werden.
 
 Das Reifegradmodell ist aktuell auf Englisch formuliert. Bitte verwenden Sie die Übersetzungsmöglichkeiten Ihres 
