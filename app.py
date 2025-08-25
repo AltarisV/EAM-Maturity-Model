@@ -12,7 +12,7 @@ For each dimension and phase of the ADM, criteria are shown that are assigned to
 - If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.
 - The highest level in which **at least one criterion** is met is considered the **Ceiling**.
 - The actual maturity lies somewhere between the Baseline and the Ceiling.
-- Within this range, the next steps should be planned (starting from the lowest level).
+- Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level).
 
 Please check all criteria that your organization currently meets.
 """)
