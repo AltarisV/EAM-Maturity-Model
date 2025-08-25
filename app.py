@@ -5,19 +5,16 @@ import altair as alt
 st.title("EAM Maturity Assessment")
 
 st.markdown("""
-Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture Management (EAM).
+This assessment is based on a maturity model for Enterprise Architecture Management (EAM).
 
-Für jede Dimension und Phase des ADM werden Kriterien angezeigt, die einem bestimmten Reifegrad-Level zugeordnet sind:
+For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:
 
-- Wenn **alle Kriterien** eines Levels und der darunter erfüllt sind, gilt dieses Level als **Baseline**.
-- Das höchste Level, in dem **mindestens ein Kriterium** eines Levels erfüllt ist, gilt es als **Deckel**.
-- Der tatsächliche Reifegrad bewegt sich irgendwo zwischen Baseline und Deckel. 
-- In diesem Bereich sollten (vom untersten Level beginnend) nächste Schritte geplant werden.
+- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.
+- The highest level in which **at least one criterion** is met is considered the **Ceiling**.
+- The actual maturity lies somewhere between the Baseline and the Ceiling.
+- Within this range, the next steps should be planned (starting from the lowest level).
 
-Das Reifegradmodell ist aktuell auf Englisch formuliert. Bitte verwenden Sie die Übersetzungsmöglichkeiten Ihres 
-Browsers, falls dies ein Problem darstellt und geben Sie uns entsprechend Feedback.
-
-Bitte haken Sie alle Kriterien an, die Ihre Organisation aktuell erfüllt.
+Please check all criteria that your organization currently meets.
 """)
 
 # Daten laden
