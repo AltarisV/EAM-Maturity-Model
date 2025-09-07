@@ -374,15 +374,21 @@ with st.sidebar:
 init_state_if_missing()
 for g_idx, row in criteria.iterrows():
     dim, phase, level = row["Dimension"], row["ADM-Phases"], row["level_num"]
-    header = f"{dim}"
-    if phase:
-        header += f" – {phase}"
-    header += f" – Level {level}"
+
+    header = f"{dim} – {phase} – Level {level}" if phase else f"{dim} – Level {level}"
 
     with st.expander(header, expanded=False):
         for c_idx, desc in enumerate(row["Description"]):
             k = checkbox_key(g_idx, c_idx)
-            st.checkbox(desc, key=k)
+            if c_idx == 0:
+                col1, col2 = st.columns([20,1])
+                with col1:
+                    st.checkbox(desc, key=k)
+                with col2:
+                    with st.popover("ℹ️"):
+                        st.write("This level ensures objectives and risks are evaluated.")
+            else:
+                st.checkbox(desc, key=k)
 
 # ------------------------------
 # Auswertung & Visualisierung
