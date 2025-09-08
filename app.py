@@ -55,7 +55,7 @@ def load_data(path: str) -> pd.DataFrame:
     return df
 
 def load_value_data(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, sep=',')
+    df = pd.read_csv(path, sep=';')
     return df
 
 try:
