@@ -1,3 +1,5 @@
+from os import path
+
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -52,6 +54,9 @@ def load_data(path: str) -> pd.DataFrame:
     df = df[df["level_num"] > 0].copy()
     return df
 
+def load_value_data(path: str) -> pd.DataFrame:
+    df = pd.read_csv(path, sep=';')
+    return df
 
 try:
     raw = load_data("Reifegradmodell.csv")
@@ -91,6 +96,8 @@ label_order = [
 criteria["phase_order"] = criteria["ADM-Phases"].apply(
     lambda x: phase_order.index(x) if x in phase_order else len(phase_order))
 criteria = criteria.sort_values(["phase_order", "level_num"]).reset_index(drop=True)
+value_df = load_value_data("mehrwert.csv")
+criteria["Value"] = value_df["Value"]
 
 # ------------------------------
 # Hilfsfunktionen für Zustand, Auswertung & Export
@@ -373,16 +380,27 @@ with st.sidebar:
 # ------------------------------
 init_state_if_missing()
 for g_idx, row in criteria.iterrows():
-    dim, phase, level = row["Dimension"], row["ADM-Phases"], row["level_num"]
-    header = f"{dim}"
-    if phase:
-        header += f" – {phase}"
-    header += f" – Level {level}"
+    dim, phase, level, value = row["Dimension"], row["ADM-Phases"], row["level_num"], row["Value"]
+
+    header = f"{dim} – {phase} – Level {level}" if phase else f"{dim} – Level {level}"
 
     with st.expander(header, expanded=False):
         for c_idx, desc in enumerate(row["Description"]):
             k = checkbox_key(g_idx, c_idx)
-            st.checkbox(desc, key=k)
+            if c_idx == 0:
+                col1, col2 = st.columns([20,1])
+                with col1:
+                    st.checkbox(desc, key=k)
+                with col2:
+                    with st.popover("ℹ️"):
+                        text = (
+                            "\n".join([f"- {v.strip()}" for v in str(value).split("-") if v.strip()])
+                            if pd.notna(value) and str(value).strip()
+                            else "Value not measurable."
+                        )
+                        st.markdown(text)
+            else:
+                st.checkbox(desc, key=k)
 
 # ------------------------------
 # Auswertung & Visualisierung

@@ -1,0 +1,39 @@
+Dimension;ADM-Phases;Maturity Level;Value
+Architecture Capability;Preliminary;1 – Initial;- Basic awareness of architecture practices - Initial attempts to align IT with business - Efforts are inconsistent
+Architecture Capability;Preliminary;2 – Initial;- More structured approach introduced - Repeatable processes reduce ad hoc decisions - Early collaboration across teams
+Architecture Capability;Preliminary;3 – Initial;- Standardized architecture practices - Improves decision making - Better predictability of project outcomes
+Architecture Capability;Preliminary;4 – Initial;- Architecture embedded into governance - Stronger business alignment - Risks reduced through consistent methods
+Architecture Capability;Preliminary;5 – Initial;- Architecture is strategic and enterprise-wide - Maximizes business value - Enables agility and scalability
+Architecture Capability;A – Architecture Vision;1 – Initial;- Limited vision clarity - Inconsistent communication - Business benefits unclear
+Architecture Capability;A – Architecture Vision;2 – Initial;- Defined vision communicated - Stronger stakeholder engagement - Supports early alignment
+Architecture Capability;A – Architecture Vision;3 – Initial;- Vision consistently applied - Clear roadmap supports planning - Improves organizational confidence
+Architecture Capability;A – Architecture Vision;4 – Initial;- Vision embedded in strategic planning - Improves cross-domain alignment - Builds trust with stakeholders
+Architecture Capability;A – Architecture Vision;5 – Initial;- Vision drives business strategy - Shared understanding across all units - Enables innovation
+Architecture Development; D – Business, Information Systems and Technology Architecture;1 – Initial;- Fragmented architecture approaches - Limited alignment between business and IT
+Architecture Development; D – Business, Information Systems and Technology Architecture;2 – Initial;- Processes become more repeatable - Improves consistency across projects
+Architecture Development; D – Business, Information Systems and Technology Architecture;3 – Initial;- Defined architecture standards - Improves efficiency and interoperability
+Architecture Development; D – Business, Information Systems and Technology Architecture;4 – Initial;- Integrated across domains - Supports long-term planning - Reduces duplication of effort
+Architecture Development; D – Business, Information Systems and Technology Architecture;5 – Initial;- Enterprise-wide adoption - Optimized for agility and scalability - Drives continuous improvement
+Transition Planning;E – Opportunities & Solutions;1 – Initial;- Ad hoc transition planning - Low predictability - Reactive problem-solving
+Transition Planning;E – Opportunities & Solutions;2 – Initial;- More structured planning emerges - Improves allocation of resources
+Transition Planning;E – Opportunities & Solutions;3 – Initial;- Defined planning processes - Enables clearer roadmaps - Reduces transition risks
+Transition Planning;E – Opportunities & Solutions;4 – Initial;- Integrated into governance - Aligns business and IT transitions - Improves project execution
+Transition Planning;E – Opportunities & Solutions;5 – Initial;- Transition planning is proactive - Supports enterprise agility - Maximizes return on investment
+Transition Planning;F – Migration Planning;1 – Initial;- Migration is reactive - High risk of delays - Limited business value
+Transition Planning;F – Migration Planning;2 – Initial;- Repeatable migration processes - Improves predictability
+Transition Planning;F – Migration Planning;3 – Initial;- Migration standards defined - Reduces risks - Improves success rates
+Transition Planning;F – Migration Planning;4 – Initial;- Migration planning aligned with business goals - Improves efficiency and resource use
+Transition Planning;F – Migration Planning;5 – Initial;- Optimized migration approach - Enables business agility - Reduces costs
+Architecture Governance;G – Implementation Governance;1 – Initial;- Minimal oversight - High risk of misalignment
+Architecture Governance;G – Implementation Governance;2 – Initial;- Governance processes emerging - Ensures more consistent execution
+Architecture Governance;G – Implementation Governance;3 – Initial;- Governance standardized - Reduces risks - Improves accountability
+Architecture Governance;G – Implementation Governance;4 – Initial;- Governance integrated with enterprise processes - Increases transparency - Supports compliance
+Architecture Governance;G – Implementation Governance;5 – Initial;- Governance drives business value - Ensures continuous compliance - Enables sustainable growth
+Architecture Governance;H – Architecture Change Management;1 – Initial;- Change management ad hoc - Risks of disruption - Low adaptability
+Architecture Governance;H – Architecture Change Management;2 – Initial;- Defined processes for change - Reduces disruption - Improves adaptability
+Architecture Governance;H – Architecture Change Management;3 – Initial;- Standardized change management - Supports agility - Improves stakeholder trust
+Architecture Governance;H – Architecture Change Management;4 – Initial;- Integrated into governance - Anticipates risks - Improves resilience
+Architecture Requirements Management;1 – Initial;- Requirements gathered inconsistently - Low traceability
+Architecture Requirements Management;2 – Initial;- Defined requirement gathering - Improves consistency
+Architecture Requirements Management;3 – Initial;- Standardized requirement processes - Improves traceability - Reduces errors
+Architecture Requirements Management;4 – Initial;- Requirements fully integrated into architecture processes - Supports alignment - Increases project success
