@@ -1,16 +1,11 @@
-from os import path
-
 import streamlit as st
 import pandas as pd
 import altair as alt
-import io
-import json
 import random
 import re
 from datetime import datetime
 from io import BytesIO
 
-# Optional imports for export
 try:
     from docx import Document
     from docx.shared import Inches

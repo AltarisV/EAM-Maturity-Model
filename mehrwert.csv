@@ -33,7 +33,7 @@ Architecture Governance;H – Architecture Change Management;1 – Initial;- Cha
 Architecture Governance;H – Architecture Change Management;2 – Initial;- Defined processes for change - Reduces disruption - Improves adaptability
 Architecture Governance;H – Architecture Change Management;3 – Initial;- Standardized change management - Supports agility - Improves stakeholder trust
 Architecture Governance;H – Architecture Change Management;4 – Initial;- Integrated into governance - Anticipates risks - Improves resilience
-Architecture Requirements Management;1 – Initial;- Requirements gathered inconsistently - Low traceability
-Architecture Requirements Management;2 – Initial;- Defined requirement gathering - Improves consistency
-Architecture Requirements Management;3 – Initial;- Standardized requirement processes - Improves traceability - Reduces errors
-Architecture Requirements Management;4 – Initial;- Requirements fully integrated into architecture processes - Supports alignment - Increases project success
+Architecture Requirements Management;;1 – Initial;- Requirements gathered inconsistently - Low traceability
+Architecture Requirements Management;;2 – Initial;- Defined requirement gathering - Improves consistency
+Architecture Requirements Management;;3 – Initial;- Standardized requirement processes - Improves traceability - Reduces errors
+Architecture Requirements Management;;4 – Initial;- Requirements fully integrated into architecture processes - Supports alignment - Increases project success
