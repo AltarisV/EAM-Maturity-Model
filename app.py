@@ -16,9 +16,9 @@ except Exception:
 
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="EAM Reifegrad-Assessment", layout="wide")
+st.set_page_config(page_title="EAM Maturity Assessment", layout="wide")
 
-st.title("EAM Reifegrad-Assessment")
+st.title("EAM Maturity Assessment")
 
 st.markdown("""
 This assessment is based on a maturity model for Enterprise Architecture Management (EAM).
@@ -35,38 +35,40 @@ Please check all criteria that your organization currently meets.
 
 
 # ------------------------------
-# Daten laden
+# Data loading
 # ------------------------------
 @st.cache_data(show_spinner=False)
 def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, sep=';', encoding='utf-8-sig')
-    # Dimensionen und Phasen auffüllen
+    # Fill down Dimensions and Phases
     df["Dimension"] = df["Dimension"].ffill()
     df["ADM-Phases"] = df.groupby("Dimension")["ADM-Phases"].ffill().fillna("")
-    # Numerische Stufe extrahieren
+    # Extract numeric level
     df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
-    # Level 0 ausblenden (keine Auswahl)
+    # Hide level 0 (no selection)
     df = df[df["level_num"] > 0].copy()
     return df
+
 
 def load_value_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, sep=';')
     return df
 
+
 try:
     raw = load_data("Reifegradmodell.csv")
 except Exception as e:
-    st.error(f"Fehler beim Laden der CSV: {e}")
+    st.error(f"Error while loading CSV: {e}")
     st.stop()
 
-# Gruppierte Kriterien je (Dimension, Phase, Level)
+# Grouped criteria per (Dimension, Phase, Level)
 criteria = (
     raw.groupby(["Dimension", "ADM-Phases", "level_num"])['Description']
         .apply(list)
         .reset_index()
 )
 
-# Reihenfolge der Phasen definieren
+# Define phase order
 phase_order = [
     "Preliminary",
     "A – Architecture Vision",
@@ -75,7 +77,7 @@ phase_order = [
     "F – Migration Planning",
     "G – Implementation Governance",
     "H – Architecture Change Management",
-    ""  # für Architecture Requirements Management ohne Phase
+    ""  # for Architecture Requirements Management without phase
 ]
 label_order = [
     "Preliminary",
@@ -95,11 +97,11 @@ value_df = load_value_data("mehrwert.csv")
 criteria["Value"] = value_df["Value"]
 
 # ------------------------------
-# Hilfsfunktionen für Zustand, Auswertung & Export
+# Helpers for state, evaluation & export
 # ------------------------------
 RESP_KEY_PREFIX = "chk"
 
-# Gewichtung für Zufalls-Ausfüllen je Level (1 sehr oft … 5 selten)
+# Weight for random fill per level (1 very often … 5 rarely)
 LEVEL_FILL_PROB = {1: 0.90, 2: 0.80, 3: 0.50, 4: 0.10, 5: 0.02}
 
 
@@ -112,7 +114,7 @@ def checkbox_key(group_idx: int, crit_idx: int) -> str:
 
 
 def init_state_if_missing():
-    # Initialisiere Checkbox-Keys, falls nicht vorhanden
+    # Initialize checkbox keys if missing
     for g_idx, row in criteria.iterrows():
         for c_idx, _ in enumerate(row["Description"]):
             k = checkbox_key(g_idx, c_idx)
@@ -137,31 +139,31 @@ def collect_responses() -> pd.DataFrame:
 
 
 def summarize(responses_df: pd.DataFrame):
-    # Aggregiere je (Dimension, Phase, Level)
+    # Aggregate per (Dimension, Phase, Level)
     grp = (responses_df.groupby(["Dimension", "ADM-Phases", "level_num"])
            .agg(total=("Checked", "count"), done=("Checked", "sum"))
            .reset_index())
     grp["fulfilled"] = grp["done"] == grp["total"]
     grp["any"] = grp["done"] > 0
 
-    # Ergebnisse pro (Dimension, Phase)
+    # Results per (Dimension, Phase)
     results = []
     for (dim, phase), sub in grp.groupby(["Dimension", "ADM-Phases"]):
-        base = 0
+        baseline = 0
         for k in sorted(sub["level_num"].unique()):
-            # alle Level <= k müssen vollständig erfüllt sein
+            # all levels <= k must be fully fulfilled
             if sub.loc[sub["level_num"] <= k, "fulfilled"].all():
-                base = k
-        deckel = sub.loc[sub["any"], "level_num"].max() if sub["any"].any() else 0
+                baseline = k
+        ceiling = sub.loc[sub["any"], "level_num"].max() if sub["any"].any() else 0
         results.append({
             "Dimension": dim,
             "ADM-Phases": phase,
-            "Baseline": base,
-            "Deckel": deckel,
+            "Baseline": baseline,
+            "Ceiling": ceiling,
         })
 
     df_res = pd.DataFrame(results)
-    df_res["Durchschnitt"] = (df_res["Baseline"] + df_res["Deckel"]) / 2
+    df_res["Average"] = (df_res["Baseline"] + df_res["Ceiling"]) / 2
     df_res["Label"] = df_res.apply(lambda r: r["ADM-Phases"] if r["ADM-Phases"] else r["Dimension"], axis=1)
     df_res["Label"] = pd.Categorical(df_res["Label"], categories=label_order, ordered=True)
     df_res = df_res.sort_values("Label").reset_index(drop=True)
@@ -169,14 +171,14 @@ def summarize(responses_df: pd.DataFrame):
 
 
 def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_df: pd.DataFrame) -> pd.DataFrame:
-    # Erstelle Next Steps je Phase: nicht erfüllte Kriterien zwischen Baseline+1 .. Deckel (oder Level 1, wenn noch nichts erfüllt)
+    # Build Next Steps per phase: unmet criteria between Baseline+1 .. Ceiling (or Level 1 if nothing is met)
     next_rows = []
     for _, r in df_res.iterrows():
-        dim, phase, base, deckel = r["Dimension"], r["ADM-Phases"], r["Baseline"], r["Deckel"]
-        if deckel == 0:
+        dim, phase, baseline, ceiling = r["Dimension"], r["ADM-Phases"], r["Baseline"], r["Ceiling"]
+        if ceiling == 0:
             target_levels = [1]
         else:
-            target_levels = list(range(max(1, base + 1), deckel + 1))
+            target_levels = list(range(max(1, baseline + 1), ceiling + 1))
 
         for lvl in target_levels:
             crits = responses_df[(responses_df["Dimension"] == dim) &
@@ -188,7 +190,7 @@ def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_d
                 if not row["Checked"]:
                     next_rows.append({
                         "Dimension": dim,
-                        "ADM-Phases": phase if phase else "(ohne Phase)",
+                        "ADM-Phases": phase if phase else "(no phase)",
                         "Level": int(lvl),
                         "ToDo": row["Description"],
                     })
@@ -203,13 +205,12 @@ def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
     """
     fig, ax = plt.subplots(figsize=(10, 4))
 
-    # Numeric indices to avoid long, rotated labels
     x = list(range(1, len(df_res) + 1))
     baseline = df_res["Baseline"].tolist()
-    deckel = df_res["Deckel"].tolist()
+    ceiling = df_res["Ceiling"].tolist()
 
     ax.plot(x, baseline, marker="o", label="Baseline")
-    ax.plot(x, deckel, marker="o", label="Deckel")
+    ax.plot(x, ceiling, marker="o", label="Ceiling")
 
     ax.set_xticks(x)
     ax.set_xticklabels([str(i) for i in x])
@@ -229,7 +230,6 @@ def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
 # ------------------------------
 # Markdown → DOCX (bold + bullets + linebreaks)
 # ------------------------------
-
 def _add_runs_with_markdown(paragraph, text: str):
     """Add runs to a python-docx paragraph, interpreting **bold** segments."""
     parts = re.split(r"(\*\*.*?\*\*)", text)
@@ -264,15 +264,15 @@ def add_markdownish_text(doc, text: str):
 
 def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> BytesIO:
     if not DOCX_AVAILABLE:
-        raise RuntimeError("python-docx ist nicht installiert.")
+        raise RuntimeError("`python-docx` is not installed.")
 
     doc = Document()
 
-    # Titel
+    # Title
     doc.add_heading('EAM Maturity Assessment', level=1)
     doc.add_paragraph(f"Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-    # Einleitung (Original-Text als Markdown-ähnliche Blöcke, inkl. Bold & Bullets)
+    # Intro (Markdown-like)
     intro_md = (
         "This assessment is based on a maturity model for Enterprise Architecture Management (EAM).\n\n"
         "For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:\n\n"
@@ -284,12 +284,12 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
     )
     add_markdownish_text(doc, intro_md)
 
-    # Diagramm
+    # Chart
     doc.add_heading('Maturity Overview', level=2)
     chart_png = generate_chart_image(df_res)
     doc.add_picture(chart_png, width=Inches(6.5))
 
-    # Tabelle unter der Grafik (Index-Mapping)
+    # Table below the chart (index mapping)
     doc.add_paragraph("Indices on the chart correspond to the first column (#) in the table below.")
     table = doc.add_table(rows=1, cols=5)
     hdr = table.rows[0].cells
@@ -304,31 +304,31 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
         row_cells[0].text = str(i)
         row_cells[1].text = str(getattr(r, 'Label'))
         row_cells[2].text = str(int(getattr(r, 'Baseline')))
-        row_cells[3].text = str(int(getattr(r, 'Deckel')))
-        row_cells[4].text = f"{float(getattr(r, 'Durchschnitt')):.1f}"
+        row_cells[3].text = str(int(getattr(r, 'Ceiling')))
+        row_cells[4].text = f"{float(getattr(r, 'Average')):.1f}"
 
-    # Abschnitt pro Phase/Dimension
+    # Section per phase/dimension
     doc.add_heading('Details & Next Steps', level=2)
     for _, r in df_res.iterrows():
         label = str(r['Label'])
         dim = r['Dimension']
         phase = r['ADM-Phases']
         baseline = int(r['Baseline'])
-        deckel = int(r['Deckel'])
+        ceiling = int(r['Ceiling'])
 
         doc.add_heading(label, level=3)
         p = doc.add_paragraph()
         p.add_run("Baseline: ").bold = True
         p.add_run(str(baseline))
         p.add_run("; Ceiling: ").bold = True
-        p.add_run(str(deckel))
+        p.add_run(str(ceiling))
 
-        # Nächstes Ziel-Level bestimmen (nur Baseline+1, wie besprochen)
+        # Determine immediate next target level (Baseline + 1)
         target_level = max(1, baseline + 1)
-        if deckel > 0 and target_level > deckel:
+        if ceiling > 0 and target_level > ceiling:
             target_level = baseline + 1
 
-        # Kriterien für das Ziel-Level, nur unerfüllte
+        # Unmet criteria for the target level
         crits = responses_df[(responses_df["Dimension"] == dim) &
                              (responses_df["ADM-Phases"] == phase) &
                              (responses_df["level_num"] == target_level)]
@@ -349,13 +349,13 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
 
 
 # ------------------------------
-# Seitenleiste: Testfunktionen, Chart & Export
+# Sidebar: Test functions, chart & export
 # ------------------------------
 with st.sidebar:
-    st.subheader("Testfunktionen")
+    st.subheader("Test Functions")
     col_a, col_b = st.columns(2)
     with col_a:
-        if st.button("🎲 Zufällig ausfüllen"):
+        if st.button("🎲 Fill randomly"):
             init_state_if_missing()
             for g_idx, row in criteria.iterrows():
                 lvl = int(row["level_num"])
@@ -364,14 +364,14 @@ with st.sidebar:
                     st.session_state[checkbox_key(g_idx, c_idx)] = random.random() < p
             st.rerun()
     with col_b:
-        if st.button("↩︎ Zurücksetzen"):
+        if st.button("↩︎ Reset"):
             for k in list(st.session_state.keys()):
                 if k.startswith(RESP_KEY_PREFIX + "_"):
                     st.session_state[k] = False
             st.rerun()
 
 # ------------------------------
-# UI: Checklisten rendern
+# UI: Render checklists
 # ------------------------------
 init_state_if_missing()
 for g_idx, row in criteria.iterrows():
@@ -383,7 +383,7 @@ for g_idx, row in criteria.iterrows():
         for c_idx, desc in enumerate(row["Description"]):
             k = checkbox_key(g_idx, c_idx)
             if c_idx == 0:
-                col1, col2 = st.columns([20,1])
+                col1, col2 = st.columns([20, 1])
                 with col1:
                     st.checkbox(desc, key=k)
                 with col2:
@@ -398,67 +398,68 @@ for g_idx, row in criteria.iterrows():
                 st.checkbox(desc, key=k)
 
 # ------------------------------
-# Auswertung & Visualisierung
+# Evaluation & visualization
 # ------------------------------
 responses_df = collect_responses()
 df_res, grp_levels = summarize(responses_df)
 
-# Chart in Sidebar (Altair)
+# Chart in sidebar (Altair)
 chart = alt.Chart(df_res).transform_fold(
-    fold=["Baseline", "Deckel"],
+    fold=["Baseline", "Ceiling"],
     as_=["Metric", "Level"]
 ).mark_line(point=True).encode(
     x=alt.X("Label:N", title="Phase / Dimension", sort=label_order),
     y=alt.Y("Level:Q", title="Level"),
-    color=alt.Color("Metric:N", title="Kennzahl"),
+    color=alt.Color("Metric:N", title="Metric"),
     tooltip=[
         alt.Tooltip("Label:N", title="Phase/Dimension"),
-        alt.Tooltip("Metric:N", title="Kennzahl"),
+        alt.Tooltip("Metric:N", title="Metric"),
         alt.Tooltip("Level:Q", title="Level")
     ]
 )
 with st.sidebar:
-    st.subheader("Maturity-Chart")
+    st.subheader("Maturity Chart")
     st.altair_chart(chart, use_container_width=True)
 
     st.markdown("---")
     st.subheader("Export")
     if not DOCX_AVAILABLE:
-        st.info("`python-docx` ist nicht installiert. Bitte ausführen: `pip install python-docx`.")
+        st.info("`python-docx` is not installed. Please run: `pip install python-docx`.")
     else:
-        if st.button("📄 DOCX-Report erstellen"):
+        if st.button("📄 Create DOCX report"):
             try:
                 docx_buf = build_docx_report(df_res, responses_df)
                 st.download_button(
                     label="📥 Download DOCX",
                     data=docx_buf.getvalue(),
-                    file_name=f"eam_reifegrad_report_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.docx",
+                    file_name=f"eam_maturity_report_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 )
             except Exception as e:
-                st.error(f"Fehler beim Erstellen des DOCX: {e}")
+                st.error(f"Error while creating DOCX: {e}")
 
-# Hauptbereich: Tabellen
-st.subheader("Bewertungsergebnisse")
+# Main area: tables
+st.subheader("Assessment Results")
 st.dataframe(df_res, use_container_width=True)
 
-st.subheader("Nächste Schritte")
+st.subheader("Next Steps")
 df_next = build_next_steps(df_res, grp_levels, responses_df)
 if df_next.empty:
     st.success(
-        "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im Baseline–Deckel-Bereich.")
+        "All criteria in the relevant areas are fulfilled — no open next steps within the Baseline–Ceiling range."
+    )
 else:
     st.dataframe(df_next, use_container_width=True)
 
-# Glossar zuletzt (optional im Hauptbereich)
-with st.expander("ℹ️ Glossar / Erklärungen"):
+# Glossary (optional)
+with st.expander("ℹ️ Glossary / Explanations"):
     glossary = {
-        "Baseline": "Höchstes Level, bei dem alle Kriterien bis einschließlich dieses Levels erfüllt sind.",
-        "Deckel": "Höchstes Level, bei dem mindestens ein Kriterium erfüllt ist (Ceiling).",
-        "EAM": "Enterprise Architecture Management – ganzheitliche Planung und Steuerung der Unternehmensarchitektur.",
-        "ADM": "Architecture Development Method – Vorgehensmodell aus TOGAF mit Phasen von Preliminary bis H.",
-        "Architecture Requirements Management": "Querschnittsprozess, der Anforderungen über alle Phasen steuert.",
+        "Baseline": "Highest level where all criteria up to and including that level are fulfilled.",
+        "Ceiling": "Highest level where at least one criterion is fulfilled.",
+        "EAM": "Enterprise Architecture Management — holistic planning and governance of the enterprise architecture.",
+        "ADM": "Architecture Development Method — the TOGAF method with phases from Preliminary to H.",
+        "Architecture Requirements Management": "Cross-cutting process that manages requirements across all phases.",
     }
-    term = st.selectbox("Begriff auswählen", options=["(bitte wählen)"] + list(glossary.keys()))
-    if term != "(bitte wählen)":
+    term = st.selectbox("Select a term", options=["(please choose)"] + list(glossary.keys()))
+    if term != "(please choose)":
         st.markdown(f"**{term}:** {glossary[term]}")
