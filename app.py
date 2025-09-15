@@ -18,9 +18,13 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="EAM Reifegrad-Assessment", layout="wide")
 
-st.title("EAM Reifegrad-Assessment")
-
-st.markdown("""
+# ------------------------------
+# Localization
+# ------------------------------
+translations = {
+    "en": {
+        "title": "EAM Maturity Assessment",
+        "intro": """
 This assessment is based on a maturity model for Enterprise Architecture Management (EAM).
 
 For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:
@@ -31,12 +35,66 @@ For each dimension and phase of the ADM, criteria are shown that are assigned to
 - Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level).
 
 Please check all criteria that your organization currently meets.
-""")
+""",
+        "sidebar_tests": "Test functions",
+        "btn_random": "🎲 Fill randomly",
+        "btn_reset": "↩︎ Reset",
+        "sidebar_chart": "Maturity Chart",
+        "export": "Export",
+        "docx_info": "`python-docx` is not installed. Please run: `pip install python-docx`.",
+        "btn_docx": "📄 Create DOCX Report",
+        "download_docx": "📥 Download DOCX",
+        "results": "Assessment Results",
+        "next_steps": "Next Steps",
+        "no_next": "All criteria within the relevant range are fulfilled – no open Next Steps between Baseline and Ceiling.",
+        "glossary": "ℹ️ Glossary / Explanations",
+        "select_term": "Select term",
+        "lang_select": "🌐 Language",
+        "chart-sidebar-heading":"Key Figure"
+    },
+    "de": {
+        "title": "EAM Reifegrad-Assessment",
+        "intro": """
+Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture Management (EAM).
+
+Für jede Dimension und Phase des ADM werden Kriterien angezeigt, die einem bestimmten Reifegrad-Level zugeordnet sind:
+
+- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als **Baseline**.
+- Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel**.
+- Die tatsächliche Reife liegt zwischen Baseline und Deckel.
+- Innerhalb dieses Bereichs sollten die nächsten Schritte zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level).
+
+Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
+""",
+        "sidebar_tests": "Testfunktionen",
+        "btn_random": "🎲 Zufällig ausfüllen",
+        "btn_reset": "↩︎ Zurücksetzen",
+        "sidebar_chart": "Reifegrad-Diagram",
+        "export": "Export",
+        "docx_info": "`python-docx` ist nicht installiert. Bitte ausführen: `pip install python-docx`.",
+        "btn_docx": "📄 DOCX-Report erstellen",
+        "download_docx": "📥 DOCX herunterladen",
+        "results": "Bewertungsergebnisse",
+        "next_steps": "Nächste Schritte",
+        "no_next": "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im Baseline–Deckel-Bereich.",
+        "glossary": "ℹ️ Glossar / Erklärungen",
+        "select_term": "Begriff auswählen",
+        "lang_select": "🌐 Sprache",
+        "chart-sidebar-heading":"Kennzahl"
+    }
+}
+
 
 
 # ------------------------------
 # Daten laden
 # ------------------------------
+if "lang" not in st.session_state:
+    st.session_state["lang"] = "en"  # default
+
+lang = st.session_state["lang"]
+texts = translations[lang]
+
 @st.cache_data(show_spinner=False)
 def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, sep=';', encoding='utf-8-sig')
@@ -87,6 +145,8 @@ label_order = [
     "H – Architecture Change Management",
     "Architecture Requirements Management"
 ]
+
+st.title(texts["title"])
 
 criteria["phase_order"] = criteria["ADM-Phases"].apply(
     lambda x: phase_order.index(x) if x in phase_order else len(phase_order))
@@ -352,10 +412,25 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
 # Seitenleiste: Testfunktionen, Chart & Export
 # ------------------------------
 with st.sidebar:
-    st.subheader("Testfunktionen")
+
+    st.markdown("### 🌐 Language / Sprache")
+    # Build the button label with flag + text
+    if st.session_state["lang"] == "en":
+        btn_label = "🇬🇧 English"
+    else:
+        btn_label = "🇩🇪 Deutsch"
+
+    if st.sidebar.button(btn_label):
+        st.session_state["lang"] = "de" if st.session_state["lang"] == "en" else "en"
+
+    # Default language if not set
+    if "lang" not in st.session_state:
+        st.session_state["lang"] = "en"
+
+    st.subheader(texts["sidebar_tests"])
     col_a, col_b = st.columns(2)
     with col_a:
-        if st.button("🎲 Zufällig ausfüllen"):
+        if st.button(texts["btn_random"]):
             init_state_if_missing()
             for g_idx, row in criteria.iterrows():
                 lvl = int(row["level_num"])
@@ -364,7 +439,7 @@ with st.sidebar:
                     st.session_state[checkbox_key(g_idx, c_idx)] = random.random() < p
             st.rerun()
     with col_b:
-        if st.button("↩︎ Zurücksetzen"):
+        if st.button(texts["btn_reset"]):
             for k in list(st.session_state.keys()):
                 if k.startswith(RESP_KEY_PREFIX + "_"):
                     st.session_state[k] = False
@@ -410,7 +485,7 @@ chart = alt.Chart(df_res).transform_fold(
 ).mark_line(point=True).encode(
     x=alt.X("Label:N", title="Phase / Dimension", sort=label_order),
     y=alt.Y("Level:Q", title="Level"),
-    color=alt.Color("Metric:N", title="Kennzahl"),
+    color=alt.Color("Metric:N", title=texts["chart-sidebar-heading"]),
     tooltip=[
         alt.Tooltip("Label:N", title="Phase/Dimension"),
         alt.Tooltip("Metric:N", title="Kennzahl"),
@@ -418,15 +493,15 @@ chart = alt.Chart(df_res).transform_fold(
     ]
 )
 with st.sidebar:
-    st.subheader("Maturity-Chart")
+    st.subheader(texts["sidebar_chart"])
     st.altair_chart(chart, use_container_width=True)
 
     st.markdown("---")
-    st.subheader("Export")
+    st.subheader(texts["export"])
     if not DOCX_AVAILABLE:
         st.info("`python-docx` ist nicht installiert. Bitte ausführen: `pip install python-docx`.")
     else:
-        if st.button("📄 DOCX-Report erstellen"):
+        if st.button(texts["btn_docx"]):
             try:
                 docx_buf = build_docx_report(df_res, responses_df)
                 st.download_button(
