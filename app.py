@@ -147,6 +147,7 @@ label_order = [
 ]
 
 st.title(texts["title"])
+st.markdown(texts["intro"])
 
 criteria["phase_order"] = criteria["ADM-Phases"].apply(
     lambda x: phase_order.index(x) if x in phase_order else len(phase_order))
