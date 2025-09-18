@@ -1,0 +1,156 @@
+Dimension;ADM-Phases;Maturity Level;Description
+Architekturfähigkeit; Vorläufig; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA Funktionen oder  Aufgaben aus.
+Architekturfähigkeit; A – Architekturvision; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA Funktionen oder Aufgaben aus.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 0 – Nicht vorhanden; Führt keinerlei EA Funktionen oder -Aufgaben aus.
+Übergangsplanung; E – Chancen und Lösungen; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Übergangsplanung; F – Migrationsplanung; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architektur-Governance; G – Implementierungs-Governance; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architektur-Anforderungsmanagement; 0 – Nicht vorhanden; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architektur-Fähigkeiten; Vorläufig; 1 – Anfänglich; Vorbereitungs- und Einleitungsaktivitäten finden statt.
+Architekturfähigkeit; A – Architekturvision; 1 – Anfangsphase; Ein erster Umfang für die Architektur wird definiert.
+Architekturfähigkeit; A – Architekturvision; 1 – Anfangsphase; Die Stakeholder werden identifiziert.
+Architekturfähigkeit; A – Architekturvision; 1 – Anfangsphase; Eine erste Architekturvision existiert.
+Architekturkompetenz; A – Architekturvision; 1 – Anfangsphase; Genehmigungen werden eingeholt.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 1 – Initial; Erste Architekturelemente sind entwickelt.
+Übergangsplanung; E – Chancen und Lösungen; 1 – Initial; Lieferansätze wie Projekte, Programme oder Portfolios sind identifiziert.
+Übergangsplanung; F – Migrationsplanung; 1 – Initial; Ein Implementierungs- und Migrationsplan liegt vor.
+Übergangsplanung; F – Migrationsplanung; 1 – Anfangsphase; Geschäftswert und Kosten werden von den Stakeholdern berücksichtigt.
+Architektur-Governance; G – Implementierungs-Governance; 1 – Anfangsphase; Es besteht eine Aufsicht über die Implementierung der Zielarchitektur.
+Architektur-Governance; G – Implementierungs-Governance; 1 – Anfangsphase; Bereitstellungsressourcen und Prioritäten werden identifiziert.
+Architektur-Governance;G – Implementierungs-Governance;1 – Initial;Compliance-Prüfungen werden durchgeführt.
+Architektur-Governance;H – Architektur-Änderungsmanagement;1 – Initial;Verfahren für das Änderungsmanagement sind festgelegt.
+Architektur-Governance;H – Architektur-Änderungsmanagement;1 – Initial;Risikomanagementverfahren sind vorhanden.
+Architektur-Governance;H – Architektur-Änderungsmanagement;1 – Initial;Überwachungsinstrumente sind vorhanden.
+Architektur-Anforderungsmanagement;;1 – Initial;Das Anforderungsmanagement wird über einige ADM-Phasen hinweg aufrechterhalten.
+Architektur-Anforderungsmanagement;;1 – Initial;Architektur-Anforderungen sind in einigen ADM-Phasen verfügbar.
+Architektur-Anforderungsmanagement;;1 – Initial;Architektur-Anforderungen werden während der ADM-Ausführung identifiziert und verwaltet.
+Architekturfähigkeit; Vorläufig; 2 – Verwaltet; Identifiziert die Kern-, Soft- und erweiterten Unternehmenseinheiten sowie die beteiligten Gemeinschaften und Governance-Strukturen.
+Architekturfähigkeit; vorläufig; 2 – verwaltet; wählt die geeigneten Architekturwerkzeuge zur Unterstützung der Architekturfunktion aus (z. B. ArchiMate, Sparx Enterprise Architect, LeanIX).
+Architekturfähigkeit; A – Architekturvision; 2 – verwaltet; identifiziert die wichtigsten Stakeholder und ihre Anliegen oder Ziele.
+Architekturkompetenz; A – Architekturvision; 2 – Verwaltet; Beschreibt die wichtigsten Geschäftsanforderungen, die im Architekturprojekt berücksichtigt werden müssen.
+Architekturkompetenz; A – Architekturvision; 2 – Verwaltet; Identifiziert und bewertet die Gesamtheit der Kompetenzen innerhalb der Organisation.
+Architekturkompetenz; A – Architekturvision; 2 – Verwaltet; Bewertet und qualifiziert die Bereitschaft der Organisation, Veränderungen vorzunehmen.
+Architekturkompetenz; A – Architekturvision; 2 – Verwaltet; Identifiziert die mit der Architekturvision verbundenen Risiken.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Identifiziert die Kataloge, die Bestandsaufnahmen der Kernressourcen des Unternehmens erfassen (z. B. Anwendungsportfolio, Katalog der Technologiestandards).
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Identifiziert die erforderlichen Matrizen, die die Kernbeziehungen zwischen verwandten Modellentitäten zeigen (z. B. CRUD-Matrix, Anwendungs-/Schnittstellenmatrix).
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Identifiziert die erforderlichen Diagramme, die die Daten-, Anwendungs- und Technologiearchitekturinformationen aus verschiedenen Blickwinkeln entsprechend den Anforderungen der Stakeholder darstellen (z. B. Fähigkeitskarte, Anwendungskommunikationsdiagramm, Technologie-Referenzmodell in ArchiMate).
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Formalisiert die Geschäfts-, Daten-, Anwendungs- und Technologieanforderungen für die Implementierung der Zielarchitektur.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Entwickelt eine Baseline-Beschreibung der aktuellen Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur in dem Umfang, der zur Unterstützung der Zielgeschäftsarchitektur erforderlich ist.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 2 – Verwaltet; Identifiziert und behebt alle weitreichenden Auswirkungen oder Implikationen in der Architekturlandschaft.
+Übergangsplanung; E – Chancen und Lösungen; 2 – Verwaltet; Identifiziert alle geschäftlichen Faktoren, die die Implementierungssequenz einschränken würden.
+Übergangsplanung; E – Chancen und Lösungen; 2 – Verwaltet; Konsolidiert die in früheren Phasen identifizierten Interoperabilitätsanforderungen.
+Übergangsplanung; E – Chancen und Lösungen; 2 – Verwaltet; Verfeinert die anfänglichen Abhängigkeiten und stellt sicher, dass alle Einschränkungen für die Implementierungs- und Migrationspläne identifiziert werden.
+Übergangsplanung; E – Chancen und Lösungen; 2 – Verwaltet; Überprüft die Ergebnisse der zuvor in Phase A durchgeführten Bewertung der Bereitschaft zur Geschäftstransformation und ermittelt deren Auswirkungen auf die Architektur-Roadmap und die Implementierungs- und Migrationsstrategie (z. B. Heatmap zur Geschäftsbereitschaft, Stakeholder-Umfrage).
+Übergangsplanung; E – Chancen und Lösungen; 2 – Verwaltet; Erstellt eine umfassende Implementierungs- und Migrationsstrategie, die als Leitfaden für die Implementierung der Zielarchitektur dient, und strukturiert alle Übergangsarchitekturen (z. B. MoSCoW-Priorisierung, Wert-Risiko-Matrix).
+Übergangsplanung; F – Migrationsplanung; 2 – Verwaltet; Legt Geschäftswerte für alle Arbeitspakete fest und weist sie zu.
+Übergangsplanung; F – Migrationsplanung; 2 – Verwaltet; Bestimmt die erforderlichen Ressourcen und Zeiten für jedes Projekt und deren Inkremente und liefert erste Kostenschätzungen.
+Übergangsplanung; F – Migrationsplanung; 2 – Verwaltet; Überträgt die Governance von der Entwicklung der Architektur auf die Realisierung der Architektur.
+Architektur-Governance; G – Implementierungs-Governance; 2 – Verwaltet; Identifiziert die für die Lösungsentwicklung erforderlichen Systementwicklungsmethoden und stellt sicher, dass die Systementwicklungsmethode ein Feedback an das Architekturteam zu den Entwürfen ermöglicht (z. B. Agile SAFe, DevOps, ITIL Change Management).
+Architektur-Governance; G – Implementierungs-Governance; 2 – Verwaltet; Führt die Bereitstellungsprojekte durch und veröffentlicht neue Basisarchitekturen im Architektur-Repository und aktualisiert andere betroffene Repositorys, wie z. B. operative Konfigurationsmanagement-Speicher.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 2 – Verwaltet; Verwaltet den Governance-Prozess und das Framework für die Architektur.
+Architektur-Governance;H – Architektur-Änderungsmanagement;2 – Verwaltet;Aktiviert den Architekturprozess zur Umsetzung von Änderungen.
+Architektur-Anforderungsmanagement;;2 – Verwaltet;Identifiziert die geänderten Anforderungen und dokumentiert die Prioritäten.
+Architektur-Anforderungsmanagement; 2 – Verwaltet; Aktualisiert das Anforderungsrepository mit Informationen zu den angeforderten Änderungen, einschließlich der Standpunkte der betroffenen Stakeholder.
+Architektur-Anforderungsmanagement; 2 – Verwaltet; Identifiziert und dokumentiert Anforderungen anhand von Geschäftsszenarien oder einer analogen Technik (z. B. Use-Case-Modellierung, TOGAF-Geschäftsszenarien).
+Architektur-Anforderungsmanagement; 2 – Verwaltet; Identifiziert geänderte Anforderungen.
+Architektur-Anforderungsmanagement; 2 – Verwaltet; Legt fest, ob die Änderung umgesetzt oder auf einen späteren ADM-Zyklus verschoben werden soll, wenn die Entscheidung zur Umsetzung getroffen wurde, und bewertet den Zeitrahmen für die Umsetzung des Änderungsmanagements.
+Architekturfähigkeit; Vorläufig; 3 – Definiert; Definiert einen Rahmen für die Architektur-Governance.
+Architekturfähigkeit; Vorläufig; 3 – Definiert; Definiert und richtet ein Enterprise-Architektur-Team und eine Organisation ein.
+Architekturfähigkeit; vorläufig; 3 – definiert; Identifiziert und etabliert die Architekturprinzipien, d. h. die Grundsätze, die sich auf die Architekturarbeit beziehen (z. B. Wiederverwendung vor Kauf vor Erstellung, Technologiestandardisierung, Sicherheit durch Design).
+Architekturkompetenz; Vorläufig; 3 – Definiert; Legt fest, welche Anpassungen von TOGAF und anderen ausgewählten Architektur-Frameworks erforderlich sind (z. B. Anpassung der ADM-Phasen, Integration mit SAFe-Portfoliomanagement).
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Führt die erforderlichen Verfahren durch, um die Anerkennung des Architekturprojekts, die Zustimmung der Unternehmensleitung und die Unterstützung und das Engagement der erforderlichen Linienführung sicherzustellen.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Identifiziert die Geschäftsziele und Geschäftstreiber sowie die Einschränkungen, die berücksichtigt werden müssen.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Definiert, was zum Umfang der Basis- und Zielarchitektur gehört.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Überprüft die Grundsätze, nach denen die Architektur entwickelt wird.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Entwickelt eine Architekturvision, die den Umfang des für das Architekturprojekt identifizierten Bereichs auf hoher Ebene abdeckt.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Definiert die Wertversprechen und KPIs für die Zielarchitektur, die im Rahmen des Projekts entwickelt werden soll.
+Architekturkompetenz; A – Architekturvision; 3 – Definiert; Definiert die zu erstellenden Arbeitsergebnisse sowie die Fristen für jedes dieser Arbeitsergebnisse.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Wählt relevante Ressourcen und Gesichtspunkte der Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur sowie geeignete Werkzeuge und Techniken aus.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Wählt für jeden Standpunkt die Modelle aus, die zur Unterstützung der erforderlichen spezifischen Sichtweise benötigt werden, und verwendet dabei das ausgewählte Werkzeug oder die ausgewählte Methode.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Entwickelt eine Zielbeschreibung für die zu entwickelnde Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur in dem Umfang, der zur Unterstützung der Architekturvision erforderlich ist.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Überprüft die Geschäfts-, Daten-, Anwendungs- und Technologiearchitekturmodelle auf interne Konsistenz und Genauigkeit, indem Lücken zwischen der Basis- und der Zielgeschäftsarchitektur identifiziert werden (z. B. Lückenanalyse).
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Definiert eine Geschäfts-, Daten-, Anwendungs- und Technologie-Roadmap, um Aktivitäten in den folgenden Phasen zu priorisieren (z. B. ArchiMate Plateaus & Gaps, Gantt-basierte Roadmap).
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Überprüft, ob die vorgeschlagene Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur die nachfolgenden Arbeiten unterstützen kann, indem die ursprüngliche Motivation für das Architekturprojekt und die Erklärung zur Architekturarbeit mit der vorgeschlagenen Architektur abgeglichen werden.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Finalisiert die Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur nach Durchführung einer formellen Stakeholder-Überprüfung, indem alle endgültigen Anforderungen, Zuordnungen und Arbeitsergebnisse dokumentiert werden.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 3 – Definiert; Dokumentiert die Architekturdefinition und überprüft das resultierende Dokument mit den relevanten Stakeholdern und berücksichtigt deren Feedback.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Legt fest, wie die Unternehmensarchitektur am besten implementiert werden kann, um die Unternehmenskultur der Organisation zu nutzen. Dies sollte die Erstellung einer Matrix zur Bewertung und Ableitung von Implementierungsfaktoren (z. B. SWOT-Analyse) umfassen.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Konsolidiert und integriert die Ergebnisse der Lückenanalyse aus den Geschäfts-, Informationssystem- und Technologiearchitekturen (erstellt in den Phasen B bis D) und bewertet deren Auswirkungen in Bezug auf mögliche Lösungen und gegenseitige Abhängigkeiten.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Bewertet die Anforderungen, Lücken, Lösungen und Faktoren, um einen Mindestumfang an Anforderungen zu ermitteln, deren Integration in Arbeitspakete zu einer effizienteren und effektiveren Umsetzung der Zielarchitektur in allen an der Architektur beteiligten Geschäftsfunktionen führen würde.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Bewertet die in der Architekturvision und der Zielarchitektur identifizierten fehlenden Geschäftsfähigkeiten und gruppiert die verschiedenen Aktivitäten logisch in Arbeitspakete.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Identifiziert eine oder mehrere Übergangsarchitekturen, bei denen der Umfang der Änderungen zur Implementierung der Zielarchitektur einen schrittweisen Ansatz erfordert.
+Übergangsplanung; E – Chancen und Lösungen; 3 – Definiert; Konsolidiert die Arbeitspakete und Übergangsarchitekturen in der Architektur-Roadmap, die einen Zeitplan für den Übergang von der Basisarchitektur zur Zielarchitektur beschreibt (z. B. Visualisierung der Roadmap mit Kanban-Boards, Programminkrementplanung in SAFe).
+Übergangsplanung; F – Migrationsplanung; 3 – Definiert; Koordiniert den Implementierungs- und Migrationsplan mit den Management-Frameworks innerhalb der Organisation.
+Übergangsplanung; F – Migrationsplanung; 3 – Definiert; Priorisiert die Projekte, indem ihr geschäftlicher Wert im Verhältnis zu den Kosten für ihre Umsetzung ermittelt wird.
+Übergangsplanung; F – Migrationsplanung; 3 – Definiert; Aktualisiert die Architektur-Roadmap einschließlich aller Übergangsarchitekturen und bestätigt die Architekturdefinition für den Fall, dass sich der Implementierungsansatz geändert hat.
+Übergangsplanung; F – Migrationsplanung; 3 – Definiert; Erstellt den fertigen Implementierungs- und Migrationsplan.
+Architektur-Governance; G – Implementierungs-Governance; 3 – Definiert; Bestätigt den Umfang und die Prioritäten für die Bereitstellung mit dem Entwicklungsmanagement.
+Architektur-Governance; G – Implementierungs-Governance; 3 – Definiert; Leitet die Entwicklung der Lösungsbereitstellung.
+Architektur-Governance; G – Implementierungs-Governance; 3 – Definiert; Überprüft die laufende Implementierungs-Governance und Architekturkonformität für jeden Baustein, führt Überprüfungen nach der Entwicklung durch und schließt den Entwicklungsteil von Bereitstellungsprojekten ab.
+Architektur-Governance; G – Implementierungs-Governance; 3 – Definiert; Führt Überprüfungen nach der Implementierung durch, veröffentlicht Überprüfungen und schließt Projekte ab (z. B. TOGAF-Checkliste zur Überprüfung der Architekturkonformität, Lessons Learned-Sitzungen).
+Architektur-Governance; H – Architektur-Änderungsmanagement; 3 – Definiert; Beeinflusst aktiv Geschäftsprojekte, um messbare Ergebnisse und Geschäftswert durch Unternehmensarchitektur zu erzielen.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 3 – Definiert; Identifiziert und mindert EA-bezogene Risiken und trägt zur Entwicklung der IT-Strategie bei.
+Architektur-Anforderungsmanagement;;3 – Definiert;Stellt sicher, dass sich alle wichtigen Beteiligten über die detaillierte Beschreibung der Anforderungen einig sind und sich zu deren Umsetzung verpflichten.
+Architektur-Anforderungsmanagement;;3 – Definiert;Überwacht die festgelegten Anforderungen (z. B. Anforderungsrepository, Jira/Confluence-Tracking).
+Architektur-Anforderungsmanagement;;3 – Definiert; Bewertet und überarbeitet die in den Phasen B bis D durchgeführte Lückenanalyse, die die Lücken zwischen Basis- und Zielarchitekturen identifiziert.
+Architektur-Anforderungsmanagement;;3 – Definiert; Bewertet die Auswirkungen geänderter Anforderungen auf die aktuelle (aktive) Phase.
+Architektur-Anforderungsmanagement;;3 – Definiert; Bewertet die Auswirkungen geänderter Anforderungen auf die vorherigen Phasen.
+Architektur-Anforderungsmanagement;;3 – Definiert; Gibt in jeder Phase des ADM-Zyklus eine Erklärung zu den Auswirkungen der Anforderungen ab.
+Architekturkompetenz; vorläufig; 4 – quantitativ verwaltet; legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architekturkompetenz; vorläufig; 4 – quantitativ verwaltet; wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architekturfähigkeit; vorläufig; 4 – quantitativ verwaltet; analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architekturfähigkeit; vorläufig; 4 – quantitativ verwaltet; legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architekturkompetenz; A – Architekturvision; 4 – Quantitativ gesteuert; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architekturkompetenz; A – Architekturvision; 4 – Quantitativ gesteuert; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management eingesetzt werden sollen.
+Architekturkompetenz; A – Architekturvision; 4 – quantitativ verwaltet; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architekturkompetenz; A – Architekturvision; 4 – quantitativ verwaltet; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 4 – Quantitativ verwaltet; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 4 – Quantitativ verwaltet; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 4 – Quantitativ verwaltet; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 4 – Quantitativ verwaltet; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Übergangsplanung; E – Chancen und Lösungen; 4 – quantitativ gesteuert; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Übergangsplanung; E – Chancen und Lösungen; 4 – Quantitativ gesteuert; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Übergangsplanung; E – Chancen und Lösungen; 4 – Quantitativ gesteuert; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Übergangsplanung; E – Chancen und Lösungen; 4 – Quantitativ gesteuert; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Übergangsplanung; F – Migrationsplanung; 4 – quantitativ gesteuert; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt diese in angemessener Detailtiefe, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Übergangsplanung; F – Migrationsplanung; 4 – quantitativ gesteuert; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management eingesetzt werden sollen.
+Übergangsplanung; F – Migrationsplanung; 4 – Quantitativ gesteuert; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Übergangsplanung; F – Migrationsplanung; 4 – Quantitativ gesteuert; Legt Prozessleistungs-Baselines fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architektur-Governance; G – Implementierungs-Governance; 4 – Quantitativ verwaltet; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architektur-Governance; G – Implementierungs-Governance; 4 – Quantitativ verwaltet; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architektur-Governance; G – Implementierungs-Governance; 4 – Quantitativ verwaltet; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architektur-Governance; G – Implementierungs-Governance; 4 – Quantitativ verwaltet; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 4 – Quantitativ verwaltet; Stellt sicher, dass Überwachungsinstrumente effektiv implementiert und genutzt werden.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 4 – Quantitativ verwaltet; Führt strukturierte Analysen durch, um das Architektur-Änderungsmanagement zu unterstützen.
+Architektur-Governance; H – Architektur-Änderungsmanagement; 4 – Quantitativ verwaltet; Gibt umsetzbare Empfehlungen zu Änderungsbedarf, um Leistungsziele zu erreichen und Handlungsbereitschaft herzustellen.
+Architektur-Anforderungsmanagement; 4 – Quantitativ verwaltet; Stellt sicher, dass neue oder sich ändernde Anforderungen, die sich aus dem Architekturänderungsmanagement (Phase H) ergeben, entsprechend verwaltet werden.
+Architekturfähigkeit; Vorläufig; 5 – Optimierung; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architekturfähigkeit; vorläufig; 5 – Optimierung; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architekturfähigkeit; vorläufig; 5 – Optimierung; Bewertet die Auswirkungen der eingesetzten Verbesserungen auf Qualität und Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architekturkompetenz; vorläufig; 5 – Optimierung; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Architekturkompetenz; vorläufig; 5 – Optimierung; Implementierung und Bewertung ausgewählter Maßnahmenvorschläge, die im Rahmen der Ursachenanalyse entwickelt wurden.
+Architekturkompetenz; A – Architekturvision; 5 – Optimierung; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architekturkompetenz; A – Architekturvision; 5 – Optimierung; Wählt Verbesserungen für die Bereitstellung im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren aus und setzt diese um.
+Architekturkompetenz; A – Architekturvision; 5 – Optimierung; Bewertet die Auswirkungen der umgesetzten Verbesserungen auf Qualität und Prozessleistung mithilfe statistischer und anderer quantitativer Verfahren.
+Architekturkompetenz; A – Architekturvision; 5 – Optimierung; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Architekturkompetenz; A – Architekturvision; 5 – Optimierung; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 5 – Optimierung; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 5 – Optimierung; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 5 – Optimierung; Bewertung der Auswirkungen der implementierten Verbesserungen auf die Qualität und Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 5 – Optimierung; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Architekturentwicklung; B, C, D – Geschäfts-, Informationssystem- und Technologiearchitektur; 5 – Optimierung; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Übergangsplanung; E – Chancen und Lösungen; 5 – Optimierung; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Übergangsplanung; E – Chancen und Lösungen; 5 – Optimierung; Auswahl und Umsetzung von Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Übergangsplanung; E – Chancen und Lösungen; 5 – Optimierung; Bewertung der Auswirkungen der umgesetzten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Übergangsplanung; E – Chancen und Lösungen; 5 – Optimierung; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Übergangsplanung; E – Chancen und Lösungen; 5 – Optimierung; Umsetzung und Bewertung ausgewählter Maßnahmenvorschläge, die im Rahmen der Ursachenanalyse entwickelt wurden.
+Übergangsplanung; F – Migrationsplanung; 5 – Optimierung; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Übergangsplanung; F – Migrationsplanung; 5 – Optimierung; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Übergangsplanung; F – Migrationsplanung; 5 – Optimierung; Bewertet die Auswirkungen der implementierten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Übergangsplanung; F – Migrationsplanung; 5 – Optimierung; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Übergangsplanung; F – Migrationsplanung; 5 – Optimierung; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Architektur-Governance;G – Implementierungs-Governance;5 – Optimierung;Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architektur-Governance;G – Implementierungs-Governance;5 – Optimierung;Wählt Verbesserungen aus und implementiert sie für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architektur-Governance;G – Implementierungs-Governance;5 – Optimierung; Bewertet die Auswirkungen der implementierten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architektur-Governance; G – Implementierungs-Governance; 5 – Optimierung; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Architektur-Governance; G – Implementierungs-Governance; 5 – Optimierung; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.

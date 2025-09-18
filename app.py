@@ -96,14 +96,18 @@ lang = st.session_state["lang"]
 texts = translations[lang]
 
 @st.cache_data(show_spinner=False)
-def load_data(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, sep=';', encoding='utf-8-sig')
-    # Dimensionen und Phasen auffüllen
+def load_data(path: str, lang: str) -> pd.DataFrame:
+    file = path.replace(".csv", f"_{lang}.csv")
+    df = pd.read_csv(file, sep=';', encoding='utf-8-sig')
+
     df["Dimension"] = df["Dimension"].ffill()
     df["ADM-Phases"] = df.groupby("Dimension")["ADM-Phases"].ffill().fillna("")
-    # Numerische Stufe extrahieren
-    df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
-    # Level 0 ausblenden (keine Auswahl)
+    #df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
+    df["level_num"] = (
+        df["Maturity Level"]
+        .str.extract(r"(\d+)")
+        .astype("Int64")  # allows NA
+    )
     df = df[df["level_num"] > 0].copy()
     return df
 
@@ -112,7 +116,7 @@ def load_value_data(path: str) -> pd.DataFrame:
     return df
 
 try:
-    raw = load_data("Reifegradmodell.csv")
+    raw = load_data("reifegradmodell.csv", lang)
 except Exception as e:
     st.error(f"Fehler beim Laden der CSV: {e}")
     st.stop()
@@ -150,7 +154,8 @@ st.title(texts["title"])
 st.markdown(texts["intro"])
 
 criteria["phase_order"] = criteria["ADM-Phases"].apply(
-    lambda x: phase_order.index(x) if x in phase_order else len(phase_order))
+    lambda x: phase_order.index(x) if x in phase_order else len(phase_order)
+)
 criteria = criteria.sort_values(["phase_order", "level_num"]).reset_index(drop=True)
 value_df = load_value_data("mehrwert.csv")
 criteria["Value"] = value_df["Value"]
