@@ -152,78 +152,103 @@ def load_model(alba_path: str, lang: str) -> pd.DataFrame:
     return df[["Dimension", "ADM-Phases", "level_num", "ID", "Description"]]
 
 
-def load_value_data(path: str, lang: str):
+def normalize_phase(p: str) -> str:
+    """Phasen-String auf das kanonische Label bringen (kleine Toleranzen)."""
+    if p is None:
+        return ""
+    s = str(p).strip()
+    # häufiges Synonym abfangen: "D – ..." -> "B, C, D – ..."
+    if s == "D – Business, Information Systems and Technology Architecture":
+        return "B, C, D – Business, Information Systems and Technology Architecture"
+    return s
+
+
+def load_value_data(path: str, lang: str) -> tuple[dict, dict]:
     """
-    Unterstützt zwei Schemata:
-    (A) ID-basiert:
-        ID;Value_DE / Value_EN / Value / Mehrwert / Mehrwert_EN
-    (B) Kombinationsbasiert:
-        Dimension;ADM-Phases;Maturity Level;Value_DE / Value_EN / Value / Mehrwert / Mehrwert_EN
+    Lädt Mehrwert-Infos.
+    Unterstützt zwei Formen:
+      1) ID-basiert:   Spalten: ID + (Value_EN/Value_DE oder Value)
+      2) Tripel-basiert: Dimension; ADM-Phases; Maturity Level; (Value_EN/Value_DE oder Value)
 
     Rückgabe:
-      by_id:   dict[str -> str]      (leer wenn kein ID-Schema)
-      by_combo:dict[(dim, phase, lvl)-> str] (leer wenn kein Kombi-Schema)
+      (id_to_value: dict[str,str], triple_to_value: dict[tuple[str,str,int], str])
     """
     try:
         vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig")
     except FileNotFoundError:
         return {}, {}
 
-    # passende Value-Spalte wählen
+    # Spalten-Namen tolerant behandeln (lowercase-map)
     colmap = {c.lower(): c for c in vdf.columns}
 
     def has(name: str) -> bool:
         return name in colmap
 
-    candidates_de = ["value_de", "mehrwert", "value"]
+    # passende Value-Spalte je Sprache finden
+    candidates_de = ["value_de", "mehrwert", "mehrwert_de", "value"]
     candidates_en = ["value_en", "mehrwert_en", "value"]
-
     value_col_lc = None
     if lang == "de":
         for c in candidates_de:
             if has(c):
-                value_col_lc = c;
+                value_col_lc = c
                 break
     else:
         for c in candidates_en:
             if has(c):
-                value_col_lc = c;
+                value_col_lc = c
                 break
     if not value_col_lc:
+        # letzte Chance: irgendeine Spalte mit "value" oder "mehrwert"
         for c in colmap:
             if "value" in c or "mehrwert" in c:
-                value_col_lc = c;
+                value_col_lc = c
                 break
     if not value_col_lc:
         return {}, {}
 
     value_col = colmap[value_col_lc]
 
-    # (A) ID-basiert
-    if "ID" in vdf.columns:
-        tmp = vdf[["ID", value_col]].copy()
-        tmp["ID"] = tmp["ID"].astype(str).str.strip()
+    id_to_value: dict[str, str] = {}
+    triple_to_value: dict[tuple[str, str, int], str] = {}
+
+    # Fall 1: ID-basiert
+    if has("id"):
+        idcol = colmap["id"]
+        tmp = vdf[[idcol, value_col]].copy()
+        tmp[idcol] = tmp[idcol].astype(str).str.strip()
         tmp[value_col] = tmp[value_col].astype(str).fillna("").str.strip()
-        by_id = dict(zip(tmp["ID"], tmp[value_col]))
-        return by_id, {}
+        id_to_value = dict(zip(tmp[idcol], tmp[value_col]))
+        # zusätzlich versuchen wir auch Tripel zu bauen, falls vorhanden
+        if has("dimension") and has("adm-phases") and has("maturity level"):
+            dcol = colmap["dimension"]
+            pcol = colmap["adm-phases"]
+            lcol = colmap["maturity level"]
+            tmp2 = vdf[[dcol, pcol, lcol, value_col]].copy()
+            tmp2[dcol] = tmp2[dcol].astype(str).str.strip()
+            tmp2[pcol] = tmp2[pcol].map(normalize_phase)
+            tmp2["level_num"] = tmp2[lcol].astype(str).str.extract(r"(\d+)").astype(int)
+            tmp2[value_col] = tmp2[value_col].astype(str).fillna("").str.strip()
+            for _, r in tmp2.iterrows():
+                triple_to_value[(r[dcol], r[pcol], int(r["level_num"]))] = r[value_col]
+        return id_to_value, triple_to_value
 
-    # (B) Kombinationsbasiert
-    need = {"Dimension", "ADM-Phases", "Maturity Level"}
-    if not need.issubset(set(vdf.columns)):
-        return {}, {}
+    # Fall 2: Tripel-basiert (ohne ID)
+    if has("dimension") and has("adm-phases") and has("maturity level"):
+        dcol = colmap["dimension"]
+        pcol = colmap["adm-phases"]
+        lcol = colmap["maturity level"]
+        tmp = vdf[[dcol, pcol, lcol, value_col]].copy()
+        tmp[dcol] = tmp[dcol].astype(str).str.strip()
+        tmp[pcol] = tmp[pcol].map(normalize_phase)
+        tmp["level_num"] = tmp[lcol].astype(str).str.extract(r"(\d+)").astype(int)
+        tmp[value_col] = tmp[value_col].astype(str).fillna("").str.strip()
+        for _, r in tmp.iterrows():
+            triple_to_value[(r[dcol], r[pcol], int(r["level_num"]))] = r[value_col]
+        return {}, triple_to_value
 
-    tmp = vdf[list(need) + [value_col]].copy()
-    tmp["Dimension"] = tmp["Dimension"].astype(str).str.strip()
-    tmp["ADM-Phases"] = tmp["ADM-Phases"].apply(normalize_phase_name)
-    tmp["level_num"] = tmp["Maturity Level"].astype(str).str.extract(r"(\d+)").astype("Int64")
-    tmp[value_col] = tmp[value_col].astype(str).fillna("").str.strip()
-    tmp = tmp.dropna(subset=["level_num"])
-
-    by_combo = {
-        (row["Dimension"], row["ADM-Phases"], int(row["level_num"])): row[value_col]
-        for _, row in tmp.iterrows()
-    }
-    return {}, by_combo
+    # nichts Passendes gefunden
+    return {}, {}
 
 
 try:
@@ -286,21 +311,26 @@ if "__resp_snapshot" in st.session_state:
                 st.session_state[k] = bool(resp_snap[k])
     del st.session_state["__resp_snapshot"]
 
-by_id, by_combo = load_value_data("mehrwert.csv", lang)
+id_to_value, triple_to_value = load_value_data("mehrwert.csv", lang)
 
-values_col = []
-for _, r in criteria.iterrows():
-    dim = str(r["Dimension"]).strip()
-    phase = normalize_phase_name(r["ADM-Phases"])
-    lvl = int(r["level_num"])
-    group_val = by_combo.get((dim, phase, lvl), "")
 
-    row_vals = []
-    for item_id in r["IDs"]:
-        row_vals.append(by_id.get(str(item_id), group_val))
-    values_col.append(row_vals)
+def value_for_group(dim: str, phase: str, lvl: int, ids: list[str]) -> list[str]:
+    # 1) Tripel bevorzugen (ein Wert für die ganze Gruppe)
+    key = (str(dim).strip(), normalize_phase(phase), int(lvl))
+    if key in triple_to_value:
+        v = triple_to_value[key]
+        return [v for _ in ids]
+    # 2) Fallback pro ID
+    out = []
+    for i in ids:
+        out.append(id_to_value.get(str(i).strip(), ""))
+    return out
 
-criteria["Values"] = values_col
+
+criteria["Values"] = criteria.apply(
+    lambda r: value_for_group(r["Dimension"], r["ADM-Phases"], r["level_num"], r["IDs"]),
+    axis=1
+)
 
 # ------------------------------
 # Helpers for state, evaluation & export
