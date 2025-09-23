@@ -94,6 +94,11 @@ with st.sidebar:
     st.markdown("### 🌐 Language / Sprache")
     btn_label = "🇬🇧 English" if st.session_state["lang"] == "en" else "🇩🇪 Deutsch"
     if st.button(btn_label, key="lang_toggle"):
+        snap = {}
+        for k, v in st.session_state.items():
+            if isinstance(k, str) and k.startswith("resp|"):
+                snap[k] = bool(v)
+        st.session_state["__resp_snapshot"] = snap
         st.session_state["lang"] = "de" if st.session_state["lang"] == "en" else "en"
         st.rerun()
 
@@ -101,42 +106,77 @@ lang = st.session_state["lang"]
 texts = translations[lang]
 
 
+# ------------------------------
+# Daten laden aus EINER Datei: alba.csv (ID + EN/DE-Text)
+# ------------------------------
 @st.cache_data(show_spinner=False)
-def load_data(path: str, lang: str) -> pd.DataFrame:
-    file = path.replace(".csv", f"_{lang}.csv")
-    df = pd.read_csv(file, sep=';', encoding='utf-8-sig')
+def load_model(alba_path: str, lang: str) -> pd.DataFrame:
+    """
+    Erwartete Spalten in alba.csv:
+      Dimension;ADM-Phases;Maturity Level;ID;Description_EN;Description_DE
+    Gibt zurück:
+      Dimension, ADM-Phases, level_num, ID (str), Description (sprachspezifisch mit Fallback)
+    """
+    df = pd.read_csv(alba_path, sep=";", encoding="utf-8-sig")
 
+    required = {"Dimension", "ADM-Phases", "Maturity Level", "ID", "Description_EN", "Description_DE"}
+    missing = required - set(df.columns)
+    if missing:
+        st.error(f"alba.csv fehlt Spalten: {', '.join(sorted(missing))}")
+        st.stop()
+
+    # Normalisieren
     df["Dimension"] = df["Dimension"].ffill()
     df["ADM-Phases"] = df.groupby("Dimension")["ADM-Phases"].ffill().fillna("")
-    # df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
-    df["level_num"] = (
-        df["Maturity Level"]
-            .str.extract(r"(\d+)")
-            .astype("Int64")  # allows NA
-    )
-    df = df[df["level_num"] > 0].copy()
-    return df
+    df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype("Int64")
+
+    # IDs IMMER als String -> stabiler Streamlit-Key
+    df["ID"] = df["ID"].astype(str)
+
+    # Sprachtext mit Fallback (damit identische ID-Menge in beiden Sprachen sichtbar bleibt)
+    def pick_desc(row):
+        de = str(row.get("Description_DE", "") or "").strip()
+        en = str(row.get("Description_EN", "") or "").strip()
+        if lang == "de":
+            return de if de else en  # DE bevorzugen, sonst EN
+        else:
+            return en if en else de  # EN bevorzugen, sonst DE
+
+    df["Description"] = df.apply(pick_desc, axis=1)
+
+    # Nur Level > 0 und nicht-leere Beschreibungen anzeigen
+    df = df[(df["level_num"] > 0) & (df["Description"].astype(str).str.strip() != "")]
+    return df[["Dimension", "ADM-Phases", "level_num", "ID", "Description"]]
 
 
 def load_value_data(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, sep=';')
-    return df
+    """Erwartet Schema: ID;Value (optional)."""
+    try:
+        vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig")
+    except FileNotFoundError:
+        return pd.DataFrame(columns=["ID", "Value"])
+    if "ID" not in vdf.columns or "Value" not in vdf.columns:
+        return pd.DataFrame(columns=["ID", "Value"])
+    vdf["ID"] = vdf["ID"].astype(str)
+    vdf["Value"] = vdf["Value"].astype(str).fillna("")
+    return vdf[["ID", "Value"]]
 
 
 try:
-    raw = load_data("reifegradmodell.csv", lang)
+    raw = load_model("alba.csv", lang)
 except Exception as e:
-    st.error(f"Fehler beim Laden der CSV: {e}")
+    st.error(f"Fehler beim Laden von alba.csv: {e}")
     st.stop()
 
-# Gruppierte Kriterien je (Dimension, Phase, Level)
+# Gruppierte Kriterien je (Dimension, Phase, Level) – IDs & Descriptions als Listen
 criteria = (
-    raw.groupby(["Dimension", "ADM-Phases", "level_num"])['Description']
-        .apply(list)
+    raw.sort_values(["Dimension", "ADM-Phases", "level_num", "Description"])
+        .groupby(["Dimension", "ADM-Phases", "level_num"])
+        .agg(IDs=("ID", list), Descs=("Description", list))
         .reset_index()
 )
 
-# Reihenfolge der Phasen definieren
+# Reihenfolge der Phasen definieren (Labels aus dem Modell – hier englische Bezeichnungen)
 phase_order = [
     "Preliminary",
     "A – Architecture Vision",
@@ -147,16 +187,6 @@ phase_order = [
     "H – Architecture Change Management",
     ""  # für Architecture Requirements Management ohne Phase
 ]
-label_order = [
-    "Preliminary",
-    "A – Architecture Vision",
-    "B, C, D – Business, Information Systems and Technology Architecture",
-    "E – Opportunities & Solutions",
-    "F – Migration Planning",
-    "G – Implementation Governance",
-    "H – Architecture Change Management",
-    "Architecture Requirements Management"
-]
 
 st.title(texts["title"])
 st.markdown(texts["intro"])
@@ -165,8 +195,23 @@ criteria["phase_order"] = criteria["ADM-Phases"].apply(
     lambda x: phase_order.index(x) if x in phase_order else len(phase_order)
 )
 criteria = criteria.sort_values(["phase_order", "level_num"]).reset_index(drop=True)
+
+# Auswahl von vorheriger Sprache übernehmen
+if "__resp_snapshot" in st.session_state:
+    resp_snap = st.session_state["__resp_snapshot"] or {}
+    # vorhandene IDs im aktuellen Modell wiederbelegen
+    for _, row in criteria.iterrows():
+        for item_id in row["IDs"]:
+            k = f"resp|{item_id}"
+            if k in resp_snap:
+                st.session_state[k] = bool(resp_snap[k])
+    # nur einmalig verwenden
+    del st.session_state["__resp_snapshot"]
+
+# Mehrwert-Texte optional per ID mappen
 value_df = load_value_data("mehrwert.csv")
-criteria["Value"] = value_df["Value"]
+id_to_value = dict(value_df.values) if not value_df.empty else {}
+criteria["Values"] = criteria["IDs"].apply(lambda ids: [id_to_value.get(str(i), "") for i in ids])
 
 # ------------------------------
 # Hilfsfunktionen für Zustand, Auswertung & Export
@@ -181,21 +226,15 @@ def fill_probability(level: int) -> float:
     return LEVEL_FILL_PROB.get(int(level), 0.50)
 
 
-def _slug(s: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", str(s).strip().lower())
-
-
-def checkbox_key(dim: str, phase: str, lvl: int, item_idx: int) -> str:
-    current_lang = st.session_state.get("lang", "en")
-    return f"{RESP_KEY_PREFIX}{current_lang}|{_slug(dim)}|{_slug(phase)}|{int(lvl)}|{int(item_idx)}"
+def checkbox_key(item_id: str) -> str:
+    # Sprachunabhängig stabil
+    return f"{RESP_KEY_PREFIX}{item_id}"
 
 
 def init_state_if_missing():
-    # build deterministic item indices per (Dimension, Phase, Level)
     for _, row in criteria.iterrows():
-        dim, phase, lvl = row["Dimension"], row["ADM-Phases"], row["level_num"]
-        for i, _ in enumerate(row["Description"]):
-            k = checkbox_key(dim, phase, lvl, i)
+        for item_id in row["IDs"]:
+            k = checkbox_key(item_id)
             if k not in st.session_state:
                 st.session_state[k] = False
 
@@ -204,9 +243,10 @@ def collect_responses() -> pd.DataFrame:
     records = []
     for _, row in criteria.iterrows():
         dim, phase, lvl = row["Dimension"], row["ADM-Phases"], row["level_num"]
-        for i, desc in enumerate(row["Description"]):
-            k = checkbox_key(dim, phase, lvl, i)
+        for item_id, desc in zip(row["IDs"], row["Descs"]):
+            k = checkbox_key(item_id)
             records.append({
+                "ID": item_id,
                 "Dimension": dim,
                 "ADM-Phases": phase,
                 "level_num": lvl,
@@ -323,7 +363,6 @@ def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
 # ------------------------------
 # Markdown → DOCX (bold + bullets + linebreaks)
 # ------------------------------
-
 def _add_runs_with_markdown(paragraph, text: str):
     """Add runs to a python-docx paragraph, interpreting **bold** segments."""
     parts = re.split(r"(\*\*.*?\*\*)", text)
@@ -449,16 +488,15 @@ with st.sidebar:
     st.subheader(texts["sidebar_tests"])
     col_a, col_b = st.columns(2)
 
-    # Zufällig ausfüllen (mit stabilen Keys)
+    # Zufällig ausfüllen (mit stabilen ID-Keys)
     with col_a:
         if st.button(texts["btn_random"]):
             init_state_if_missing()
             for _, row in criteria.iterrows():
                 lvl = int(row["level_num"])
                 p = fill_probability(lvl)
-                for i, _ in enumerate(row["Description"]):
-                    k = checkbox_key(row["Dimension"], row["ADM-Phases"], lvl, i)
-                    st.session_state[k] = (random.random() < p)
+                for item_id in row["IDs"]:
+                    st.session_state[checkbox_key(item_id)] = (random.random() < p)
             st.rerun()
 
     # Antworten zurücksetzen (Sprache bleibt unangetastet)
@@ -474,27 +512,30 @@ with st.sidebar:
 # ------------------------------
 init_state_if_missing()
 for _, row in criteria.iterrows():
-    dim, phase, level, value = row["Dimension"], row["ADM-Phases"], row["level_num"], row["Value"]
+    dim, phase, level = row["Dimension"], row["ADM-Phases"], row["level_num"]
 
     header = f"{dim} – {phase} – Level {level}" if phase else f"{dim} – Level {level}"
 
     with st.expander(header, expanded=False):
-        for c_idx, desc in enumerate(row["Description"]):
-            k = checkbox_key(dim, phase, level, c_idx)
-            if c_idx == 0:
+        first_id = row["IDs"][0] if row["IDs"] else None
+        for item_id, desc, val in zip(row["IDs"], row["Descs"], row["Values"]):
+            desc_str = str(desc).strip()
+            if not desc_str:
+                continue
+            k = checkbox_key(item_id)
+            if item_id == first_id:
                 col1, col2 = st.columns([20, 1])
                 with col1:
-                    st.checkbox(desc, key=k)
+                    st.checkbox(desc_str, key=k)
                 with col2:
                     with st.popover("ℹ️"):
                         text = (
-                            "\n".join([f"- {v.strip()}" for v in str(value).split("-") if v.strip()])
-                            if pd.notna(value) and str(value).strip()
-                            else "Value not measurable."
+                            "\n".join([f"- {v.strip()}" for v in str(val).split("-") if str(v).strip()])
+                            if str(val).strip() else "Value not measurable."
                         )
                         st.markdown(text)
             else:
-                st.checkbox(desc, key=k)
+                st.checkbox(desc_str, key=k)
 
 # ------------------------------
 # Auswertung & Visualisierung
