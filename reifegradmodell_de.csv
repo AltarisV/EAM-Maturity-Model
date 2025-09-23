@@ -6,7 +6,7 @@ Transition Planning;E – Opportunities & Solutions;0 – Non-existent; Die Orga
 Transition Planning;F – Migration Planning;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
 Architecture Governance;G – Implementation Governance;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
 Architecture Governance;H – Architecture Change Management;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
-Architecture Requirements Management;;0 – Non-existent;
+Architecture Requirements Management;;0 – Non-existent;Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
 Architecture Capability;Preliminary;1 – Initial; Vorbereitungs- und Einleitungsaktivitäten finden statt.
 Architecture Capability;A – Architecture Vision;1 – Initial; Ein erster Umfang für die Architektur wird definiert.
 Architecture Capability;A – Architecture Vision;1 – Initial; Die Stakeholder werden identifiziert.
@@ -51,10 +51,10 @@ Architecture Governance;G – Implementation Governance;2 – Managed; Führt di
 Architecture Governance;H – Architecture Change Management;2 – Managed; Verwaltet den Governance-Prozess und das Framework für die Architektur.
 Architecture Governance;H – Architecture Change Management;2 – Managed;Aktiviert den Architekturprozess zur Umsetzung von Änderungen.
 Architecture Requirements Management;;2 – Managed;Identifiziert die geänderten Anforderungen und dokumentiert die Prioritäten.
-Architecture Requirements Management;;2 – Managed;
-Architecture Requirements Management;;2 – Managed;
-Architecture Requirements Management;;2 – Managed;
-Architecture Requirements Management;;2 – Managed;
+Architecture Requirements Management;;2 – Managed;Aktualisiert das Anforderungs-Repository mit Informationen zu den angeforderten Änderungen, einschließlich betroffener Stakeholder-Sichten.
+Architecture Requirements Management;;2 – Managed;Identifiziert und dokumentiert Anforderungen mithilfe von Geschäftsszenarien oder einer analogen Technik (z. B. Use-Case-Modellierung, TOGAF Business Scenarios).
+Architecture Requirements Management;;2 – Managed;Identifiziert geänderte Anforderungen.
+Architecture Requirements Management;;2 – Managed;Bestimmt, ob eine Änderung umgesetzt oder auf einen späteren ADM-Zyklus verschoben wird, bei Umsetzung bewertet den Zeitrahmen für die Einführung des Änderungsmanagements.
 Architecture Capability;Preliminary;3 – Defined; Definiert einen Rahmen für die Architektur-Governance.
 Architecture Capability;Preliminary;3 – Defined; Definiert und richtet ein Enterprise-Architektur-Team und eine Organisation ein.
 Architecture Capability;Preliminary;3 – Defined; Identifiziert und etabliert die Architekturprinzipien, d. h. die Grundsätze, die sich auf die Architekturarbeit beziehen (z. B. Wiederverwendung vor Kauf vor Erstellung, Technologiestandardisierung, Sicherheit durch Design).
@@ -123,7 +123,7 @@ Architecture Governance;G – Implementation Governance;4 – Quantitatively Man
 Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Stellt sicher, dass Überwachungsinstrumente effektiv implementiert und genutzt werden.
 Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Führt strukturierte Analysen durch, um das Architektur-Änderungsmanagement zu unterstützen.
 Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Gibt umsetzbare Empfehlungen zu Änderungsbedarf, um Leistungsziele zu erreichen und Handlungsbereitschaft herzustellen.
-Architecture Requirements Management;;4 – Quantitatively Managed;
+Architecture Requirements Management;;4 – Quantitatively Managed;Stellt sicher, dass neue oder geänderte Anforderungen, die aus dem Architektur-Änderungsmanagement (Phase H) abgeleitet sind, entsprechend verwaltet werden.
 Architecture Capability;Preliminary;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
 Architecture Capability;Preliminary;5 – Optimizing; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
 Architecture Capability;Preliminary;5 – Optimizing; Bewertet die Auswirkungen der eingesetzten Verbesserungen auf Qualität und Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.

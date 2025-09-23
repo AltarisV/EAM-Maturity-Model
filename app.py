@@ -50,7 +50,7 @@ Please check all criteria that your organization currently meets.
         "glossary": "ℹ️ Glossary / Explanations",
         "select_term": "Select term",
         "lang_select": "🌐 Language",
-        "chart-sidebar-heading":"Key Figure"
+        "chart-sidebar-heading": "Key Figure"
     },
     "de": {
         "title": "EAM Reifegrad-Assessment",
@@ -80,20 +80,26 @@ Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
         "glossary": "ℹ️ Glossar / Erklärungen",
         "select_term": "Begriff auswählen",
         "lang_select": "🌐 Sprache",
-        "chart-sidebar-heading":"Kennzahl"
+        "chart-sidebar-heading": "Kennzahl"
     }
 }
 
-
-
 # ------------------------------
-# Daten laden
+# Language state & toggle (early)
 # ------------------------------
 if "lang" not in st.session_state:
-    st.session_state["lang"] = "en"  # default
+    st.session_state["lang"] = "en"
+
+with st.sidebar:
+    st.markdown("### 🌐 Language / Sprache")
+    btn_label = "🇬🇧 English" if st.session_state["lang"] == "en" else "🇩🇪 Deutsch"
+    if st.button(btn_label, key="lang_toggle"):
+        st.session_state["lang"] = "de" if st.session_state["lang"] == "en" else "en"
+        st.rerun()
 
 lang = st.session_state["lang"]
 texts = translations[lang]
+
 
 @st.cache_data(show_spinner=False)
 def load_data(path: str, lang: str) -> pd.DataFrame:
@@ -102,18 +108,20 @@ def load_data(path: str, lang: str) -> pd.DataFrame:
 
     df["Dimension"] = df["Dimension"].ffill()
     df["ADM-Phases"] = df.groupby("Dimension")["ADM-Phases"].ffill().fillna("")
-    #df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
+    # df["level_num"] = df["Maturity Level"].str.extract(r"(\d+)").astype(int)
     df["level_num"] = (
         df["Maturity Level"]
-        .str.extract(r"(\d+)")
-        .astype("Int64")  # allows NA
+            .str.extract(r"(\d+)")
+            .astype("Int64")  # allows NA
     )
     df = df[df["level_num"] > 0].copy()
     return df
 
+
 def load_value_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, sep=';')
     return df
+
 
 try:
     raw = load_data("reifegradmodell.csv", lang)
@@ -163,7 +171,7 @@ criteria["Value"] = value_df["Value"]
 # ------------------------------
 # Hilfsfunktionen für Zustand, Auswertung & Export
 # ------------------------------
-RESP_KEY_PREFIX = "chk"
+RESP_KEY_PREFIX = "resp|"
 
 # Gewichtung für Zufalls-Ausfüllen je Level (1 sehr oft … 5 selten)
 LEVEL_FILL_PROB = {1: 0.90, 2: 0.80, 3: 0.50, 4: 0.10, 5: 0.02}
@@ -173,25 +181,31 @@ def fill_probability(level: int) -> float:
     return LEVEL_FILL_PROB.get(int(level), 0.50)
 
 
-def checkbox_key(group_idx: int, crit_idx: int) -> str:
-    return f"{RESP_KEY_PREFIX}_{group_idx}_{crit_idx}"
+def _slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", str(s).strip().lower())
+
+
+def checkbox_key(dim: str, phase: str, lvl: int, item_idx: int) -> str:
+    current_lang = st.session_state.get("lang", "en")
+    return f"{RESP_KEY_PREFIX}{current_lang}|{_slug(dim)}|{_slug(phase)}|{int(lvl)}|{int(item_idx)}"
 
 
 def init_state_if_missing():
-    # Initialisiere Checkbox-Keys, falls nicht vorhanden
-    for g_idx, row in criteria.iterrows():
-        for c_idx, _ in enumerate(row["Description"]):
-            k = checkbox_key(g_idx, c_idx)
+    # build deterministic item indices per (Dimension, Phase, Level)
+    for _, row in criteria.iterrows():
+        dim, phase, lvl = row["Dimension"], row["ADM-Phases"], row["level_num"]
+        for i, _ in enumerate(row["Description"]):
+            k = checkbox_key(dim, phase, lvl, i)
             if k not in st.session_state:
                 st.session_state[k] = False
 
 
 def collect_responses() -> pd.DataFrame:
     records = []
-    for g_idx, row in criteria.iterrows():
+    for _, row in criteria.iterrows():
         dim, phase, lvl = row["Dimension"], row["ADM-Phases"], row["level_num"]
-        for c_idx, desc in enumerate(row["Description"]):
-            k = checkbox_key(g_idx, c_idx)
+        for i, desc in enumerate(row["Description"]):
+            k = checkbox_key(dim, phase, lvl, i)
             records.append({
                 "Dimension": dim,
                 "ADM-Phases": phase,
@@ -212,10 +226,9 @@ def summarize(responses_df: pd.DataFrame):
 
     # Ergebnisse pro (Dimension, Phase)
     results = []
-    for (dim, phase), sub in grp.groupby(["Dimension", "ADM-Phases"]):
+    for (dim, phase), sub in grp.groupby(["Dimension", "ADM-Phases"], sort=False):
         base = 0
         for k in sorted(sub["level_num"].unique()):
-            # alle Level <= k müssen vollständig erfüllt sein
             if sub.loc[sub["level_num"] <= k, "fulfilled"].all():
                 base = k
         deckel = sub.loc[sub["any"], "level_num"].max() if sub["any"].any() else 0
@@ -227,11 +240,26 @@ def summarize(responses_df: pd.DataFrame):
         })
 
     df_res = pd.DataFrame(results)
+    # Label bauen (Phase, sonst Dimension)
+    df_res["Label"] = df_res.apply(
+        lambda r: r["ADM-Phases"] if r["ADM-Phases"] else r["Dimension"], axis=1
+    )
+
+    # Dynamische Sortierung: erst nach Phasenrang (wenn bekannt), dann Label
+    def _phase_rank(phase):
+        return phase_order.index(phase) if phase in phase_order else len(phase_order)
+
+    df_res["__rank"] = df_res["ADM-Phases"].apply(_phase_rank)
+    df_res = (
+        df_res.sort_values(["__rank", "Label"])
+            .drop(columns="__rank")
+            .reset_index(drop=True)
+    )
+    # Zusatzkennzahl
     df_res["Durchschnitt"] = (df_res["Baseline"] + df_res["Deckel"]) / 2
-    df_res["Label"] = df_res.apply(lambda r: r["ADM-Phases"] if r["ADM-Phases"] else r["Dimension"], axis=1)
-    df_res["Label"] = pd.Categorical(df_res["Label"], categories=label_order, ordered=True)
-    df_res = df_res.sort_values("Label").reset_index(drop=True)
-    return df_res, grp
+    # Reihenfolge für die Altair-X-Achse
+    x_order = df_res["Label"].tolist()
+    return df_res, grp, x_order
 
 
 def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_df: pd.DataFrame) -> pd.DataFrame:
@@ -418,36 +446,26 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
 # Seitenleiste: Testfunktionen, Chart & Export
 # ------------------------------
 with st.sidebar:
-
-    st.markdown("### 🌐 Language / Sprache")
-    # Build the button label with flag + text
-    if st.session_state["lang"] == "en":
-        btn_label = "🇬🇧 English"
-    else:
-        btn_label = "🇩🇪 Deutsch"
-
-    if st.sidebar.button(btn_label):
-        st.session_state["lang"] = "de" if st.session_state["lang"] == "en" else "en"
-
-    # Default language if not set
-    if "lang" not in st.session_state:
-        st.session_state["lang"] = "en"
-
     st.subheader(texts["sidebar_tests"])
     col_a, col_b = st.columns(2)
+
+    # Zufällig ausfüllen (mit stabilen Keys)
     with col_a:
         if st.button(texts["btn_random"]):
             init_state_if_missing()
-            for g_idx, row in criteria.iterrows():
+            for _, row in criteria.iterrows():
                 lvl = int(row["level_num"])
                 p = fill_probability(lvl)
-                for c_idx, _ in enumerate(row["Description"]):
-                    st.session_state[checkbox_key(g_idx, c_idx)] = random.random() < p
+                for i, _ in enumerate(row["Description"]):
+                    k = checkbox_key(row["Dimension"], row["ADM-Phases"], lvl, i)
+                    st.session_state[k] = (random.random() < p)
             st.rerun()
+
+    # Antworten zurücksetzen (Sprache bleibt unangetastet)
     with col_b:
         if st.button(texts["btn_reset"]):
             for k in list(st.session_state.keys()):
-                if k.startswith(RESP_KEY_PREFIX + "_"):
+                if isinstance(k, str) and k.startswith(RESP_KEY_PREFIX):
                     st.session_state[k] = False
             st.rerun()
 
@@ -455,16 +473,16 @@ with st.sidebar:
 # UI: Checklisten rendern
 # ------------------------------
 init_state_if_missing()
-for g_idx, row in criteria.iterrows():
+for _, row in criteria.iterrows():
     dim, phase, level, value = row["Dimension"], row["ADM-Phases"], row["level_num"], row["Value"]
 
     header = f"{dim} – {phase} – Level {level}" if phase else f"{dim} – Level {level}"
 
     with st.expander(header, expanded=False):
         for c_idx, desc in enumerate(row["Description"]):
-            k = checkbox_key(g_idx, c_idx)
+            k = checkbox_key(dim, phase, level, c_idx)
             if c_idx == 0:
-                col1, col2 = st.columns([20,1])
+                col1, col2 = st.columns([20, 1])
                 with col1:
                     st.checkbox(desc, key=k)
                 with col2:
@@ -482,14 +500,14 @@ for g_idx, row in criteria.iterrows():
 # Auswertung & Visualisierung
 # ------------------------------
 responses_df = collect_responses()
-df_res, grp_levels = summarize(responses_df)
+df_res, grp_levels, x_order = summarize(responses_df)
 
 # Chart in Sidebar (Altair)
 chart = alt.Chart(df_res).transform_fold(
     fold=["Baseline", "Deckel"],
     as_=["Metric", "Level"]
 ).mark_line(point=True).encode(
-    x=alt.X("Label:N", title="Phase / Dimension", sort=label_order),
+    x=alt.X("Label:N", title="Phase / Dimension", sort=x_order),
     y=alt.Y("Level:Q", title="Level"),
     color=alt.Color("Metric:N", title=texts["chart-sidebar-heading"]),
     tooltip=[
@@ -498,6 +516,7 @@ chart = alt.Chart(df_res).transform_fold(
         alt.Tooltip("Level:Q", title="Level")
     ]
 )
+
 with st.sidebar:
     st.subheader(texts["sidebar_chart"])
     st.altair_chart(chart, use_container_width=True)
@@ -505,13 +524,13 @@ with st.sidebar:
     st.markdown("---")
     st.subheader(texts["export"])
     if not DOCX_AVAILABLE:
-        st.info("`python-docx` ist nicht installiert. Bitte ausführen: `pip install python-docx`.")
+        st.info(texts["docx_info"])
     else:
         if st.button(texts["btn_docx"]):
             try:
                 docx_buf = build_docx_report(df_res, responses_df)
                 st.download_button(
-                    label="📥 Download DOCX",
+                    label=texts["download_docx"],
                     data=docx_buf.getvalue(),
                     file_name=f"eam_reifegrad_report_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -520,19 +539,18 @@ with st.sidebar:
                 st.error(f"Fehler beim Erstellen des DOCX: {e}")
 
 # Hauptbereich: Tabellen
-st.subheader("Bewertungsergebnisse")
+st.subheader(texts["results"])
 st.dataframe(df_res, use_container_width=True)
 
-st.subheader("Nächste Schritte")
+st.subheader(texts["next_steps"])
 df_next = build_next_steps(df_res, grp_levels, responses_df)
 if df_next.empty:
-    st.success(
-        "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im Baseline–Deckel-Bereich.")
+    st.success(texts["no_next"])
 else:
     st.dataframe(df_next, use_container_width=True)
 
 # Glossar zuletzt (optional im Hauptbereich)
-with st.expander("ℹ️ Glossar / Erklärungen"):
+with st.expander(texts["glossary"]):
     glossary = {
         "Baseline": "Höchstes Level, bei dem alle Kriterien bis einschließlich dieses Levels erfüllt sind.",
         "Deckel": "Höchstes Level, bei dem mindestens ein Kriterium erfüllt ist (Ceiling).",
@@ -540,6 +558,6 @@ with st.expander("ℹ️ Glossar / Erklärungen"):
         "ADM": "Architecture Development Method – Vorgehensmodell aus TOGAF mit Phasen von Preliminary bis H.",
         "Architecture Requirements Management": "Querschnittsprozess, der Anforderungen über alle Phasen steuert.",
     }
-    term = st.selectbox("Begriff auswählen", options=["(bitte wählen)"] + list(glossary.keys()))
+    term = st.selectbox(texts["select_term"], options=["(bitte wählen)"] + list(glossary.keys()))
     if term != "(bitte wählen)":
         st.markdown(f"**{term}:** {glossary[term]}")
