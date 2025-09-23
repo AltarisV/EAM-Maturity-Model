@@ -1,0 +1,156 @@
+Dimension;ADM-Phases;Maturity Level;Description
+Architecture Capability;Preliminary;0 – Non-existent; Die Organisation führt keinerlei EA Funktionen oder  Aufgaben aus.
+Architecture Capability;A – Architecture Vision;0 – Non-existent; Die Organisation führt keinerlei EA Funktionen oder Aufgaben aus.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;0 – Non-existent; Führt keinerlei EA Funktionen oder -Aufgaben aus.
+Transition Planning;E – Opportunities & Solutions;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Transition Planning;F – Migration Planning;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architecture Governance;G – Implementation Governance;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architecture Governance;H – Architecture Change Management;0 – Non-existent; Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architecture Requirements Management;;0 – Non-existent;Die Organisation führt keinerlei EA-Funktionen oder -Aufgaben aus.
+Architecture Capability;Preliminary;1 – Initial; Vorbereitungs- und Einleitungsaktivitäten finden statt.
+Architecture Capability;A – Architecture Vision;1 – Initial; Ein erster Umfang für die Architektur wird definiert.
+Architecture Capability;A – Architecture Vision;1 – Initial; Die Stakeholder werden identifiziert.
+Architecture Capability;A – Architecture Vision;1 – Initial; Eine erste Architekturvision existiert.
+Architecture Capability;A – Architecture Vision;1 – Initial; Genehmigungen werden eingeholt.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;1 – Initial; Erste Architekturelemente sind entwickelt.
+Transition Planning;E – Opportunities & Solutions;1 – Initial; Lieferansätze wie Projekte, Programme oder Portfolios sind identifiziert.
+Transition Planning;F – Migration Planning;1 – Initial; Ein Implementierungs- und Migrationsplan liegt vor.
+Transition Planning;F – Migration Planning;1 – Initial; Geschäftswert und Kosten werden von den Stakeholdern berücksichtigt.
+Architecture Governance;G – Implementation Governance;1 – Initial; Es besteht eine Aufsicht über die Implementierung der Zielarchitektur.
+Architecture Governance;G – Implementation Governance;1 – Initial; Bereitstellungsressourcen und Prioritäten werden identifiziert.
+Architecture Governance;G – Implementation Governance;1 – Initial;Compliance-Prüfungen werden durchgeführt.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Verfahren für das Änderungsmanagement sind festgelegt.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Risikomanagementverfahren sind vorhanden.
+Architecture Governance;H – Architecture Change Management;1 – Initial;Überwachungsinstrumente sind vorhanden.
+Architecture Requirements Management;;1 – Initial;Das Anforderungsmanagement wird über einige ADM-Phasen hinweg aufrechterhalten.
+Architecture Requirements Management;;1 – Initial;Architektur-Anforderungen sind in einigen ADM-Phasen verfügbar.
+Architecture Requirements Management;;1 – Initial;Architektur-Anforderungen werden während der ADM-Ausführung identifiziert und verwaltet.
+Architecture Capability;Preliminary;2 – Managed; Identifiziert die Kern-, Soft- und erweiterten Unternehmenseinheiten sowie die beteiligten Gemeinschaften und Governance-Strukturen.
+Architecture Capability;Preliminary;2 – Managed; wählt die geeigneten Architekturwerkzeuge zur Unterstützung der Architekturfunktion aus (z. B. ArchiMate, Sparx Enterprise Architect, LeanIX).
+Architecture Capability;A – Architecture Vision;2 – Managed; identifiziert die wichtigsten Stakeholder und ihre Anliegen oder Ziele.
+Architecture Capability;A – Architecture Vision;2 – Managed; Beschreibt die wichtigsten Geschäftsanforderungen, die im Architekturprojekt berücksichtigt werden müssen.
+Architecture Capability;A – Architecture Vision;2 – Managed; Identifiziert und bewertet die Gesamtheit der Kompetenzen innerhalb der Organisation.
+Architecture Capability;A – Architecture Vision;2 – Managed; Bewertet und qualifiziert die Bereitschaft der Organisation, Veränderungen vorzunehmen.
+Architecture Capability;A – Architecture Vision;2 – Managed; Identifiziert die mit der Architekturvision verbundenen Risiken.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Identifiziert die Kataloge, die Bestandsaufnahmen der Kernressourcen des Unternehmens erfassen (z. B. Anwendungsportfolio, Katalog der Technologiestandards).
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Identifiziert die erforderlichen Matrizen, die die Kernbeziehungen zwischen verwandten Modellentitäten zeigen (z. B. CRUD-Matrix, Anwendungs-/Schnittstellenmatrix).
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Identifiziert die erforderlichen Diagramme, die die Daten-, Anwendungs- und Technologiearchitekturinformationen aus verschiedenen Blickwinkeln entsprechend den Anforderungen der Stakeholder darstellen (z. B. Fähigkeitskarte, Anwendungskommunikationsdiagramm, Technologie-Referenzmodell in ArchiMate).
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Formalisiert die Geschäfts-, Daten-, Anwendungs- und Technologieanforderungen für die Implementierung der Zielarchitektur.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Entwickelt eine Baseline-Beschreibung der aktuellen Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur in dem Umfang, der zur Unterstützung der Zielgeschäftsarchitektur erforderlich ist.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;2 – Managed; Identifiziert und behebt alle weitreichenden Auswirkungen oder Implikationen in der Architekturlandschaft.
+Transition Planning;E – Opportunities & Solutions;2 – Managed; Identifiziert alle geschäftlichen Faktoren, die die Implementierungssequenz einschränken würden.
+Transition Planning;E – Opportunities & Solutions;2 – Managed; Konsolidiert die in früheren Phasen identifizierten Interoperabilitätsanforderungen.
+Transition Planning;E – Opportunities & Solutions;2 – Managed; Verfeinert die anfänglichen Abhängigkeiten und stellt sicher, dass alle Einschränkungen für die Implementierungs- und Migrationspläne identifiziert werden.
+Transition Planning;E – Opportunities & Solutions;2 – Managed; Überprüft die Ergebnisse der zuvor in Phase A durchgeführten Bewertung der Bereitschaft zur Geschäftstransformation und ermittelt deren Auswirkungen auf die Architektur-Roadmap und die Implementierungs- und Migrationsstrategie (z. B. Heatmap zur Geschäftsbereitschaft, Stakeholder-Umfrage).
+Transition Planning;E – Opportunities & Solutions;2 – Managed; Erstellt eine umfassende Implementierungs- und Migrationsstrategie, die als Leitfaden für die Implementierung der Zielarchitektur dient, und strukturiert alle Übergangsarchitekturen (z. B. MoSCoW-Priorisierung, Wert-Risiko-Matrix).
+Transition Planning;F – Migration Planning;2 – Managed; Legt Geschäftswerte für alle Arbeitspakete fest und weist sie zu.
+Transition Planning;F – Migration Planning;2 – Managed; Bestimmt die erforderlichen Ressourcen und Zeiten für jedes Projekt und deren Inkremente und liefert erste Kostenschätzungen.
+Transition Planning;F – Migration Planning;2 – Managed; Überträgt die Governance von der Entwicklung der Architektur auf die Realisierung der Architektur.
+Architecture Governance;G – Implementation Governance;2 – Managed; Identifiziert die für die Lösungsentwicklung erforderlichen Systementwicklungsmethoden und stellt sicher, dass die Systementwicklungsmethode ein Feedback an das Architekturteam zu den Entwürfen ermöglicht (z. B. Agile SAFe, DevOps, ITIL Change Management).
+Architecture Governance;G – Implementation Governance;2 – Managed; Führt die Bereitstellungsprojekte durch und veröffentlicht neue Basisarchitekturen im Architektur-Repository und aktualisiert andere betroffene Repositorys, wie z. B. operative Konfigurationsmanagement-Speicher.
+Architecture Governance;H – Architecture Change Management;2 – Managed; Verwaltet den Governance-Prozess und das Framework für die Architektur.
+Architecture Governance;H – Architecture Change Management;2 – Managed;Aktiviert den Architekturprozess zur Umsetzung von Änderungen.
+Architecture Requirements Management;;2 – Managed;Identifiziert die geänderten Anforderungen und dokumentiert die Prioritäten.
+Architecture Requirements Management;;2 – Managed;Aktualisiert das Anforderungs-Repository mit Informationen zu den angeforderten Änderungen, einschließlich betroffener Stakeholder-Sichten.
+Architecture Requirements Management;;2 – Managed;Identifiziert und dokumentiert Anforderungen mithilfe von Geschäftsszenarien oder einer analogen Technik (z. B. Use-Case-Modellierung, TOGAF Business Scenarios).
+Architecture Requirements Management;;2 – Managed;Identifiziert geänderte Anforderungen.
+Architecture Requirements Management;;2 – Managed;Bestimmt, ob eine Änderung umgesetzt oder auf einen späteren ADM-Zyklus verschoben wird, bei Umsetzung bewertet den Zeitrahmen für die Einführung des Änderungsmanagements.
+Architecture Capability;Preliminary;3 – Defined; Definiert einen Rahmen für die Architektur-Governance.
+Architecture Capability;Preliminary;3 – Defined; Definiert und richtet ein Enterprise-Architektur-Team und eine Organisation ein.
+Architecture Capability;Preliminary;3 – Defined; Identifiziert und etabliert die Architekturprinzipien, d. h. die Grundsätze, die sich auf die Architekturarbeit beziehen (z. B. Wiederverwendung vor Kauf vor Erstellung, Technologiestandardisierung, Sicherheit durch Design).
+Architecture Capability;Preliminary;3 – Defined; Legt fest, welche Anpassungen von TOGAF und anderen ausgewählten Architektur-Frameworks erforderlich sind (z. B. Anpassung der ADM-Phasen, Integration mit SAFe-Portfoliomanagement).
+Architecture Capability;A – Architecture Vision;3 – Defined; Führt die erforderlichen Verfahren durch, um die Anerkennung des Architekturprojekts, die Zustimmung der Unternehmensleitung und die Unterstützung und das Engagement der erforderlichen Linienführung sicherzustellen.
+Architecture Capability;A – Architecture Vision;3 – Defined; Identifiziert die Geschäftsziele und Geschäftstreiber sowie die Einschränkungen, die berücksichtigt werden müssen.
+Architecture Capability;A – Architecture Vision;3 – Defined; Definiert, was zum Umfang der Basis- und Zielarchitektur gehört.
+Architecture Capability;A – Architecture Vision;3 – Defined; Überprüft die Grundsätze, nach denen die Architektur entwickelt wird.
+Architecture Capability;A – Architecture Vision;3 – Defined; Entwickelt eine Architekturvision, die den Umfang des für das Architekturprojekt identifizierten Bereichs auf hoher Ebene abdeckt.
+Architecture Capability;A – Architecture Vision;3 – Defined; Definiert die Wertversprechen und KPIs für die Zielarchitektur, die im Rahmen des Projekts entwickelt werden soll.
+Architecture Capability;A – Architecture Vision;3 – Defined; Definiert die zu erstellenden Arbeitsergebnisse sowie die Fristen für jedes dieser Arbeitsergebnisse.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Wählt relevante Ressourcen und Gesichtspunkte der Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur sowie geeignete Werkzeuge und Techniken aus.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Wählt für jeden Standpunkt die Modelle aus, die zur Unterstützung der erforderlichen spezifischen Sichtweise benötigt werden, und verwendet dabei das ausgewählte Werkzeug oder die ausgewählte Methode.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Entwickelt eine Zielbeschreibung für die zu entwickelnde Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur in dem Umfang, der zur Unterstützung der Architekturvision erforderlich ist.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Überprüft die Geschäfts-, Daten-, Anwendungs- und Technologiearchitekturmodelle auf interne Konsistenz und Genauigkeit, indem Lücken zwischen der Basis- und der Zielgeschäftsarchitektur identifiziert werden (z. B. Lückenanalyse).
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Definiert eine Geschäfts-, Daten-, Anwendungs- und Technologie-Roadmap, um Aktivitäten in den folgenden Phasen zu priorisieren (z. B. ArchiMate Plateaus & Gaps, Gantt-basierte Roadmap).
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Überprüft, ob die vorgeschlagene Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur die nachfolgenden Arbeiten unterstützen kann, indem die ursprüngliche Motivation für das Architekturprojekt und die Erklärung zur Architekturarbeit mit der vorgeschlagenen Architektur abgeglichen werden.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Finalisiert die Geschäfts-, Daten-, Anwendungs- und Technologiearchitektur nach Durchführung einer formellen Stakeholder-Überprüfung, indem alle endgültigen Anforderungen, Zuordnungen und Arbeitsergebnisse dokumentiert werden.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;3 – Defined; Dokumentiert die Architekturdefinition und überprüft das resultierende Dokument mit den relevanten Stakeholdern und berücksichtigt deren Feedback.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Legt fest, wie die Unternehmensarchitektur am besten implementiert werden kann, um die Unternehmenskultur der Organisation zu nutzen. Dies sollte die Erstellung einer Matrix zur Bewertung und Ableitung von Implementierungsfaktoren (z. B. SWOT-Analyse) umfassen.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Konsolidiert und integriert die Ergebnisse der Lückenanalyse aus den Geschäfts-, Informationssystem- und Technologiearchitekturen (erstellt in den Phasen B bis D) und bewertet deren Auswirkungen in Bezug auf mögliche Lösungen und gegenseitige Abhängigkeiten.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Bewertet die Anforderungen, Lücken, Lösungen und Faktoren, um einen Mindestumfang an Anforderungen zu ermitteln, deren Integration in Arbeitspakete zu einer effizienteren und effektiveren Umsetzung der Zielarchitektur in allen an der Architektur beteiligten Geschäftsfunktionen führen würde.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Bewertet die in der Architekturvision und der Zielarchitektur identifizierten fehlenden Geschäftsfähigkeiten und gruppiert die verschiedenen Aktivitäten logisch in Arbeitspakete.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Identifiziert eine oder mehrere Übergangsarchitekturen, bei denen der Umfang der Änderungen zur Implementierung der Zielarchitektur einen schrittweisen Ansatz erfordert.
+Transition Planning;E – Opportunities & Solutions;3 – Defined; Konsolidiert die Arbeitspakete und Übergangsarchitekturen in der Architektur-Roadmap, die einen Zeitplan für den Übergang von der Basisarchitektur zur Zielarchitektur beschreibt (z. B. Visualisierung der Roadmap mit Kanban-Boards, Programminkrementplanung in SAFe).
+Transition Planning;F – Migration Planning;3 – Defined; Koordiniert den Implementierungs- und Migrationsplan mit den Management-Frameworks innerhalb der Organisation.
+Transition Planning;F – Migration Planning;3 – Defined; Priorisiert die Projekte, indem ihr geschäftlicher Wert im Verhältnis zu den Kosten für ihre Umsetzung ermittelt wird.
+Transition Planning;F – Migration Planning;3 – Defined; Aktualisiert die Architektur-Roadmap einschließlich aller Übergangsarchitekturen und bestätigt die Architekturdefinition für den Fall, dass sich der Implementierungsansatz geändert hat.
+Transition Planning;F – Migration Planning;3 – Defined; Erstellt den fertigen Implementierungs- und Migrationsplan.
+Architecture Governance;G – Implementation Governance;3 – Defined; Bestätigt den Umfang und die Prioritäten für die Bereitstellung mit dem Entwicklungsmanagement.
+Architecture Governance;G – Implementation Governance;3 – Defined; Leitet die Entwicklung der Lösungsbereitstellung.
+Architecture Governance;G – Implementation Governance;3 – Defined; Überprüft die laufende Implementierungs-Governance und Architekturkonformität für jeden Baustein, führt Überprüfungen nach der Entwicklung durch und schließt den Entwicklungsteil von Bereitstellungsprojekten ab.
+Architecture Governance;G – Implementation Governance;3 – Defined; Führt Überprüfungen nach der Implementierung durch, veröffentlicht Überprüfungen und schließt Projekte ab (z. B. TOGAF-Checkliste zur Überprüfung der Architekturkonformität, Lessons Learned-Sitzungen).
+Architecture Governance;H – Architecture Change Management;3 – Defined; Beeinflusst aktiv Geschäftsprojekte, um messbare Ergebnisse und Geschäftswert durch Unternehmensarchitektur zu erzielen.
+Architecture Governance;H – Architecture Change Management;3 – Defined; Identifiziert und mindert EA-bezogene Risiken und trägt zur Entwicklung der IT-Strategie bei.
+Architecture Requirements Management;;3 – Defined;Stellt sicher, dass sich alle wichtigen Beteiligten über die detaillierte Beschreibung der Anforderungen einig sind und sich zu deren Umsetzung verpflichten.
+Architecture Requirements Management;;3 – Defined;Überwacht die festgelegten Anforderungen (z. B. Anforderungsrepository, Jira/Confluence-Tracking).
+Architecture Requirements Management;;3 – Defined; Bewertet und überarbeitet die in den Phasen B bis D durchgeführte Lückenanalyse, die die Lücken zwischen Basis- und Zielarchitekturen identifiziert.
+Architecture Requirements Management;;3 – Defined; Bewertet die Auswirkungen geänderter Anforderungen auf die aktuelle (aktive) Phase.
+Architecture Requirements Management;;3 – Defined; Bewertet die Auswirkungen geänderter Anforderungen auf die vorherigen Phasen.
+Architecture Requirements Management;;3 – Defined; Gibt in jeder Phase des ADM-Zyklus eine Erklärung zu den Auswirkungen der Anforderungen ab.
+Architecture Capability;Preliminary;4 – Quantitatively Managed; legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architecture Capability;Preliminary;4 – Quantitatively Managed; wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architecture Capability;Preliminary;4 – Quantitatively Managed; analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architecture Capability;Preliminary;4 – Quantitatively Managed; legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management eingesetzt werden sollen.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architecture Capability;A – Architecture Vision;4 – Quantitatively Managed; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;4 – Quantitatively Managed; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Transition Planning;E – Opportunities & Solutions;4 – Quantitatively Managed; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt diese in angemessener Detailtiefe, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management eingesetzt werden sollen.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Transition Planning;F – Migration Planning;4 – Quantitatively Managed; Legt Prozessleistungs-Baselines fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed; Legt die Ziele für Qualität und Prozessleistung fest und verhandelt auf einer angemessenen Detailebene, um eine Gesamtbewertung der Ziele und Risiken auf Prozessebene zu ermöglichen.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed; Wählt Maßnahmen und Analysetechniken aus, die im quantitativen Management verwendet werden sollen.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed; Analysiert ausgewählte Maßnahmen, um die Leistung der Prozesse der Organisation zu charakterisieren.
+Architecture Governance;G – Implementation Governance;4 – Quantitatively Managed; Legt Basiswerte für die Prozessleistung fest und vergleicht diese mit den Qualitäts- und Prozessleistungszielen der Organisation, um festzustellen, ob die Qualitäts- und Prozessleistungsziele erreicht werden.
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Stellt sicher, dass Überwachungsinstrumente effektiv implementiert und genutzt werden.
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Führt strukturierte Analysen durch, um das Architektur-Änderungsmanagement zu unterstützen.
+Architecture Governance;H – Architecture Change Management;4 – Quantitatively Managed; Gibt umsetzbare Empfehlungen zu Änderungsbedarf, um Leistungsziele zu erreichen und Handlungsbereitschaft herzustellen.
+Architecture Requirements Management;;4 – Quantitatively Managed;Stellt sicher, dass neue oder geänderte Anforderungen, die aus dem Architektur-Änderungsmanagement (Phase H) abgeleitet sind, entsprechend verwaltet werden.
+Architecture Capability;Preliminary;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architecture Capability;Preliminary;5 – Optimizing; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architecture Capability;Preliminary;5 – Optimizing; Bewertet die Auswirkungen der eingesetzten Verbesserungen auf Qualität und Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architecture Capability;Preliminary;5 – Optimizing; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Architecture Capability;Preliminary;5 – Optimizing; Implementierung und Bewertung ausgewählter Maßnahmenvorschläge, die im Rahmen der Ursachenanalyse entwickelt wurden.
+Architecture Capability;A – Architecture Vision;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architecture Capability;A – Architecture Vision;5 – Optimizing; Wählt Verbesserungen für die Bereitstellung im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren aus und setzt diese um.
+Architecture Capability;A – Architecture Vision;5 – Optimizing; Bewertet die Auswirkungen der umgesetzten Verbesserungen auf Qualität und Prozessleistung mithilfe statistischer und anderer quantitativer Verfahren.
+Architecture Capability;A – Architecture Vision;5 – Optimizing; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Architecture Capability;A – Architecture Vision;5 – Optimizing; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing; Bewertung der Auswirkungen der implementierten Verbesserungen auf die Qualität und Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Architecture Development;B, C, D – Business, Information Systems and Technology Architecture;5 – Optimizing; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing; Auswahl und Umsetzung von Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing; Bewertung der Auswirkungen der umgesetzten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing; Systematische Ermittlung der Ursachen ausgewählter und analysierter Ergebnisse.
+Transition Planning;E – Opportunities & Solutions;5 – Optimizing; Umsetzung und Bewertung ausgewählter Maßnahmenvorschläge, die im Rahmen der Ursachenanalyse entwickelt wurden.
+Transition Planning;F – Migration Planning;5 – Optimizing; Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Transition Planning;F – Migration Planning;5 – Optimizing; Wählt und implementiert Verbesserungen für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Transition Planning;F – Migration Planning;5 – Optimizing; Bewertet die Auswirkungen der implementierten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Transition Planning;F – Migration Planning;5 – Optimizing; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Transition Planning;F – Migration Planning;5 – Optimizing; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Identifiziert potenzielle Verbesserungsbereiche, die zur Erreichung der Geschäftsziele beitragen könnten.
+Architecture Governance;G – Implementation Governance;5 – Optimizing;Wählt Verbesserungen aus und implementiert sie für den Einsatz im gesamten Unternehmen auf der Grundlage einer Bewertung von Kosten, Nutzen und anderen Faktoren.
+Architecture Governance;G – Implementation Governance;5 – Optimizing; Bewertet die Auswirkungen der implementierten Verbesserungen auf die Qualität und die Prozessleistung unter Verwendung statistischer und anderer quantitativer Verfahren.
+Architecture Governance;G – Implementation Governance;5 – Optimizing; Ermittelt systematisch die Ursachen ausgewählter und analysierter Ergebnisse.
+Architecture Governance;G – Implementation Governance;5 – Optimizing; Implementiert und bewertet ausgewählte Maßnahmenvorschläge, die in der Ursachenanalyse entwickelt wurden.
