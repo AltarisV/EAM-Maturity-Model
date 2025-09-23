@@ -9,6 +9,7 @@ from io import BytesIO
 try:
     from docx import Document
     from docx.shared import Inches
+
     DOCX_AVAILABLE = True
 except Exception:
     DOCX_AVAILABLE = False
@@ -107,6 +108,7 @@ with st.sidebar:
 lang = st.session_state["lang"]
 texts = translations[lang]
 
+
 # ------------------------------
 # Daten laden aus EINER Datei: alba.csv (ID + EN/DE-Text)
 # ------------------------------
@@ -149,17 +151,80 @@ def load_model(alba_path: str, lang: str) -> pd.DataFrame:
     df = df[(df["level_num"] > 0) & (df["Description"].astype(str).str.strip() != "")]
     return df[["Dimension", "ADM-Phases", "level_num", "ID", "Description"]]
 
-def load_value_data(path: str) -> pd.DataFrame:
-    """Erwartet Schema: ID;Value (optional)."""
+
+def load_value_data(path: str, lang: str):
+    """
+    Unterstützt zwei Schemata:
+    (A) ID-basiert:
+        ID;Value_DE / Value_EN / Value / Mehrwert / Mehrwert_EN
+    (B) Kombinationsbasiert:
+        Dimension;ADM-Phases;Maturity Level;Value_DE / Value_EN / Value / Mehrwert / Mehrwert_EN
+
+    Rückgabe:
+      by_id:   dict[str -> str]      (leer wenn kein ID-Schema)
+      by_combo:dict[(dim, phase, lvl)-> str] (leer wenn kein Kombi-Schema)
+    """
     try:
         vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig")
     except FileNotFoundError:
-        return pd.DataFrame(columns=["ID", "Value"])
-    if "ID" not in vdf.columns or "Value" not in vdf.columns:
-        return pd.DataFrame(columns=["ID", "Value"])
-    vdf["ID"] = vdf["ID"].astype(str)
-    vdf["Value"] = vdf["Value"].astype(str).fillna("")
-    return vdf[["ID", "Value"]]
+        return {}, {}
+
+    # passende Value-Spalte wählen
+    colmap = {c.lower(): c for c in vdf.columns}
+
+    def has(name: str) -> bool:
+        return name in colmap
+
+    candidates_de = ["value_de", "mehrwert", "value"]
+    candidates_en = ["value_en", "mehrwert_en", "value"]
+
+    value_col_lc = None
+    if lang == "de":
+        for c in candidates_de:
+            if has(c):
+                value_col_lc = c;
+                break
+    else:
+        for c in candidates_en:
+            if has(c):
+                value_col_lc = c;
+                break
+    if not value_col_lc:
+        for c in colmap:
+            if "value" in c or "mehrwert" in c:
+                value_col_lc = c;
+                break
+    if not value_col_lc:
+        return {}, {}
+
+    value_col = colmap[value_col_lc]
+
+    # (A) ID-basiert
+    if "ID" in vdf.columns:
+        tmp = vdf[["ID", value_col]].copy()
+        tmp["ID"] = tmp["ID"].astype(str).str.strip()
+        tmp[value_col] = tmp[value_col].astype(str).fillna("").str.strip()
+        by_id = dict(zip(tmp["ID"], tmp[value_col]))
+        return by_id, {}
+
+    # (B) Kombinationsbasiert
+    need = {"Dimension", "ADM-Phases", "Maturity Level"}
+    if not need.issubset(set(vdf.columns)):
+        return {}, {}
+
+    tmp = vdf[list(need) + [value_col]].copy()
+    tmp["Dimension"] = tmp["Dimension"].astype(str).str.strip()
+    tmp["ADM-Phases"] = tmp["ADM-Phases"].apply(normalize_phase_name)
+    tmp["level_num"] = tmp["Maturity Level"].astype(str).str.extract(r"(\d+)").astype("Int64")
+    tmp[value_col] = tmp[value_col].astype(str).fillna("").str.strip()
+    tmp = tmp.dropna(subset=["level_num"])
+
+    by_combo = {
+        (row["Dimension"], row["ADM-Phases"], int(row["level_num"])): row[value_col]
+        for _, row in tmp.iterrows()
+    }
+    return {}, by_combo
+
 
 try:
     raw = load_model("alba.csv", lang)
@@ -170,9 +235,9 @@ except Exception as e:
 # Gruppierte Kriterien je (Dimension, Phase, Level) – IDs & Descriptions als Listen
 criteria = (
     raw.sort_values(["Dimension", "ADM-Phases", "level_num", "Description"])
-       .groupby(["Dimension", "ADM-Phases", "level_num"])
-       .agg(IDs=("ID", list), Descs=("Description", list))
-       .reset_index()
+        .groupby(["Dimension", "ADM-Phases", "level_num"])
+        .agg(IDs=("ID", list), Descs=("Description", list))
+        .reset_index()
 )
 
 # Reihenfolge der Phasen definieren (Labels aus dem Modell – hier englische Bezeichnungen)
@@ -186,6 +251,22 @@ phase_order = [
     "H – Architecture Change Management",
     ""  # for Architecture Requirements Management without phase
 ]
+
+
+def normalize_phase_name(phase: str) -> str:
+    if phase is None:
+        return ""
+    s = re.sub(r"\s+", " ", str(phase)).strip()
+    if not s or s in ["-", "—"]:
+        return ""
+    # Sammelphase B,C,D robust erkennen
+    if "Business, Information Systems and Technology Architecture" in s:
+        return "B, C, D – Business, Information Systems and Technology Architecture"
+    # Requirements Mgmt hat keine Phase -> leer
+    if s.lower().startswith("architecture requirements management"):
+        return ""
+    return s
+
 
 st.title(texts["title"])
 st.markdown(texts["intro"])
@@ -205,10 +286,21 @@ if "__resp_snapshot" in st.session_state:
                 st.session_state[k] = bool(resp_snap[k])
     del st.session_state["__resp_snapshot"]
 
-# Mehrwert-Texte optional per ID mappen
-value_df = load_value_data("mehrwert.csv")
-id_to_value = dict(value_df.values) if not value_df.empty else {}
-criteria["Values"] = criteria["IDs"].apply(lambda ids: [id_to_value.get(str(i), "") for i in ids])
+by_id, by_combo = load_value_data("mehrwert.csv", lang)
+
+values_col = []
+for _, r in criteria.iterrows():
+    dim = str(r["Dimension"]).strip()
+    phase = normalize_phase_name(r["ADM-Phases"])
+    lvl = int(r["level_num"])
+    group_val = by_combo.get((dim, phase, lvl), "")
+
+    row_vals = []
+    for item_id in r["IDs"]:
+        row_vals.append(by_id.get(str(item_id), group_val))
+    values_col.append(row_vals)
+
+criteria["Values"] = values_col
 
 # ------------------------------
 # Helpers for state, evaluation & export
@@ -217,12 +309,15 @@ RESP_KEY_PREFIX = "resp|"
 
 LEVEL_FILL_PROB = {1: 0.90, 2: 0.80, 3: 0.50, 4: 0.10, 5: 0.02}
 
+
 def fill_probability(level: int) -> float:
     return LEVEL_FILL_PROB.get(int(level), 0.50)
+
 
 def checkbox_key(item_id: str) -> str:
     # Sprachunabhängig stabil
     return f"{RESP_KEY_PREFIX}{item_id}"
+
 
 def init_state_if_missing():
     for _, row in criteria.iterrows():
@@ -230,6 +325,7 @@ def init_state_if_missing():
             k = checkbox_key(item_id)
             if k not in st.session_state:
                 st.session_state[k] = False
+
 
 def collect_responses() -> pd.DataFrame:
     records = []
@@ -246,6 +342,7 @@ def collect_responses() -> pd.DataFrame:
                 "Checked": bool(st.session_state.get(k, False)),
             })
     return pd.DataFrame(records)
+
 
 def summarize(responses_df: pd.DataFrame):
     # Aggregate per (Dimension, Phase, Level)
@@ -284,8 +381,8 @@ def summarize(responses_df: pd.DataFrame):
     df_res["__rank"] = df_res["ADM-Phases"].apply(_phase_rank)
     df_res = (
         df_res.sort_values(["__rank", "Label"])
-              .drop(columns="__rank")
-              .reset_index(drop=True)
+            .drop(columns="__rank")
+            .reset_index(drop=True)
     )
 
     # Zusatzkennzahl
@@ -294,6 +391,7 @@ def summarize(responses_df: pd.DataFrame):
     # Reihenfolge für die Altair-X-Achse
     x_order = df_res["Label"].tolist()
     return df_res, grp, x_order
+
 
 def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_df: pd.DataFrame) -> pd.DataFrame:
     # Build Next Steps per phase: unmet criteria between Baseline+1 .. Ceiling (or Level 1 if nothing is met)
@@ -323,6 +421,7 @@ def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_d
     df_next = pd.DataFrame(next_rows).sort_values(["Dimension", "ADM-Phases", "Level"]).reset_index(drop=True)
     return df_next
 
+
 def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
     """Render a compact chart with numeric indices on the x-axis for readability.
     The detailed mapping is provided in a table below the chart in the DOCX.
@@ -350,6 +449,7 @@ def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
     buf.seek(0)
     return buf
 
+
 # ------------------------------
 # Markdown → DOCX (bold + bullets + linebreaks)
 # ------------------------------
@@ -364,6 +464,7 @@ def _add_runs_with_markdown(paragraph, text: str):
             run.bold = True
         else:
             paragraph.add_run(part)
+
 
 def add_markdownish_text(doc, text: str):
     """Render a small subset of Markdown-like text into python-docx:
@@ -382,6 +483,7 @@ def add_markdownish_text(doc, text: str):
         else:
             p = doc.add_paragraph()
             _add_runs_with_markdown(p, line)
+
 
 def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> BytesIO:
     if not DOCX_AVAILABLE:
@@ -468,6 +570,7 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
     out.seek(0)
     return out
 
+
 # ------------------------------
 # Sidebar: Test functions, chart & export
 # ------------------------------
@@ -515,11 +618,10 @@ for _, row in criteria.iterrows():
                     st.checkbox(desc_str, key=k)
                 with col2:
                     with st.popover("ℹ️"):
-                        text = (
-                            "\n".join([f"- {v.strip()}" for v in str(val).split("-") if str(v).strip()])
-                            if str(val).strip() else "Value not measurable."
-                        )
-                        st.markdown(text)
+                        s = str(val).strip()
+                        if not s:
+                            s = "Value not available." if lang == "en" else "Mehrwert nicht verfügbar."
+                        st.markdown(s)
             else:
                 st.checkbox(desc_str, key=k)
 
@@ -585,6 +687,7 @@ with st.expander(texts["glossary"]):
         "ADM": "Architecture Development Method — the TOGAF method with phases from Preliminary to H.",
         "Architecture Requirements Management": "Cross-cutting process that manages requirements across all phases.",
     }
-    term = st.selectbox(texts["select_term"], options=["(bitte wählen)" if lang=="de" else "(please choose)"] + list(glossary.keys()))
+    term = st.selectbox(texts["select_term"],
+                        options=["(bitte wählen)" if lang == "de" else "(please choose)"] + list(glossary.keys()))
     if term not in ["(bitte wählen)", "(please choose)"]:
         st.markdown(f"**{term}:** {glossary[term]}")
