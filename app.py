@@ -758,10 +758,12 @@ for _, row in criteria.iterrows():
                     st.checkbox(desc_str, key=k)
                 with col2:
                     with st.popover("ℹ️"):
-                        s = str(val).strip()
-                        if not s:
-                            s = "Value not available." if lang == "en" else "Mehrwert nicht verfügbar."
-                        st.markdown(s)
+                        text = (
+                            "\n".join([f"- {v.strip()}" for v in str(val).split("-") if v.strip()])
+                            if pd.notna(val) and str(val).strip()
+                            else "Value not measurable."
+                        )
+                        st.markdown(text)
             else:
                 st.checkbox(desc_str, key=k)
 
