@@ -8,7 +8,11 @@ from io import BytesIO
 
 try:
     from docx import Document
-    from docx.shared import Inches
+    from docx.shared import Inches, Pt
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.enum.table import WD_TABLE_ALIGNMENT
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
 
     DOCX_AVAILABLE = True
 except Exception:
@@ -515,85 +519,191 @@ def add_markdownish_text(doc, text: str):
             _add_runs_with_markdown(p, line)
 
 
+def set_repeat_table_header(row):
+    """Wiederholt die Kopfzeile einer Tabelle auf jeder Seite."""
+    tr = row._tr
+    trPr = tr.get_or_add_trPr()
+    tblHeader = OxmlElement('w:tblHeader')
+    tblHeader.set(qn('w:val'), 'true')
+    trPr.append(tblHeader)
+
+
+def prevent_row_split(row):
+    """Verhindert Seitenumbruch innerhalb einer Tabellenzeile (no row split)."""
+    trPr = row._tr.get_or_add_trPr()
+    cantSplit = OxmlElement('w:cantSplit')
+    trPr.append(cantSplit)
+
+
+def keep_with_next(paragraph, together=False):
+    """Überschrift/Text nicht am Seitenende hängen lassen."""
+    pf = paragraph.paragraph_format
+    pf.keep_with_next = True
+    if together:
+        pf.keep_together = True
+
+
 def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> BytesIO:
     if not DOCX_AVAILABLE:
         raise RuntimeError("`python-docx` is not installed.")
 
+    # --- i18n nur für den DOCX-Export ---
+    docx_t = {
+        "en": {
+            "title": "EAM Maturity Assessment",
+            "generated_at": "Generated at:",
+            "overview": "Maturity Overview",
+            "idx_hint": "Indices on the chart correspond to the first column (#) in the table below.",
+            "table_headers": ["#", "Phase / Dimension", "Baseline", "Ceiling", "Average"],
+            "details": "Details & Next Steps",
+            "baseline_lbl": "Baseline:",
+            "ceiling_lbl": "Ceiling:",
+            "reach_lead": "To reach Level {lvl}, the following criteria must be met:",
+            "no_unmet": "All criteria for the immediate next level appear to be already met or no criteria are defined.",
+            "intro_md": (
+                "This assessment is based on the ALBA maturity model for Enterprise Architecture Management (EAM).\n"
+                "For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:\n"
+                "- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.\n"
+                "- The highest level in which **at least one criterion** is met is considered the **Ceiling**.\n"
+                "- The actual maturity lies somewhere between the Baseline and the Ceiling.\n"
+                "- Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level).\n"
+            ),
+        },
+        "de": {
+            "title": "EAM Reifegrad-Assessment",
+            "generated_at": "Erstellt am:",
+            "overview": "Reifegrad-Übersicht",
+            "idx_hint": "Die Indizes in der Grafik entsprechen der ersten Spalte (#) in der untenstehenden Tabelle.",
+            "table_headers": ["#", "Phase / Dimension", "Baseline", "Deckel", "Durchschnitt"],
+            "details": "Details & Nächste Schritte",
+            "baseline_lbl": "Baseline:",
+            "ceiling_lbl": "Deckel:",
+            "reach_lead": "Um Level {lvl} zu erreichen, müssen folgende Kriterien erfüllt sein:",
+            "no_unmet": "Alle Kriterien für das unmittelbar nächste Level scheinen bereits erfüllt zu sein oder es sind keine Kriterien definiert.",
+            "intro_md": (
+                "Dieses Assessment basiert auf dem ALBA-Reifegradmodell für Enterprise Architecture Management (EAM).\n"
+                "Für jede Dimension und ADM-Phase werden Kriterien gezeigt, die einem bestimmten Reifegrad zugeordnet sind:\n"
+                "- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als **Baseline**.\n"
+                "- Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel**.\n"
+                "- Die tatsächliche Reife liegt zwischen Baseline und Deckel.\n"
+                "- Innerhalb dieses Bereichs sollten die nächsten Schritte zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level).\n"
+            ),
+        },
+    }["de" if lang == "de" else "en"]
+
     doc = Document()
 
-    # Title
-    doc.add_heading('EAM Maturity Assessment', level=1)
-    doc.add_paragraph(f"Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    # --- Seitenlayout & Grundschrift ---
+    section = doc.sections[0]
+    section.left_margin = Inches(1)
+    section.right_margin = Inches(1)
+    section.top_margin = Inches(0.8)
+    section.bottom_margin = Inches(0.8)
 
-    # Intro (Markdown-like)
-    intro_md = (
-        "This assessment is based on a maturity model for Enterprise Architecture Management (EAM).\n\n"
-        "For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:\n\n"
-        "- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.\n"
-        "- The highest level in which **at least one criterion** is met is considered the **Ceiling**.\n"
-        "- The actual maturity lies somewhere between the Baseline and the Ceiling.\n"
-        "- Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level).\n\n"
-        "Please check all criteria that your organization currently meets."
-    )
-    add_markdownish_text(doc, intro_md)
+    base = doc.styles["Normal"].font
+    base.name = "Calibri"
+    base.size = Pt(11)
 
-    # Chart
-    doc.add_heading('Maturity Overview', level=2)
-    chart_png = generate_chart_image(df_res)
-    doc.add_picture(chart_png, width=Inches(6.5))
+    doc.styles["Heading 1"].font.size = Pt(16)
+    doc.styles["Heading 2"].font.size = Pt(13)
+    doc.styles["Heading 3"].font.size = Pt(12)
 
-    # Table below the chart (index mapping)
-    doc.add_paragraph("Indices on the chart correspond to the first column (#) in the table below.")
+    # --- Titel & Intro ---
+    title = doc.add_heading(docx_t["title"], level=1)
+    keep_with_next(title)
+    stamp = doc.add_paragraph(f"{docx_t['generated_at']} {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    keep_with_next(stamp)
+
+    add_markdownish_text(doc, docx_t["intro_md"])
+
+    # --- Chart ---
+    h2 = doc.add_heading(docx_t["overview"], level=2)
+    keep_with_next(h2)
+
+    chart_png = generate_chart_image(df_res)  # Legenden im Bild bleiben wie im Code (Baseline/Ceiling)
+    pic_par = doc.add_paragraph()
+    run = pic_par.add_run()
+    run.add_picture(chart_png, width=Inches(6.5))
+    pic_par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    p_idx = doc.add_paragraph(docx_t["idx_hint"])
+    keep_with_next(p_idx)
+
+    # --- Tabelle ---
     table = doc.add_table(rows=1, cols=5)
+    table.style = "Light List Accent 1"
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
     hdr = table.rows[0].cells
-    hdr[0].text = "#"
-    hdr[1].text = "Phase / Dimension"
-    hdr[2].text = "Baseline"
-    hdr[3].text = "Ceiling"
-    hdr[4].text = "Average"
+    for i, txt in enumerate(docx_t["table_headers"]):
+        hdr[i].text = txt
+
+    set_repeat_table_header(table.rows[0])
+    prevent_row_split(table.rows[0])
+    for c in table.rows[0].cells:
+        for p in c.paragraphs:
+            if p.runs:
+                p.runs[0].bold = True
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     for i, r in enumerate(df_res.itertuples(index=False), 1):
-        row_cells = table.add_row().cells
-        row_cells[0].text = str(i)
-        row_cells[1].text = str(getattr(r, 'Label'))
-        row_cells[2].text = str(int(getattr(r, 'Baseline')))
-        row_cells[3].text = str(int(getattr(r, 'Ceiling')))
-        row_cells[4].text = f"{float(getattr(r, 'Average')):.1f}"
+        row = table.add_row()
+        prevent_row_split(row)
+        row.cells[0].text = str(i)
+        row.cells[1].text = str(getattr(r, "Label"))
+        row.cells[2].text = str(int(getattr(r, "Baseline")))
+        row.cells[3].text = str(int(getattr(r, "Ceiling")))
+        row.cells[4].text = f"{float(getattr(r, 'Average')):.1f}"
+        for j in [0, 2, 3, 4]:
+            for p in row.cells[j].paragraphs:
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    # Section per phase/dimension
-    doc.add_heading('Details & Next Steps', level=2)
+    col_widths = [0.6, 3.9, 0.9, 0.9, 0.9]
+    for row in table.rows:
+        for j, w in enumerate(col_widths):
+            row.cells[j].width = Inches(w)
+
+    # --- Nächster Abschnitt ---
+    h2 = doc.add_heading(docx_t["details"], level=2)
+    keep_with_next(h2)
+
     for _, r in df_res.iterrows():
-        label = str(r['Label'])
-        dim = r['Dimension']
-        phase = r['ADM-Phases']
-        baseline = int(r['Baseline'])
-        ceiling = int(r['Ceiling'])
+        label = str(r["Label"])
+        dim = r["Dimension"]
+        phase = r["ADM-Phases"]
+        baseline = int(r["Baseline"])
+        ceiling = int(r["Ceiling"])
 
-        doc.add_heading(label, level=3)
+        h3 = doc.add_heading(label, level=3)
+        keep_with_next(h3)
+
         p = doc.add_paragraph()
-        p.add_run("Baseline: ").bold = True
+        p.add_run(f"{docx_t['baseline_lbl']} ").bold = True
         p.add_run(str(baseline))
-        p.add_run("; Ceiling: ").bold = True
+        p.add_run(f"; {docx_t['ceiling_lbl']} ").bold = True
         p.add_run(str(ceiling))
+        keep_with_next(p)
 
-        # Determine immediate next target level (Baseline + 1)
         target_level = max(1, baseline + 1)
-        if ceiling > 0 and target_level > ceiling:
+        if 0 < ceiling < target_level:
             target_level = baseline + 1
 
-        # Unmet criteria for the target level
-        crits = responses_df[(responses_df["Dimension"] == dim) &
-                             (responses_df["ADM-Phases"] == phase) &
-                             (responses_df["level_num"] == target_level)]
+        lead = doc.add_paragraph(docx_t["reach_lead"].format(lvl=target_level))
+        keep_with_next(lead)
+
+        crits = responses_df[
+            (responses_df["Dimension"] == dim) &
+            (responses_df["ADM-Phases"] == phase) &
+            (responses_df["level_num"] == target_level)
+            ]
         unmet = crits[~crits["Checked"]]
 
-        doc.add_paragraph(f"To reach Level {target_level}, the following criteria must be met:")
         if unmet.empty:
-            doc.add_paragraph(
-                "All criteria for the immediate next level appear to be already met or no criteria are defined.")
+            doc.add_paragraph(docx_t["no_unmet"])
         else:
             for _, row in unmet.iterrows():
-                doc.add_paragraph(row['Description'], style="List Bullet")
+                li = doc.add_paragraph(row["Description"], style="List Bullet")
+                keep_with_next(li, together=True)
 
     out = BytesIO()
     doc.save(out)
