@@ -156,14 +156,26 @@ def load_model(alba_path: str, lang: str) -> pd.DataFrame:
     return df[["Dimension", "ADM-Phases", "level_num", "ID", "Description"]]
 
 
-def normalize_phase(p: str) -> str:
-    """Phasen-String auf das kanonische Label bringen (kleine Toleranzen)."""
-    if p is None:
+def normalize_phase(p) -> str:
+    # NaN oder None => leer
+    if p is None or (pd.isna(p)):
         return ""
+
     s = str(p).strip()
-    # häufiges Synonym abfangen: "D – ..." -> "B, C, D – ..."
+    if s in ("", "-", "–", "—"):
+        return ""
+
+    low = s.lower()
+    # ARM ohne Phase führen (entspricht deinem Modell)
+    if low.startswith(("architecture requirements management", "requirements management", "arm")):
+        return ""
+
+    # Sammelphase vereinheitlichen
+    if "business, information systems and technology architecture" in low:
+        return "B, C, D – Business, Information Systems and Technology Architecture"
     if s == "D – Business, Information Systems and Technology Architecture":
         return "B, C, D – Business, Information Systems and Technology Architecture"
+
     return s
 
 
@@ -178,7 +190,7 @@ def load_value_data(path: str, lang: str) -> tuple[dict, dict]:
       (id_to_value: dict[str,str], triple_to_value: dict[tuple[str,str,int], str])
     """
     try:
-        vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig")
+        vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig", keep_default_na=False)
     except FileNotFoundError:
         return {}, {}
 
@@ -339,6 +351,31 @@ criteria["Values"] = criteria.apply(
 # ------------------------------
 # Helpers for state, evaluation & export
 # ------------------------------
+
+# ---- Mehrwert → Bullet-List (trennt nur bei " Leerzeichen + Strich + Leerzeichen") ----
+DASH_CHARS = r"\-\u2013\u2014\u2212"  # -, – (en), — (em), − (minus)
+
+
+def value_to_bullets(val, lang: str) -> str:
+    """
+    Wandelt z.B. ' - A - B - C' bzw. ' – A – B …' in Bullets um.
+    Splittet NUR bei ' Leerzeichen + Dash + Leerzeichen ', damit 'Ad-hoc' etc. intakt bleibt.
+    """
+    s = "" if val is None else str(val).strip()
+    if not s:
+        return "Mehrwert nicht verfügbar." if lang == "de" else "Value not available."
+
+    # evtl. führenden Dash + Leerzeichen entfernen
+    s = re.sub(rf"^\s*[{DASH_CHARS}]\s*", "", s)
+
+    # Split NUR bei SPACE-DASH-SPACE
+    parts = [p.strip(" .;,") for p in re.split(rf"\s[{DASH_CHARS}]\s+", s) if p.strip()]
+    if not parts:
+        parts = [s]
+
+    return "\n".join(f"- {p}" for p in parts)
+
+
 RESP_KEY_PREFIX = "resp|"
 
 LEVEL_FILL_PROB = {1: 0.90, 2: 0.80, 3: 0.50, 4: 0.10, 5: 0.02}
@@ -758,12 +795,7 @@ for _, row in criteria.iterrows():
                     st.checkbox(desc_str, key=k)
                 with col2:
                     with st.popover("ℹ️"):
-                        text = (
-                            "\n".join([f"- {v.strip()}" for v in str(val).split("-") if v.strip()])
-                            if pd.notna(val) and str(val).strip()
-                            else "Value not measurable."
-                        )
-                        st.markdown(text)
+                        st.markdown(value_to_bullets(val, lang))
             else:
                 st.checkbox(desc_str, key=k)
 
