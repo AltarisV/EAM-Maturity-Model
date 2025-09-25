@@ -133,7 +133,7 @@ for _, row in criteria.iterrows():
                 st.checkbox(desc_str, key=k)
 
 # ------------------------------
-# Evaluation & charts
+# Evaluation, charts, exports in sidebar
 # ------------------------------
 responses_df = collect_responses(criteria, st.session_state)
 df_res, grp_levels, x_order = summarize(responses_df)
@@ -155,32 +155,47 @@ with st.sidebar:
 
     st.markdown("---")
     st.subheader(texts["export"])
-    if not DOCX_AVAILABLE:
-        st.info(texts["docx_info"])
-    else:
-        if st.button(texts["btn_docx"]):
-            try:
-                docx_buf = build_docx_report(df_res, responses_df, lang)
+    col_docx, col_xlsx = st.columns(2)
+
+    # ---- DOCX ----
+    with col_docx:
+        if not DOCX_AVAILABLE:
+            st.button(texts["btn_docx"], disabled=True, use_container_width=True)
+            st.caption(texts["docx_info"])
+        else:
+            if st.button(texts["btn_docx"], use_container_width=True):
+                try:
+                    buf = build_docx_report(df_res, responses_df, lang)
+                    st.session_state["__docx_bytes"] = buf.getvalue()
+                except Exception as e:
+                    st.error(f"Error while creating DOCX: {e}")
+
+            if "__docx_bytes" in st.session_state:
                 st.download_button(
                     label=texts["download_docx"],
-                    data=docx_buf.getvalue(),
+                    data=st.session_state["__docx_bytes"],
                     file_name=f"eam_maturity_report_{datetime.now():%Y-%m-%d_%H-%M-%S}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    use_container_width=True,
                 )
-            except Exception as e:
-                st.error(f"Error while creating DOCX: {e}")
 
-    if st.button(texts["btn_xlsx"]):
-        try:
-            xlsx_buf = generate_excel_report(df_res, responses_df, lang)
+    # ---- XLSX ----
+    with col_xlsx:
+        if st.button(texts["btn_xlsx"], use_container_width=True):
+            try:
+                buf = generate_excel_report(df_res, responses_df, lang)
+                st.session_state["__xlsx_bytes"] = buf.getvalue()
+            except Exception as e:
+                st.error(f"Error while creating Excel: {e}")
+
+        if "__xlsx_bytes" in st.session_state:
             st.download_button(
                 label=texts["download_xlsx"],
-                data=xlsx_buf.getvalue(),
+                data=st.session_state["__xlsx_bytes"],
                 file_name=f"eam_maturity_{datetime.now():%Y-%m-%d_%H-%M-%S}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
             )
-        except Exception as e:
-            st.error(f"Error while creating Excel: {e}")
 
 # ------------------------------
 # Tables

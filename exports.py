@@ -145,7 +145,8 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame, lang: st
             "no_unmet": "All criteria for the immediate next level appear to be already met or no criteria are defined.",
             "intro_md": (
                 "This assessment is based on the ALBA maturity model for Enterprise Architecture Management (EAM).\n"
-                "- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.\n"
+                "- If **all criteria** of a level and the levels below are met, this level is considered the "
+                "**Baseline**.\n "
                 "- The highest level in which **at least one criterion** is met is considered the **Ceiling**.\n"
                 "- Within this range, the next steps should be planned (starting from the lowest level).\n"
             ),
@@ -160,12 +161,15 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame, lang: st
             "baseline_lbl": "Baseline:",
             "ceiling_lbl": "Deckel:",
             "reach_lead": "Um Level {lvl} zu erreichen, müssen folgende Kriterien erfüllt sein:",
-            "no_unmet": "Alle Kriterien für das unmittelbar nächste Level scheinen bereits erfüllt zu sein oder es sind keine Kriterien definiert.",
+            "no_unmet": "Alle Kriterien für das unmittelbar nächste Level scheinen bereits erfüllt zu sein oder es "
+                        "sind keine Kriterien definiert.",
             "intro_md": (
                 "Dieses Assessment basiert auf dem ALBA-Reifegradmodell für Enterprise Architecture Management (EAM).\n"
-                "- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als **Baseline**.\n"
+                "- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses "
+                "Level als **Baseline**.\n "
                 "- Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel**.\n"
-                "- Innerhalb dieses Bereichs sollten die nächsten Schritte geplant werden (beginnend beim niedrigsten Level).\n"
+                "- Innerhalb dieses Bereichs sollten die nächsten Schritte geplant werden (beginnend beim niedrigsten "
+                "Level).\n "
             ),
         },
     }["de" if lang == "de" else "en"]

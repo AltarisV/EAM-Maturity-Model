@@ -13,10 +13,10 @@ This assessment is based on a maturity model for Enterprise Architecture Managem
 
 For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:
 
-- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**.
-- The highest level in which **at least one criterion** is met is considered the **Ceiling**.
-- The actual maturity lies somewhere between the Baseline and the Ceiling.
-- Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level).
+- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**. - The 
+highest level in which **at least one criterion** is met is considered the **Ceiling**. - The actual maturity lies 
+somewhere between the Baseline and the Ceiling. - Within this range, the next steps to improve the Enterprise 
+Architecture of the company should be planned (starting from the lowest level). 
 
 Please check all criteria that your organization currently meets.
 """,
@@ -32,7 +32,8 @@ Please check all criteria that your organization currently meets.
         "download_xlsx": "📥 Download Excel",
         "results": "Assessment Results",
         "next_steps": "Next Steps",
-        "no_next": "All criteria within the relevant range are fulfilled – no open Next Steps within the Baseline–Ceiling range.",
+        "no_next": "All criteria within the relevant range are fulfilled – no open Next Steps within the "
+                   "Baseline–Ceiling range.",
         "glossary": "ℹ️ Glossary / Explanations",
         "select_term": "Select a term",
         "lang_select": "🌐 Language",
@@ -46,10 +47,10 @@ Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture
 
 Für jede Dimension und Phase des ADM werden Kriterien angezeigt, die einem bestimmten Reifegrad-Level zugeordnet sind:
 
-- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als **Baseline**.
-- Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel** (Ceiling).
-- Die tatsächliche Reife liegt zwischen Baseline und Deckel.
-- Innerhalb dieses Bereichs sollten die nächsten Schritte zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level).
+- Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als 
+**Baseline**. - Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel** (Ceiling). - 
+Die tatsächliche Reife liegt zwischen Baseline und Deckel. - Innerhalb dieses Bereichs sollten die nächsten Schritte 
+zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level). 
 
 Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
 """,
@@ -65,7 +66,8 @@ Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
         "download_xlsx": "📥 Excel herunterladen",
         "results": "Bewertungsergebnisse",
         "next_steps": "Nächste Schritte",
-        "no_next": "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im Baseline–Ceiling-Bereich.",
+        "no_next": "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im "
+                   "Baseline–Ceiling-Bereich.",
         "glossary": "ℹ️ Glossar / Erklärungen",
         "select_term": "Begriff auswählen",
         "lang_select": "🌐 Sprache",

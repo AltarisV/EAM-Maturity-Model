@@ -109,7 +109,9 @@ def load_value_data(path: str, lang: str) -> Tuple[Dict[str, str], Dict[Tuple[st
         return {}, {}
 
     colmap = {c.lower(): c for c in vdf.columns}
-    def has(name: str) -> bool: return name in colmap
+
+    def has(name: str) -> bool:
+        return name in colmap
 
     candidates_de = ["value_de", "mehrwert", "mehrwert_de", "value"]
     candidates_en = ["value_en", "mehrwert_en", "value"]
@@ -158,6 +160,7 @@ def load_value_data(path: str, lang: str) -> Tuple[Dict[str, str], Dict[Tuple[st
 # ---------- Display helpers & state ----------
 
 DASH_CHARS = r"\-\u2013\u2014\u2212"
+
 
 def value_to_bullets(val, lang: str) -> str:
     """
@@ -287,7 +290,9 @@ def summarize(responses_df: pd.DataFrame):
     df_res = pd.DataFrame(results)
     df_res["Label"] = df_res.apply(lambda r: r["ADM-Phases"] if r["ADM-Phases"] else r["Dimension"], axis=1)
 
-    def _phase_rank(ph): return phase_order.index(ph) if ph in phase_order else len(phase_order)
+    def _phase_rank(ph):
+        return phase_order.index(ph) if ph in phase_order else len(phase_order)
+
     df_res["__rank"] = df_res["ADM-Phases"].apply(_phase_rank)
     df_res = df_res.sort_values(["__rank", "Label"]).drop(columns="__rank").reset_index(drop=True)
 
