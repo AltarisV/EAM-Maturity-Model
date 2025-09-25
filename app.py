@@ -9,7 +9,7 @@ from core import (
     checkbox_key, collect_responses, summarize, build_next_steps,
     fill_probability
 )
-from exports import DOCX_AVAILABLE, build_docx_report, generate_excel_report
+from exports import DOCX_AVAILABLE, generate_chart_image, build_docx_report, generate_excel_report
 
 st.set_page_config(page_title="EAM Maturity Assessment", layout="wide")
 

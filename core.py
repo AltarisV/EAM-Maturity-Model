@@ -5,6 +5,7 @@ Data loading, normalization, state helpers, and maturity calculations.
 
 from typing import Dict, Tuple, List
 import re
+import random
 import pandas as pd
 from config import LEVEL_FILL_PROB, phase_order, RESP_KEY_PREFIX
 
