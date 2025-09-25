@@ -90,7 +90,6 @@ st.markdown(texts["intro"])
 with st.sidebar:
     st.subheader(texts["glossary"])
 
-    # CSV, falls vorhanden; sonst Defaults aus config
     glossary, _ = core.load_glossary("glossary.csv")
 
     terms = sorted(glossary.keys(), key=str.casefold)
@@ -102,11 +101,10 @@ with st.sidebar:
             texts["select_term"],
             options=[placeholder] + terms,
             index=0,
-            key="glossary_select",        # eigener Key für Sidebar
+            key="glossary_select",
         )
 
         if term != placeholder:
-            # Nur die aktuell gewählte Sprache anzeigen
             text = (glossary.get(term, {}).get(lang) or "").strip()
             if text:
                 st.markdown(text)
