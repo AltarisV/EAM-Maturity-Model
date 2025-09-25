@@ -13,10 +13,10 @@ This assessment is based on a maturity model for Enterprise Architecture Managem
 
 For each dimension and phase of the ADM, criteria are shown that are assigned to a specific maturity level:
 
-- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**. - The 
-highest level in which **at least one criterion** is met is considered the **Ceiling**. - The actual maturity lies 
-somewhere between the Baseline and the Ceiling. - Within this range, the next steps to improve the Enterprise 
-Architecture of the company should be planned (starting from the lowest level). 
+- If **all criteria** of a level and the levels below are met, this level is considered the **Baseline**. 
+- The highest level in which **at least one criterion** is met is considered the **Ceiling**.
+- The actual maturity lies somewhere between the Baseline and the Ceiling. 
+- Within this range, the next steps to improve the Enterprise Architecture of the company should be planned (starting from the lowest level). 
 
 Please check all criteria that your organization currently meets.
 """,
@@ -48,9 +48,10 @@ Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture
 Für jede Dimension und Phase des ADM werden Kriterien angezeigt, die einem bestimmten Reifegrad-Level zugeordnet sind:
 
 - Wenn **alle Kriterien** eines Levels und der darunterliegenden Levels erfüllt sind, gilt dieses Level als 
-**Baseline**. - Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel** (Ceiling). - 
-Die tatsächliche Reife liegt zwischen Baseline und Deckel. - Innerhalb dieses Bereichs sollten die nächsten Schritte 
-zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level). 
+**Baseline**. 
+- Das höchste Level, in dem **mindestens ein Kriterium** erfüllt ist, gilt als **Deckel** (Ceiling). 
+- Die tatsächliche Reife liegt zwischen Baseline und Deckel. 
+- Innerhalb dieses Bereichs sollten die nächsten Schritte zur Verbesserung der Unternehmensarchitektur geplant werden (beginnend beim niedrigsten Level). 
 
 Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
 """,
