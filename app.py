@@ -13,10 +13,15 @@ try:
     from docx.enum.table import WD_TABLE_ALIGNMENT
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
-
     DOCX_AVAILABLE = True
 except Exception:
     DOCX_AVAILABLE = False
+
+try:
+    import xlsxwriter
+    EXCEL_ENGINE = "xlsxwriter"
+except Exception:
+    EXCEL_ENGINE = None
 
 import matplotlib.pyplot as plt
 
@@ -46,14 +51,17 @@ Please check all criteria that your organization currently meets.
         "sidebar_chart": "Maturity Chart",
         "export": "Export",
         "docx_info": "`python-docx` is not installed. Please run: `pip install python-docx`.",
-        "btn_docx": "📄 Create DOCX Report",
+        "btn_docx": "Create DOCX Report",
         "download_docx": "📥 Download DOCX",
+        "btn_xlsx": "Create Excel",
+        "download_xlsx": "📥 Download Excel",
         "results": "Assessment Results",
         "next_steps": "Next Steps",
         "no_next": "All criteria within the relevant range are fulfilled – no open Next Steps within the Baseline–Ceiling range.",
         "glossary": "ℹ️ Glossary / Explanations",
         "select_term": "Select a term",
         "lang_select": "🌐 Language",
+        "benefit_title": "Benefits of achieving this level",
         "chart-sidebar-heading": "Metric"
     },
     "de": {
@@ -76,14 +84,17 @@ Bitte markieren Sie alle Kriterien, die Ihre Organisation aktuell erfüllt.
         "sidebar_chart": "Reifegrad-Diagramm",
         "export": "Export",
         "docx_info": "`python-docx` ist nicht installiert. Bitte ausführen: `pip install python-docx`.",
-        "btn_docx": "📄 DOCX-Report erstellen",
+        "btn_docx": "DOCX-Report erstellen",
         "download_docx": "📥 DOCX herunterladen",
+        "btn_xlsx": "Excel erstellen",
+        "download_xlsx": "📥 Excel herunterladen",
         "results": "Bewertungsergebnisse",
         "next_steps": "Nächste Schritte",
         "no_next": "Alle Kriterien in den relevanten Bereichen sind erfüllt – keine offenen Next Steps im Baseline–Ceiling-Bereich.",
         "glossary": "ℹ️ Glossar / Erklärungen",
         "select_term": "Begriff auswählen",
         "lang_select": "🌐 Sprache",
+        "benefit_title": "Mehrwert des Erreichens dieses Levels",
         "chart-sidebar-heading": "Kennzahl"
     }
 }
@@ -465,32 +476,39 @@ def summarize(responses_df: pd.DataFrame):
 
 
 def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_df: pd.DataFrame) -> pd.DataFrame:
-    # Build Next Steps per phase: unmet criteria between Baseline+1 .. Ceiling (or Level 1 if nothing is met)
+    # Next Steps NUR für das aktuelle Arbeitslevel je (Dimension, Phase)
     next_rows = []
     for _, r in df_res.iterrows():
-        dim, phase, baseline, ceiling = r["Dimension"], r["ADM-Phases"], r["Baseline"], r["Ceiling"]
+        dim = r["Dimension"]
+        phase = r["ADM-Phases"]
+        baseline = int(r["Baseline"])
+        ceiling = int(r["Ceiling"])
+
+        # DOCX-Logik: genau EIN Ziel-Level
+        target_level = max(1, baseline + 1)
         if ceiling == 0:
-            target_levels = [1]
-        else:
-            target_levels = list(range(max(1, baseline + 1), ceiling + 1))
+            target_level = 1
 
-        for lvl in target_levels:
-            crits = responses_df[(responses_df["Dimension"] == dim) &
-                                 (responses_df["ADM-Phases"] == phase) &
-                                 (responses_df["level_num"] == lvl)]
-            if crits.empty:
-                continue
-            for _, row in crits.iterrows():
-                if not row["Checked"]:
-                    next_rows.append({
-                        "Dimension": dim,
-                        "ADM-Phases": phase if phase else "(no phase)",
-                        "Level": int(lvl),
-                        "ToDo": row["Description"],
-                    })
+        crits = responses_df[
+            (responses_df["Dimension"] == dim) &
+            (responses_df["ADM-Phases"] == phase) &
+            (responses_df["level_num"] == target_level)
+            ]
+        if crits.empty:
+            continue
 
-    df_next = pd.DataFrame(next_rows).sort_values(["Dimension", "ADM-Phases", "Level"]).reset_index(drop=True)
-    return df_next
+        unmet = crits[~crits["Checked"]]
+        for _, row in unmet.iterrows():
+            next_rows.append({
+                "Dimension": dim,
+                "ADM-Phases": phase if phase else "(no phase)",
+                "Level": target_level,
+                "ToDo": row["Description"],
+            })
+
+    return pd.DataFrame(next_rows).sort_values(
+        ["Dimension", "ADM-Phases", "Level"]
+    ).reset_index(drop=True)
 
 
 def generate_chart_image(df_res: pd.DataFrame) -> BytesIO:
@@ -748,6 +766,113 @@ def build_docx_report(df_res: pd.DataFrame, responses_df: pd.DataFrame) -> Bytes
     return out
 
 
+def _autosize_excel_columns(writer: pd.ExcelWriter, df: pd.DataFrame, sheet_name: str,
+                            min_w: int = 8, max_w: int = 80, wrap_cols: list[str] | None = None):
+    """Auto-Breite je Spalte; optional Textumbruch für wrap_cols."""
+    ws = writer.sheets[sheet_name]
+    book = writer.book
+    wrap_fmt = book.add_format({"text_wrap": True})
+    for col_idx, col in enumerate(df.columns):
+        series = df[col].astype(str)
+        max_len = max([len(str(col))] + series.map(len).tolist())
+        width = max(min_w, min(max_w, max_len + 2))
+        if wrap_cols and col in wrap_cols:
+            ws.set_column(col_idx, col_idx, width, wrap_fmt)
+        else:
+            ws.set_column(col_idx, col_idx, width)
+
+
+def generate_excel_report(df_res: pd.DataFrame, responses_df: pd.DataFrame, lang: str) -> BytesIO:
+    _, grp_levels, _ = summarize(responses_df)
+    df_next = build_next_steps(df_res, grp_levels, responses_df)
+
+    # Lokalisierung
+    xl = {
+        "en": {
+            "sheet_summary": "Summary",
+            "sheet_next": "NextSteps",
+            "sheet_resp": "Responses",
+            "sheet_chart": "Chart",
+            "col_phase": "Phase",
+            "col_label": "Phase / Dimension",
+            "col_baseline": "Baseline",
+            "col_ceiling": "Ceiling",
+            "col_avg": "Average",
+            "col_level": "Level",
+            "col_desc": "Description",
+            "col_checked": "Checked",
+            "arm_label": "Architecture Requirements Management",
+        },
+        "de": {
+            "sheet_summary": "Übersicht",
+            "sheet_next": "Nächste Schritte",
+            "sheet_resp": "Antworten",
+            "sheet_chart": "Diagramm",
+            "col_phase": "Phase",
+            "col_label": "Phase / Dimension",
+            "col_baseline": "Baseline",
+            "col_ceiling": "Deckel",
+            "col_avg": "Durchschnitt",
+            "col_level": "Level",
+            "col_desc": "Beschreibung",
+            "col_checked": "Erfüllt",
+            "arm_label": "Architecture Requirements Management",
+        },
+    }["de" if lang == "de" else "en"]
+
+    # Kopien mit umbenannten Spalten für die Ausgabe
+    df_summary = df_res.copy()
+    if "ADM-Phases" in df_summary.columns:
+        df_summary = df_summary.rename(columns={"ADM-Phases": xl["col_phase"]})
+    if "Label" in df_summary.columns:
+        df_summary = df_summary.rename(columns={"Label": xl["col_label"]})
+    df_summary = df_summary.rename(columns={
+        "Baseline": xl["col_baseline"],
+        "Ceiling": xl["col_ceiling"],
+        "Average": xl["col_avg"],
+    })
+
+    df_next_out = df_next.copy()
+    if "ADM-Phases" in df_next_out.columns:
+        df_next_out = df_next_out.rename(columns={"ADM-Phases": xl["col_phase"]})
+    # ARM-Phase leeren Eintrag hübsch machen
+    if xl["col_phase"] in df_next_out.columns:
+        df_next_out[xl["col_phase"]] = df_next_out[xl["col_phase"]].replace("", xl["arm_label"])
+
+    df_resp_out = responses_df.copy().rename(columns={
+        "ADM-Phases": xl["col_phase"],
+        "level_num": xl["col_level"],
+        "Description": xl["col_desc"],
+        "Checked": xl["col_checked"],
+    })
+
+    buf = BytesIO()
+    with pd.ExcelWriter(buf, engine="xlsxwriter") as writer:
+        # 1) Summary
+        df_summary.to_excel(writer, sheet_name=xl["sheet_summary"], index=False)
+        _autosize_excel_columns(writer, df_summary, xl["sheet_summary"],
+                                wrap_cols=[xl["col_label"]])
+
+        # 2) Next Steps
+        df_next_out.to_excel(writer, sheet_name=xl["sheet_next"], index=False)
+        _autosize_excel_columns(writer, df_next_out, xl["sheet_next"],
+                                wrap_cols=["ToDo", xl["col_phase"]])
+
+        # 3) Responses (Rohdaten)
+        df_resp_out.to_excel(writer, sheet_name=xl["sheet_resp"], index=False)
+        _autosize_excel_columns(writer, df_resp_out, xl["sheet_resp"],
+                                wrap_cols=[xl["col_desc"], xl["col_phase"]])
+
+        # 4) Chart (als Bild)
+        chart_png = generate_chart_image(df_res)  # BytesIO
+        ws = writer.book.add_worksheet(xl["sheet_chart"])
+        writer.sheets[xl["sheet_chart"]] = ws
+        ws.insert_image(0, 0, "chart.png", {"image_data": chart_png})
+
+    buf.seek(0)
+    return buf
+
+
 # ------------------------------
 # Sidebar: Test functions, chart & export
 # ------------------------------
@@ -795,7 +920,7 @@ for _, row in criteria.iterrows():
                     st.checkbox(desc_str, key=k)
                 with col2:
                     with st.popover("ℹ️"):
-                        st.markdown(value_to_bullets(val, lang))
+                        st.markdown(f"**{texts['benefit_title']}**\n\n{value_to_bullets(val, lang)}")
             else:
                 st.checkbox(desc_str, key=k)
 
@@ -826,6 +951,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.subheader(texts["export"])
+    # DOCX
     if not DOCX_AVAILABLE:
         st.info(texts["docx_info"])
     else:
@@ -840,6 +966,19 @@ with st.sidebar:
                 )
             except Exception as e:
                 st.error(f"Error while creating DOCX: {e}")
+
+    # Excel
+    if st.button(texts["btn_xlsx"]):
+        try:
+            xlsx_buf = generate_excel_report(df_res, responses_df, lang)
+            st.download_button(
+                label=texts["download_xlsx"],
+                data=xlsx_buf.getvalue(),
+                file_name=f"eam_maturity_{datetime.now():%Y-%m-%d_%H-%M-%S}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            )
+        except Exception as e:
+            st.error(f"Error while creating Excel: {e}")
 
 # Hauptbereich / Main area
 st.subheader(texts["results"])
