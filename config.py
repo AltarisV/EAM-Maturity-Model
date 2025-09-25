@@ -88,5 +88,96 @@ phase_order = [
     ""  # Architecture Requirements Management
 ]
 
+# --- Glossary UI labels ---
+for _lang, t in translations.items():
+    t.setdefault("glossary_search", "Search term" if _lang == "en" else "Begriff suchen")
+    t.setdefault("glossary_lang_en", "English" if _lang == "en" else "Englisch")
+    t.setdefault("glossary_lang_de", "German" if _lang == "en" else "Deutsch")
+    t.setdefault("glossary_no_match", "No matching entries." if _lang == "en" else "Keine passenden Einträge.")
+
+# --- Built-in bilingual glossary (used if glossary.csv not found) ---
+GLOSSARY = {
+    "Baseline": {
+        "en": "Highest level where all criteria up to and including that level are fulfilled.",
+        "de": "Höchstes Level, bei dem alle Kriterien bis einschließlich dieses Levels erfüllt sind.",
+    },
+    "Ceiling": {
+        "en": "Highest level where at least one criterion is fulfilled.",
+        "de": "Höchstes Level, in dem mindestens ein Kriterium erfüllt ist.",
+    },
+    "Baseline–Ceiling Range": {
+        "en": "Span between Baseline and Ceiling; actual maturity lies within this interval.",
+        "de": "Spanne zwischen Baseline und Deckel; die tatsächliche Reife liegt in diesem Bereich.",
+    },
+    "Next Steps": {
+        "en": "Unmet criteria on the immediate next target level; concrete actions to progress maturity.",
+        "de": "Nicht erfüllte Kriterien des unmittelbar nächsten Ziel-Levels; konkrete Schritte zur Erhöhung der Reife.",
+    },
+    "EAM": {
+        "en": "Enterprise Architecture Management — holistic planning and governance of the enterprise architecture.",
+        "de": "Enterprise Architecture Management — ganzheitliche Planung und Steuerung der Unternehmensarchitektur.",
+    },
+    "ADM": {
+        "en": "Architecture Development Method (TOGAF) with phases from Preliminary to H.",
+        "de": "Architecture Development Method (TOGAF) mit Phasen von Preliminary bis H.",
+    },
+    "ADM Phases": {
+        "en": "Preliminary, A: Vision, B/C/D: Architectures, E: Solutions, F: Migration, G: Implementation Governance, H: Change.",
+        "de": "Preliminary, A: Vision, B/C/D: Architekturen, E: Lösungen, F: Migration, G: Implementierungssteuerung, H: Veränderung.",
+    },
+    "Architecture Requirements Management": {
+        "en": "Cross-cutting process that manages requirements across all ADM phases.",
+        "de": "Querschnittsprozess zur Verwaltung von Anforderungen über alle ADM-Phasen.",
+    },
+    "Maturity Level": {
+        "en": "Ordinal scale (e.g., 1–5) grouping criteria into progressive capability bands.",
+        "de": "Ordinale Skala (z. B. 1–5), die Kriterien in aufeinander aufbauende Fähigkeitsstufen bündelt.",
+    },
+    "Capability": {
+        "en": "Ability of an organization to achieve a specific outcome repeatedly and reliably.",
+        "de": "Fähigkeit einer Organisation, ein bestimmtes Ergebnis wiederholt und verlässlich zu erzielen.",
+    },
+    "Gap Analysis": {
+        "en": "Compares current and target architectures to identify required changes.",
+        "de": "Vergleicht Ist- und Zielarchitektur, um notwendige Änderungen zu identifizieren.",
+    },
+    "Architecture Roadmap": {
+        "en": "Sequenced plan of work packages and plateaus to reach target architecture.",
+        "de": "Sequenzierter Plan aus Arbeitspaketen und Plateaus zur Erreichung der Zielarchitektur.",
+    },
+    "Plateaus & Gaps": {
+        "en": "States (plateaus) and differences (gaps) used to plan transitions.",
+        "de": "Zustände (Plateaus) und Differenzen (Gaps) zur Planung von Übergängen.",
+    },
+    "Work Package": {
+        "en": "Deliverable unit of work that advances the roadmap.",
+        "de": "Lieferobjekt/Arbeitseinheit, die die Roadmap vorantreibt.",
+    },
+    "Migration Planning": {
+        "en": "Scheduling and dependency management of work packages across releases.",
+        "de": "Zeitplanung und Abhängigkeitssteuerung von Arbeitspaketen über Releases.",
+    },
+    "Implementation Governance": {
+        "en": "Ensures delivery is compliant with architecture principles and standards.",
+        "de": "Sichert die liefernde Umsetzung gemäß Architekturprinzipien und -standards ab.",
+    },
+    "Architecture Principles": {
+        "en": "Guiding rules for decision-making and solution design.",
+        "de": "Leitplanken für Entscheidungen und Lösungsdesign.",
+    },
+    "Stakeholder": {
+        "en": "Individual or group with interest or influence on the architecture.",
+        "de": "Person oder Gruppe mit Interesse oder Einfluss auf die Architektur.",
+    },
+    "KPI": {
+        "en": "Key Performance Indicator; metric to monitor outcomes and value.",
+        "de": "Kennzahl zur Messung von Ergebnissen und Nutzen.",
+    },
+    "Heatmap": {
+        "en": "Visual highlighting of status or risk across a matrix (e.g., capabilities × value).",
+        "de": "Visuelle Hervorhebung von Status oder Risiko in einer Matrix (z. B. Fähigkeiten × Nutzen).",
+    },
+}
+
 # Probabilities for the “fill randomly” helper per maturity level.
 LEVEL_FILL_PROB = {1: 0.90, 2: 0.80, 3: 0.50, 4: 0.10, 5: 0.02}

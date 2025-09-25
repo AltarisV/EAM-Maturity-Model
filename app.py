@@ -88,6 +88,37 @@ st.markdown(texts["intro"])
 # Sidebar actions
 # ------------------------------
 with st.sidebar:
+    st.subheader(texts["glossary"])
+
+    # CSV, falls vorhanden; sonst Defaults aus config
+    glossary, _ = core.load_glossary("glossary.csv")
+
+    terms = sorted(glossary.keys(), key=str.casefold)
+    if not terms:
+        st.info("No glossary entries." if lang == "en" else "Keine Glossareinträge.")
+    else:
+        placeholder = "(please choose)" if lang == "en" else "(bitte wählen)"
+        term = st.selectbox(
+            texts["select_term"],
+            options=[placeholder] + terms,
+            index=0,
+            key="glossary_select",        # eigener Key für Sidebar
+        )
+
+        if term != placeholder:
+            # Nur die aktuell gewählte Sprache anzeigen
+            text = (glossary.get(term, {}).get(lang) or "").strip()
+            if text:
+                st.markdown(text)
+            else:
+                st.info(
+                    "No definition available in the selected language."
+                    if lang == "en"
+                    else "Keine Definition in der gewählten Sprache verfügbar."
+                )
+
+
+with st.sidebar:
     st.subheader(texts["sidebar_tests"])
     col_a, col_b = st.columns(2)
 
@@ -209,16 +240,3 @@ if df_next.empty:
     st.success(texts["no_next"])
 else:
     st.dataframe(df_next, use_container_width=True)
-
-with st.expander(texts["glossary"]):
-    glossary = {
-        "Baseline": "Highest level where all criteria up to and including that level are fulfilled.",
-        "Ceiling": "Highest level where at least one criterion is fulfilled.",
-        "EAM": "Enterprise Architecture Management — holistic planning and governance of the enterprise architecture.",
-        "ADM": "Architecture Development Method — the TOGAF method with phases from Preliminary to H.",
-        "Architecture Requirements Management": "Cross-cutting process that manages requirements across all phases.",
-    }
-    term = st.selectbox(texts["select_term"],
-                        options=["(bitte wählen)" if lang == "de" else "(please choose)"] + list(glossary.keys()))
-    if term not in ["(bitte wählen)", "(please choose)"]:
-        st.markdown(f"**{term}:** {glossary[term]}")

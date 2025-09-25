@@ -341,3 +341,68 @@ def build_next_steps(df_res: pd.DataFrame, grp_levels: pd.DataFrame, responses_d
             })
 
     return pd.DataFrame(next_rows).sort_values(["Dimension", "ADM-Phases", "Level"]).reset_index(drop=True)
+
+
+def load_glossary(path: str | None = None):
+    """
+    Load a bilingual glossary from CSV if present; fall back to config.GLOSSARY.
+
+    CSV format (semicolon-separated, UTF-8):
+        Term; Definition_EN; Definition_DE; Aliases
+    - Aliases is optional; multiple aliases can be '|' separated.
+    - Unknown/missing columns are ignored gracefully.
+
+    Args:
+        path: Optional CSV path (e.g., 'glossary.csv').
+
+    Returns:
+        (glossary, aliases)
+        - glossary: dict[str, dict[str, str]] like {"Term": {"en": "...", "de": "..."}, ...}
+        - aliases: dict[str, str] mapping lowercased alias -> canonical Term
+    """
+    from config import GLOSSARY
+    if not path:
+        return GLOSSARY, {}
+
+    try:
+        vdf = pd.read_csv(path, sep=";", encoding="utf-8-sig", keep_default_na=False)
+    except FileNotFoundError:
+        return GLOSSARY, {}
+
+    colmap = {c.lower(): c for c in vdf.columns}
+    get = lambda name: colmap.get(name)
+
+    term_col = get("term")
+    en_col = get("definition_en")
+    de_col = get("definition_de")
+    alias_col = get("aliases")
+
+    if not term_col or not (en_col or de_col):
+        # Minimal columns missing -> fall back
+        return GLOSSARY, {}
+
+    glossary = {}
+    aliases = {}
+
+    for _, r in vdf.iterrows():
+        term = str(r[term_col]).strip()
+        if not term:
+            continue
+        en = str(r[en_col]).strip() if en_col else ""
+        de = str(r[de_col]).strip() if de_col else ""
+        glossary[term] = {"en": en or GLOSSARY.get(term, {}).get("en", ""),
+                          "de": de or GLOSSARY.get(term, {}).get("de", "")}
+
+        if alias_col:
+            raw = str(r[alias_col]).strip()
+            if raw:
+                for a in raw.split("|"):
+                    al = a.strip()
+                    if al:
+                        aliases[al.lower()] = term
+
+    # also add built-in entries not overridden by CSV
+    for k, v in GLOSSARY.items():
+        glossary.setdefault(k, v)
+
+    return glossary, aliases
