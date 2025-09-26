@@ -7,7 +7,7 @@ RESP_KEY_PREFIX = "resp|"
 
 translations = {
     "en": {
-        "title": "EAM Maturity Assessment",
+        "title": "ALBA - Architecture Landscape and Baseline Analysis",
         "intro": """
 This assessment is based on a maturity model for Enterprise Architecture Management (EAM).
 
@@ -41,7 +41,7 @@ Please check all criteria that your organization currently meets.
         "chart-sidebar-heading": "Metric"
     },
     "de": {
-        "title": "EAM Reifegrad-Assessment",
+        "title": "ALBA - Architekturlandschaft- und Baselineanalyse",
         "intro": """
 Dieses Assessment basiert auf einem Reifegradmodell für Enterprise Architecture Management (EAM).
 
