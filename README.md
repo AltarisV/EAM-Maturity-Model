@@ -1,6 +1,7 @@
 # ALBA - Architecture Landscape and Baseline Analysis
 
-This repository provides a tool for the analysis, management, and visualization of **Enterprise Architecture (EA) Maturity Models**. The application combines multiple maturity models (e.g., German and English) and enables persistent management as well as interactive visualization.
+This repository provides a tool for the analysis, management, and visualization of 
+**Enterprise Architecture Practices** in a Company. The application enables persistent management as well as interactive visualization.
 
 ---
 
