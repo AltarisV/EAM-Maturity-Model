@@ -1,69 +1,67 @@
-# EAM-Maturity-Model
+# ALBA - Architecture Landscape and Baseline Analysis
 
-Dieses Repository stellt ein Werkzeug zur Analyse, Verwaltung und Visualisierung von **Enterprise Architecture Maturity Models** bereit.  
-Die Anwendung kombiniert verschiedene Reifegradmodelle (z. B. in Deutsch und Englisch) und ermöglicht deren persistente Verwaltung sowie Visualisierung.
-
----
-
-## 🚀 Features
-
-- 📊 Unterstützung Reifegradmodel (`alba.csv`, `mehrwert.csv`)  
-- 🌐 Mehrsprachigkeit: Modelle und Glossare in verschiedenen Sprachen  
-- 🗂️ Persistente Speicherung der CSV-Daten  
-- 🔎 Anpassbares Glossar für Begriffe und Konzepte  
-- ⚙️ Flexible Konfiguration über `config.py`
+This repository provides a tool for the analysis, management, and visualization of **Enterprise Architecture (EA) Maturity Models**. The application combines multiple maturity models (e.g., German and English) and enables persistent management as well as interactive visualization.
 
 ---
 
-## 📂 Projektstruktur
-```
+## Features
+
+- Support for multiple maturity models (`alba.csv`, `mehrwert.csv`)
+- Multi-language support: models and glossaries available in different languages
+- Persistent storage of CSV-based data
+- Customizable glossary for terms and concepts
+- Flexible configuration via `config.py`
+
+---
+
+## Project Structure
+
+```text
 .
-├── .devcontainer/ # Dev-Container Setup (VS Code / Remote Dev)
-├── alba.csv # ALBA Reifegradmodell
-├── mehrwert.csv # Mehrwertmodell
-├── reifegradmodell_de.csv # Deutsches Reifegradmodell
-├── reifegradmodell_en.csv # Englisches Reifegradmodell
-├── app.py # Haupteinstiegspunkt (Streamlit App)
-├── config.py # Konfiguration & Glossarverwaltung
-├── core.py # Zentrale Logik für Modelle und Glossar
-├── exports.py # Exportfunktionen (Excel & DOCX)
-├── requirements.txt # Python-Abhängigkeiten
-├── runtime.txt # Python-Runtime Definition
-└── README.md # Projektdokumentation
+├── .devcontainer/           # Development container setup (VS Code / Remote Dev)
+├── alba.csv                 # ALBA maturity model
+├── mehrwert.csv             # "Mehrwert" maturity model
+├── reifegradmodell_de.csv   # German maturity model
+├── reifegradmodell_en.csv   # English maturity model
+├── app.py                   # Main entry point (Streamlit app)
+├── config.py                # Configuration and glossary management
+├── core.py                  # Core logic for models and glossary
+├── exports.py               # Export functions (Excel & DOCX)
+├── requirements.txt         # Python dependencies
+├── runtime.txt              # Python runtime definition
+└── README.md                # Project documentation
 ```
 
 ---
 
-## ⚙️ Installation
+## Installation
 
-1. Repository klonen:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<USER>/ALBA.git
+   cd ALBA
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate   # Linux/Mac
+   venv\Scripts\activate    # Windows
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## Run the Application
+
+Start the Streamlit app:
 ```bash
-git clone https://github.com/<USER>/EAM-Maturity-Model.git
-cd EAM-Maturity-Model
-```
-
-2. Virtuelle Umgebung erstellen & aktivieren:
-
-```python 
-python3 -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
-```
-
-3. Abhängigkeiten installieren:
-
-```python 
-pip install -r requirements.txt
-```
-
-4. Nutzung
-
-Starte die Streamlit-App mit:
-```python 
 streamlit run app.py
 ```
 
-Danach öffnet sich die App automatisch im Browser unter:
-👉 http://localhost:8501 
-
-
+Once started, the application will open in your browser at:
+http://localhost:8501
