@@ -9,7 +9,7 @@ Die Anwendung kombiniert verschiedene Reifegradmodelle (z. B. in Deutsch und Eng
 
 - 📊 Unterstützung Reifegradmodel (`alba.csv`, `mehrwert.csv`)  
 - 🌐 Mehrsprachigkeit: Modelle und Glossare in verschiedenen Sprachen  
-- 🗂️ Persistente Speicherung und Verarbeitung der CSV-Daten  
+- 🗂️ Persistente Speicherung der CSV-Daten  
 - 🔎 Anpassbares Glossar für Begriffe und Konzepte  
 - ⚙️ Flexible Konfiguration über `config.py`
 
@@ -23,10 +23,10 @@ Die Anwendung kombiniert verschiedene Reifegradmodelle (z. B. in Deutsch und Eng
 ├── mehrwert.csv # Mehrwertmodell
 ├── reifegradmodell_de.csv # Deutsches Reifegradmodell
 ├── reifegradmodell_en.csv # Englisches Reifegradmodell
-├── app.py # Haupteinstiegspunkt (z. B. Flask/FastAPI/CLI)
+├── app.py # Haupteinstiegspunkt (Streamlit App)
 ├── config.py # Konfiguration & Glossarverwaltung
 ├── core.py # Zentrale Logik für Modelle und Glossar
-├── exports.py # Exportfunktionen (z. B. Visualisierung, Reports)
+├── exports.py # Exportfunktionen (Excel & DOCX)
 ├── requirements.txt # Python-Abhängigkeiten
 ├── runtime.txt # Python-Runtime Definition
 └── README.md # Projektdokumentation
